@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ page.title }}</title>
+  {% if page.noindex %}<meta name="robots" content="noindex, nofollow" />{% endif %}
+  <meta name="theme-color" content="#0d1117" />
+  <link
+    rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d1117' stroke='%2330363d' stroke-width='2'/%3E%3Ctext x='12' y='45' font-family='ui-monospace,monospace' font-size='30' font-weight='bold' fill='%233fb950'%3E%3E_%3C/text%3E%3C/svg%3E"
+  />
+  <link rel="stylesheet" href="/blog.css" />
+</head>
+<body>
+  {% include topbar.html %}
+  <main>
+    <div class="container">
+      <div class="prose">
+{{ content }}
+      </div>
+    </div>
+  </main>
+  {% include footer.html %}
+</body>
+</html>

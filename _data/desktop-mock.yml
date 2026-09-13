@@ -1,0 +1,135 @@
+# The hero's interactive desktop mock: the same folder/session shapes the
+# app renders (panel is root -> folder, the tab bar carries agent marks,
+# and a session with no cwd is a mono-label row). js/landing.js switches
+# folders and tabs client-side; the markup renders every folder/tab and
+# toggles visibility, so the initial paint matches the app's default state
+# (pocketshell / review) with or without JS.
+
+folders:
+  - id: pocketshell
+    root: git
+    label: pocketshell
+    attached: true
+    count: 2
+    badges: [claude, codex]
+    time: 6m
+    activeTab: review
+    tabs:
+      - id: review
+        label: review
+        mark: hexagon
+        draft: run the full suite, then update the PR description with what moved
+        term: |-
+          <span class="t-bullet">●</span> Update(src/agent/merge.ts)
+            <span class="t-dim">└  src/agent/merge.ts ·</span> <span class="t-add">+12</span> <span class="t-del">−8</span>
+
+          <span class="t-bullet">●</span> Bash(npm test -- merge)
+            <span class="t-dim">└</span>  <span class="t-add">✓ 14 tests passing</span> <span class="t-dim">(2.4s)</span>
+
+          <span class="t-bullet">●</span> Merge logic now lives in
+            mergeSessions() — all three
+            callers hand off to it instead
+            of re-implementing the diff.
+            PR notes updated.
+
+          <span class="t-run">✻</span> <span class="t-dim">Refactoring… (esc · 2h 6m)</span>
+      - id: api-fix
+        label: api-fix
+        mark: code
+        draft: ship it — bump the patch version and tag
+        term: |-
+          <span class="t-bullet">●</span> Update(src/api/handlers.ts)
+            <span class="t-dim">└  src/api/handlers.ts ·</span> <span class="t-add">+9</span> <span class="t-del">−3</span>
+
+          <span class="t-bullet">●</span> Bash(npm run lint)
+            <span class="t-dim">└</span>  <span class="t-add">✓ no issues</span> <span class="t-dim">(1.1s)</span>
+
+          <span class="t-bullet">●</span> The 500s came from a missing
+            await on the session lookup —
+            retries raced the close. Added
+            the await and a regression test.
+
+          <span class="t-run">✻</span> <span class="t-dim">Patching… (esc · 6m)</span>
+      - id: spec
+        label: spec
+        draft: check the spec index for stale links
+        term: |-
+          <span class="t-prompt">$</span> npm run spec:check
+          <span class="t-green">✓</span> <span class="t-dim">12 specs · 0 failed · 1.8s</span>
+
+          <span class="t-prompt">$</span> <span class="cursor">█</span>
+      - id: files
+        label: Files
+        draft: ""
+        term: |-
+          <span class="t-dir">src/</span>
+          <span class="t-dir">src/agent/</span>
+            merge.ts
+            merge.test.ts
+            types.ts
+          <span class="t-dir">docs/</span>
+          package.json
+          README.md
+  - id: dtc-website
+    root: git
+    label: dtc-website
+    badges: [codex]
+    time: 3h
+    activeTab: git-dtc-website
+    tabs:
+      - id: git-dtc-website
+        label: git-dtc-website
+        mark: code
+        draft: tighten the pricing page copy too
+        term: |-
+          <span class="t-bullet">●</span> Update(content/courses.mdx)
+            <span class="t-dim">└  content/courses.mdx ·</span> <span class="t-add">+21</span> <span class="t-del">−6</span>
+
+          <span class="t-bullet">●</span> Rewrote the cohort section
+            lead and trimmed the FAQ
+            answers to two sentences each.
+
+          <span class="t-run">✻</span> <span class="t-dim">Editing… (esc · 3h 12m)</span>
+  - id: aplexer
+    root: git
+    label: aplexer
+    time: 3d
+    activeTab: spec
+    tabs:
+      - id: spec
+        label: spec
+        draft: summarise the open questions from the sync doc
+        term: |-
+          <span class="t-prompt">$</span> ./scripts/lint-docs
+          <span class="t-green">✓</span> <span class="t-dim">stylelint clean · 4.2s</span>
+
+          <span class="t-prompt">$</span> <span class="cursor">█</span>
+  - id: dataops
+    root: git
+    label: dataops
+    time: 22h
+    activeTab: git-dataops
+    tabs:
+      - id: git-dataops
+        label: git-dataops
+        draft: re-run yesterday's rollup
+        term: |-
+          <span class="t-prompt">$</span> make rollup
+          <span class="t-dim">daily rollup finished · 3 partitions</span>
+
+          <span class="t-prompt">$</span> <span class="cursor">█</span>
+  - id: backup-script
+    root: other
+    label: backup-script
+    mono: true
+    time: 5d
+    activeTab: backup-script
+    tabs:
+      - id: backup-script
+        label: backup-script
+        draft: why did the 4am run skip Tuesday?
+        term: |-
+          <span class="t-prompt">$</span> crontab -l | grep backup
+          <span class="t-dim">0 4 * * * /usr/local/bin/backup.sh</span>
+
+          <span class="t-prompt">$</span> <span class="cursor">█</span>

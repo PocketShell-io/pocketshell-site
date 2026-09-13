@@ -1,0 +1,12 @@
+<button
+  type="button"
+  class="dir-row{% if f.id == 'pocketshell' %} current{% endif %}"
+  data-folder="{{ f.id }}"
+  {% if f.id == 'pocketshell' %}aria-current="true" {% endif %}
+>
+  <span class="sdot{% if f.attached %} on{% endif %}"></span>
+  <span class="dlabel{% if f.mono %} mono{% endif %}">{{ f.label }}</span>
+  {% if f.count %}<span class="count">{{ f.count }}</span>{% endif %}
+  {% for b in f.badges %}<span class="badge">{{ b }}</span>{% endfor %}
+  <span class="time">{{ f.time }}</span>
+</button>

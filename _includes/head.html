@@ -1,0 +1,31 @@
+{% comment %}
+  Shared <head> for the blog pages — mirrors what scripts/build-blog.mjs
+  emitted for post and index pages on the old SPA deployment.
+{% endcomment %}{% if page.layout == 'post' %}{% assign head_title = page.title | append: ' — PocketShell' %}{% assign head_desc = page.description %}{% assign head_canonical = site.url | append: '/blog/' | append: page.slug %}{% assign head_type = 'article' %}{% if page.cover %}{% assign head_image = page.cover | replace: '.webp', '.png' %}{% else %}{% assign head_image = '/images/og-cover.png' %}{% endif %}{% else %}{% assign head_title = 'SSH and terminal guides — PocketShell blog' %}{% assign head_desc = 'Practical notes on SSH, terminals, and running things on remote machines — from building PocketShell, an SSH client in a browser tab.' %}{% assign head_canonical = site.url | append: '/blog' %}{% assign head_type = 'website' %}{% assign head_image = '/images/og-cover.png' %}{% endif %}{% assign head_abs_image = head_image | prepend: site.url %}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ head_title }}</title>
+  <meta name="description" content="{{ head_desc }}" />
+  <link rel="canonical" href="{{ head_canonical }}" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0d1117" />
+  <meta property="og:type" content="{{ head_type }}" />
+  <meta property="og:site_name" content="PocketShell" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:url" content="{{ head_canonical }}" />
+  <meta property="og:title" content="{{ head_title }}" />
+  <meta property="og:description" content="{{ head_desc }}" />
+  <meta property="og:image" content="{{ head_abs_image }}" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="{{ head_title }}" />{% if page.layout == 'post' %}
+  <meta property="article:published_time" content="{{ page.date | date: '%Y-%m-%d' }}" />
+  <meta property="article:author" content="Alexey Grigorev" />{% endif %}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ head_title }}" />
+  <meta name="twitter:description" content="{{ head_desc }}" />
+  <meta name="twitter:image" content="{{ head_abs_image }}" />
+  <link rel="alternate" type="application/atom+xml" title="PocketShell blog" href="/feed.xml" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d1117' stroke='%2330363d' stroke-width='2'/%3E%3Ctext x='12' y='45' font-family='ui-monospace,monospace' font-size='30' font-weight='bold' fill='%233fb950'%3E%3E_%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/blog.css" />
+  <script type="application/ld+json">{% if page.layout == 'post' %}{"@context":"https://schema.org","@type":"BlogPosting","headline":{{ head_title | jsonify }},"description":{{ head_desc | jsonify }},"datePublished":"{{ page.date | date: '%Y-%m-%d' }}","author":{"@type":"Person","name":"Alexey Grigorev","url":"https://github.com/alexeygrigorev"},"url":"{{ head_canonical }}"}{% else %}{"@context":"https://schema.org","@type":"Blog","name":"PocketShell Blog","description":{{ head_desc | jsonify }},"url":"{{ head_canonical }}"}{% endif %}</script>

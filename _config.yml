@@ -1,0 +1,19 @@
+url: https://pocketshell.io
+app_url: https://app.pocketshell.io
+name: PocketShell
+title: PocketShell
+description: SSH client in your browser tab — drop in on your AI agents from anywhere.
+permalink: /blog/:title/
+markdown: CommonMarkGhPages
+markdown: CommonMarkGhPages
+
+exclude:
+  - _site/
+  - .bin/
+  - .rustkyll/
+  - .rustkyll-manifest.json
+  - .github/
+  - README.md
+  - Makefile
+  - scripts/
+  - drafts/

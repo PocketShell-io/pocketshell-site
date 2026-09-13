@@ -1,0 +1,1866 @@
+:root {
+  color-scheme: dark;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: #0d1117;
+  color: #e6edf3;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+a {
+  color: #58a6ff;
+}
+
+:focus-visible {
+  outline: 2px solid #58a6ff;
+  outline-offset: 2px;
+}
+
+/* Buttons and button-looking links share one idiom (6px radius, family hues). */
+button,
+.button {
+  font: inherit;
+  background: #21262d;
+  color: #e6edf3;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 6px 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+button:hover,
+.button:hover {
+  background: #30363d;
+}
+
+button.primary,
+.button.primary {
+  background: #1f6feb;
+  border-color: #1f6feb;
+}
+
+.button.primary {
+  color: #fff;
+}
+
+button.primary:hover,
+.button.primary:hover {
+  background: #388bfd;
+}
+
+button:disabled,
+.button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.button.large {
+  padding: 12px 22px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+input,
+textarea {
+  font: inherit;
+  background: #0d1117;
+  color: #e6edf3;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 6px 10px;
+}
+
+.error {
+  color: #f85149;
+}
+
+.muted {
+  color: #8b949e;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 20px;
+  border-bottom: 1px solid #21262d;
+}
+
+.topbar .brand {
+  font-weight: 700;
+  text-decoration: none;
+  color: #e6edf3;
+}
+
+.topbar .spacer {
+  flex: 1;
+}
+
+/* Long account emails must not push the Sign out button off-screen. Only the
+   email may shrink; the brand and the web badge keep their natural width. */
+.topbar > * {
+  flex-shrink: 0;
+}
+
+.topbar .email {
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+main.page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px 20px;
+  /* End at the viewport bottom (100dvh minus the in-flow 54px topbar) so the
+     empty hosts view centers in the real space below the heading. */
+  min-height: calc(100vh - 54px);
+  min-height: calc(100dvh - 54px);
+  display: flex;
+  flex-direction: column;
+}
+
+.host-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 4px;
+  border-bottom: 1px solid #21262d;
+}
+
+/* The user@host:port line is unbreakable; let the text block shrink so the
+   action buttons stay on-screen on phones instead of widening the page. */
+.host-row > div:first-child {
+  min-width: 0;
+}
+
+/* One actions group per row: margin-left:auto right-aligns it beside the text
+   and, when it wraps on a phone, keeps it a single right-aligned block. */
+.host-row .actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.host-row .name {
+  font-weight: 600;
+}
+
+.host-row .meta {
+  color: #8b949e;
+  font-size: 0.9em;
+}
+
+/* Empty hosts view (nothing synced, form closed): center the message and the
+   Add host button in the space below the heading, like the auth card, so the
+   page reads as intentionally empty. flex:1 fills the page column under the
+   heading, so the centering stays true wherever the heading ends. */
+.page > .empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Inside the centered empty state the long message always wraps the Add host
+   button onto its own flex line, and whether the zero-width spacer rides the
+   first line decides which side the button lands on (left on desktop, right
+   on phones). Drop the spacer here and center both lines so the stacked
+   empty state stays symmetric at every width. */
+.page > .empty .list-head {
+  justify-content: center;
+}
+
+.page > .empty .list-head .spacer {
+  display: none;
+}
+
+/* List head above the host rows: empty-state message left, Add host right.
+   Wraps so the message and the button stack instead of cramming on phones. */
+.list-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.list-head .spacer {
+  flex: 1;
+}
+
+/* The new/edit-host form: one wrapping row of fields, width by importance. */
+.hostform {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.hostform input {
+  min-width: 0;
+  /* Long placeholders clip at the input edge; ellipsis beats a mid-token cut. */
+  text-overflow: ellipsis;
+}
+
+/* Bases are sized so field contents fit untruncated: the "Name (e.g.
+   prod-box)" placeholder needs ~172px, "User (optional)" ~119px, and a
+   typed hostname like staging.example.com ~165px of content box; Port
+   donates the shrink slack. */
+.hostform .f-name {
+  flex: 1 1 200px;
+}
+
+.hostform .f-host {
+  flex: 2 1 190px;
+}
+
+.hostform .f-user {
+  flex: 1 1 150px;
+}
+
+.hostform .f-port {
+  flex: 0 1 60px;
+}
+
+/* Phones: stack the fields. Below ~620px of viewport the four bases stop
+   fitting on one line and flex-shrink truncates placeholders ("User
+   (optio…"), so full-width rows beat a squeezed row. */
+@media (max-width: 640px) {
+  .hostform .f-name,
+  .hostform .f-host,
+  .hostform .f-user,
+  .hostform .f-port {
+    flex: 1 1 100%;
+  }
+}
+
+/* Edit mode locks the name (it keys the synced entry); show it as locked,
+   not as an ordinary field that happens to ignore typing. */
+.hostform input:disabled {
+  color: #8b949e;
+  background: #161b22;
+  cursor: not-allowed;
+}
+
+details.keybox {
+  margin-top: 6px;
+}
+
+details.keybox textarea {
+  width: 100%;
+  min-height: 90px;
+  font-family: ui-monospace, monospace;
+  font-size: 0.85em;
+}
+
+.terminal-wrap {
+  position: fixed;
+  inset: 53px 0 0 0;
+  padding: 0 8px 8px;
+}
+
+.terminal-wrap .term {
+  width: 100%;
+  height: 100%;
+}
+
+/* ---- Landing (/) ---- */
+
+.landing {
+  /* Type scale: every landing font-size maps to one of these steps. */
+  --text-fine: 13px;
+  --text-small: 14px;
+  --text-body: 16px;
+  --text-lede: 18px;
+  --text-h3: 18px;
+  --text-h2: clamp(26px, 3vw, 32px);
+  --text-h1: clamp(36px, 5vw, 54px);
+  /* One vertical rhythm: every section sits --gap-section below the previous. */
+  --gap-section: 96px;
+  /* One card padding for every card-like surface. */
+  --card-pad: 24px;
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.topbar.landing-topbar {
+  /* Block: the base .topbar is flex, which would shrink-to-fit the rail.
+     The outer bar carries only the border; the rail aligns to .container. */
+  display: block;
+  padding: 0;
+}
+
+.topbar.landing-topbar .topbar-rail {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.topbar.landing-topbar .brand {
+  padding: 4px 0;
+}
+
+.brand-mark {
+  font-family: ui-monospace, monospace;
+  color: #3fb950;
+  margin-right: 2px;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.landing .nav-link {
+  color: #e6edf3;
+  text-decoration: none;
+  padding: 6px 0;
+  font-size: var(--text-body);
+}
+
+.landing .nav-link:hover {
+  color: #58a6ff;
+}
+
+.landing .text-link {
+  color: #58a6ff;
+  text-decoration: underline;
+  text-decoration-color: #30363d;
+  text-underline-offset: 3px;
+  display: inline-block;
+  padding: 6px 2px;
+  font-size: var(--text-body);
+}
+
+.landing .text-link:hover {
+  text-decoration-color: #58a6ff;
+}
+
+/* Hero: centered copy, product visual right below the fold line. */
+
+.hero {
+  padding-top: 72px;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--text-small);
+  color: #58a6ff;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 999px;
+  padding: 4px 14px;
+  margin: 0 0 20px;
+}
+
+.hero h1 {
+  font-size: var(--text-h1);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 auto 18px;
+  max-width: 16ch;
+  text-wrap: balance;
+}
+
+.hero .sub {
+  font-size: var(--text-lede);
+  line-height: 1.6;
+  color: #8b949e;
+  max-width: 56ch;
+  margin: 0 auto 28px;
+}
+
+.cta-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.chips {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 0;
+  margin: 22px 0 0;
+}
+
+.chip {
+  border: 1px solid #30363d;
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: var(--text-fine);
+  color: #8b949e;
+  background: rgba(22, 27, 34, 0.6);
+}
+
+.cta-note {
+  margin: 14px 0 0;
+  font-size: var(--text-fine);
+  color: #8b949e;
+}
+
+/* Fact strip: one hairline-grid row of concrete claims under the hero. */
+
+.fact-strip {
+  list-style: none;
+  margin: 48px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  background: #30363d;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.fact {
+  background: #161b22;
+  padding: 16px 20px;
+  font-size: var(--text-fine);
+  line-height: 1.5;
+  color: #8b949e;
+}
+
+.fact strong {
+  display: block;
+  color: #e6edf3;
+  font-size: var(--text-small);
+  margin-bottom: 2px;
+}
+
+.hero-visual {
+  margin-top: 52px;
+}
+
+/* Desktop-app mock: the hero recreates the actual PocketShell desktop window
+   — session panel, tab bar, agent session, prompt composer — using the app's
+   own dark-theme tokens (pocketshell-electron App.vue: #0d1117 ground,
+   #161b22 surfaces, #22d3ee accent, #a78bfa agent, #22c55e attached dot). */
+
+.icon-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.desktop-mock {
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: left;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  overflow: hidden;
+  /* Same frame lift as .term-mock. */
+  box-shadow:
+    0 16px 48px rgba(31, 109, 235, 0.12),
+    0 24px 64px rgba(1, 4, 9, 0.6);
+}
+
+.desktop-mock .bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border-bottom: 1px solid #21262d;
+}
+
+.desktop-mock .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #30363d;
+}
+
+.desktop-mock .title {
+  margin-left: 8px;
+  font-family: ui-monospace, monospace;
+  font-size: var(--text-fine);
+  color: #8b949e;
+}
+
+.desk-body {
+  display: flex;
+  align-items: stretch;
+}
+
+/* Every mock icon defaults to a small inline glyph; specific slots resize. */
+.desktop-mock svg {
+  flex: none;
+  width: 12px;
+  height: 12px;
+}
+
+/* Session panel: root -> folder tree, 28px rows, cyan rail on the current
+   folder, violet agent badges, green dot = something attached. */
+
+.desk-side {
+  flex: 0 0 238px;
+  display: flex;
+  flex-direction: column;
+  background: #161b22;
+  border-right: 1px solid #21262d;
+}
+
+.side-head {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 36px;
+  padding: 0 6px;
+  border-bottom: 1px solid #21262d;
+}
+
+.side-spacer {
+  flex: 1;
+}
+
+.side-btn {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #8b949e;
+}
+
+.side-btn svg {
+  width: 13px;
+  height: 13px;
+}
+
+.side-tree {
+  padding: 6px 0;
+}
+
+.root-row,
+.dir-row {
+  display: flex;
+  align-items: center;
+  /* Rows are <button>s, and Chromium's UA sheet centers button content
+     (justify-content: center). With the auto-margined .time that free space
+     splits both ways and short rows visibly drift off the shared left line —
+     pin the start edge. */
+  justify-content: flex-start;
+  gap: 6px;
+  height: 28px;
+  padding: 0 10px;
+  font-size: 12.5px;
+  white-space: nowrap;
+}
+
+.root-row {
+  font-weight: 600;
+}
+
+.dir-row {
+  padding-left: 18px;
+  border-left: 2px solid transparent;
+}
+
+.dir-row.current {
+  background: rgba(34, 211, 238, 0.12);
+  border-left-color: #22d3ee;
+}
+
+.sdot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #6e7681;
+}
+
+.sdot.on {
+  background: #22c55e;
+}
+
+.dlabel {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* An unplaced session is labelled by its NAME, in mono (the app's untracked
+   row treatment). */
+.dlabel.mono {
+  font-family: ui-monospace, monospace;
+  font-size: 11.5px;
+  color: #8b949e;
+}
+
+.count {
+  color: #8b949e;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.row-add {
+  margin-left: auto;
+  display: inline-flex;
+  color: #8b949e;
+}
+
+.badge {
+  flex: none;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #a78bfa;
+  background: rgba(167, 139, 250, 0.14);
+  border-radius: 4px;
+  padding: 0 3px;
+}
+
+.time {
+  margin-left: auto;
+  color: #8b949e;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.dir-row.current .time {
+  margin-left: 0;
+}
+
+/* Rows and tabs are real <button>s: strip the UA chrome (border, buttonface
+   background, system font) so the row/tab styles above still read, then add
+   the affordances an interactive mock owes the visitor. Root rows stay plain
+   headers — in the app they are grouping headers, not buttons. */
+button.dir-row,
+button.tab {
+  appearance: none;
+  background: none;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background-color 0.12s ease;
+}
+
+button.dir-row {
+  border-left: 2px solid transparent;
+  width: 100%;
+  text-align: left;
+}
+
+.dir-row:not(.current):hover,
+.tab:not(.on):hover {
+  background: #1c2129;
+}
+
+.desktop-mock button:focus-visible {
+  outline: 1px solid #22d3ee;
+  outline-offset: -1px;
+}
+
+.desk-side,
+.tabbar {
+  user-select: none;
+}
+
+/* Workspace: tab bar with agent marks, the terminal holding a live agent
+   session, and the prompt composer docked under it. */
+
+.desk-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.tabbar {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 34px;
+  padding: 0 8px;
+  border-bottom: 1px solid #21262d;
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  padding: 0 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #8b949e;
+  white-space: nowrap;
+}
+
+.tab.on {
+  background: #1c2129;
+  color: #e6edf3;
+}
+
+.tab svg,
+.tab-add svg {
+  width: 11px;
+  height: 11px;
+}
+
+.tab-x {
+  display: inline-flex;
+  color: #6e7681;
+}
+
+.tab-x svg {
+  width: 9px;
+  height: 9px;
+}
+
+.tab-add {
+  display: inline-flex;
+  padding: 0 6px;
+  color: #8b949e;
+}
+
+.desk-term {
+  flex: 1;
+  background: #0c0c0c;
+  padding: 14px 18px;
+  /* Mocks are decorative: content must scroll on narrow screens, never clip. */
+  overflow-x: auto;
+}
+
+.desk-term pre {
+  margin: 0;
+  font-family: ui-monospace, monospace;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: #cccccc;
+  /* Transcript lines are authored to fit the desktop panel; pre-wrap lets
+     them reflow at phone width instead of overflowing the panel edge. */
+  white-space: pre-wrap;
+}
+
+/* The agent's turn bullet — Claude Code's terracotta. */
+.t-bullet {
+  color: #d97757;
+}
+
+.t-add {
+  color: #3fb950;
+}
+
+.t-del {
+  color: #f85149;
+}
+
+.t-run {
+  color: #a78bfa;
+}
+
+/* Prompt composer: PROMPT header, draft, then attach/slash tools, keyboard
+   hint and the cyan Send. */
+
+.desk-composer {
+  border-top: 1px solid #21262d;
+  background: #161b22;
+}
+
+.comp-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 28px;
+  padding: 0 10px;
+  border-bottom: 1px solid #21262d;
+}
+
+.comp-title {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.comp-x {
+  margin-left: auto;
+  display: inline-flex;
+  color: #8b949e;
+}
+
+.comp-x svg {
+  width: 10px;
+  height: 10px;
+}
+
+.comp-draft {
+  min-height: 20px;
+  padding: 10px 12px 4px;
+  font-size: 13px;
+  color: #e6edf3;
+}
+
+/* The Files tab has no draft; the composer shows its placeholder, like the
+   app's empty composer does. */
+.comp-draft:empty::before {
+  content: 'Prompt the agent…';
+  color: #6e7681;
+}
+
+.comp-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px 8px;
+}
+
+.comp-tool {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  color: #8b949e;
+}
+
+.comp-tool svg {
+  width: 12px;
+  height: 12px;
+}
+
+.comp-hint {
+  margin-left: auto;
+  font-size: 11px;
+  color: #8b949e;
+}
+
+.comp-send {
+  background: #22d3ee;
+  color: #04101a;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 4px 12px;
+}
+
+.desktop-mock use {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (max-width: 700px) {
+  /* The session panel is the first thing a phone-width frame can't hold. */
+  .desk-side {
+    display: none;
+  }
+
+  .desk-term pre {
+    font-size: 12px;
+  }
+
+  .comp-hint {
+    display: none;
+  }
+}
+
+.term-mock {
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: left;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  overflow: hidden;
+  /* Lift the dark terminal off the dark page with an existing-tone glow. */
+  box-shadow:
+    0 16px 48px rgba(31, 109, 235, 0.12),
+    0 24px 64px rgba(1, 4, 9, 0.6);
+}
+
+.term-mock .bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border-bottom: 1px solid #21262d;
+}
+
+.term-mock .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #30363d;
+}
+
+.term-mock .title {
+  margin-left: 8px;
+  font-family: ui-monospace, monospace;
+  font-size: var(--text-fine);
+  color: #8b949e;
+}
+
+.term-mock pre {
+  margin: 0;
+  padding: 18px 22px;
+  font-family: ui-monospace, monospace;
+  font-size: 15px;
+  line-height: 1.75;
+  /* Same reflow guarantee as .desk-term pre: wrap, never overflow. */
+  white-space: pre-wrap;
+  /* Mocks are decorative: content must scroll on narrow screens, never clip. */
+  overflow-x: auto;
+}
+
+.t-prompt {
+  color: #58a6ff;
+}
+
+.t-user {
+  color: #3fb950;
+}
+
+.t-dir {
+  color: #58a6ff;
+}
+
+.t-dim {
+  color: #8b949e;
+}
+
+.t-green {
+  color: #3fb950;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cursor {
+    animation: blink 1.2s steps(1) infinite;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Sections share one rhythm and one heading scale. */
+
+.band {
+  /* Hairline divider between bands: gap, line, then breathing room. */
+  margin-top: 56px;
+  border-top: 1px solid #21262d;
+  padding-top: 40px;
+}
+
+.band h2 {
+  font-size: var(--text-h2);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0 0 12px;
+}
+
+.band-sub {
+  margin: 0;
+  font-size: var(--text-lede);
+  line-height: 1.6;
+  color: #8b949e;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.card {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: var(--card-pad);
+}
+
+.card h3,
+.step h3 {
+  margin: 0 0 8px;
+  font-size: var(--text-h3);
+}
+
+.card p,
+.step p {
+  margin: 0;
+  font-size: var(--text-body);
+  line-height: 1.6;
+  color: #8b949e;
+}
+
+.card-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.card-link:hover {
+  border-color: #58a6ff;
+}
+
+.card-link h3 {
+  color: #58a6ff;
+}
+
+.card-meta {
+  display: block;
+  margin-top: 12px;
+  font-size: var(--text-fine);
+  color: #8b949e;
+}
+
+.blog-cards {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.band-more {
+  margin: 20px 0 0;
+}
+
+.steps {
+  list-style: none;
+  margin: 32px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.step {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: var(--card-pad);
+}
+
+.step .num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #30363d;
+  border-radius: 50%;
+  font-family: ui-monospace, monospace;
+  font-size: var(--text-small);
+  color: #58a6ff;
+  margin-bottom: 12px;
+}
+
+/* Feature rows: benefit copy on one side, a product visual on the other. */
+
+.frow {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: 48px;
+  align-items: center;
+  padding: 36px 0;
+}
+
+.frow > * {
+  min-width: 0;
+}
+
+.frow + .frow {
+  border-top: 1px solid #21262d;
+}
+
+.frow--flip .frow-copy {
+  order: 2;
+}
+
+.frow h3 {
+  margin: 0 0 10px;
+  font-size: 20px;
+}
+
+.frow .outcome {
+  margin: 0 0 16px;
+  font-size: var(--text-body);
+  line-height: 1.65;
+  color: #8b949e;
+}
+
+.frow .chips {
+  justify-content: flex-start;
+  padding: 0;
+  margin: 0 0 16px;
+}
+
+/* Keep the shared term-mock idiom but let rows use the full column. */
+.frow .term-mock {
+  max-width: none;
+  margin: 0;
+}
+
+.hosts-mock {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.hosts-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid #21262d;
+  font-family: ui-monospace, monospace;
+  font-size: var(--text-fine);
+  color: #8b949e;
+}
+
+.hosts-bar .pill {
+  color: #3fb950;
+  border: 1px solid #30363d;
+  border-radius: 999px;
+  padding: 1px 8px;
+  font-size: 12px;
+}
+
+.hosts-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #21262d;
+  font-family: ui-monospace, monospace;
+  font-size: var(--text-fine);
+}
+
+.hosts-row:last-child {
+  border-bottom: 0;
+}
+
+.hosts-row .hname {
+  color: #e6edf3;
+  font-weight: 600;
+}
+
+.hosts-row .hmeta {
+  flex: 1;
+  color: #8b949e;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hosts-row .hbtn {
+  color: #58a6ff;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-size: 12px;
+}
+
+/* Any-device panel: three CSS device silhouettes with terminal lines. */
+
+.devices {
+  display: flex;
+  flex-wrap: wrap; /* the silhouettes are fixed-size: wrap, never overflow */
+  align-items: flex-end;
+  justify-content: center;
+  gap: 24px;
+  padding: 32px 24px;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+}
+
+.device .screen {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.device .screen span {
+  display: block;
+  height: 5px;
+  border-radius: 3px;
+  background: #30363d;
+}
+
+.device .screen span.hl {
+  width: 62%;
+  background: #3fb950;
+}
+
+.device--laptop .screen {
+  width: 190px;
+  height: 118px;
+}
+
+.device--laptop .base {
+  height: 9px;
+  margin: 0 -16px;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-top: 0;
+  border-radius: 0 0 8px 8px;
+}
+
+.device--tablet .screen {
+  width: 122px;
+  height: 150px;
+}
+
+.device--phone .screen {
+  width: 68px;
+  height: 118px;
+  border-radius: 10px;
+}
+
+/* Security band: the data path as a numbered flow, CTA below. */
+
+.security {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 32px;
+}
+
+.security .chips {
+  justify-content: flex-start;
+  margin-top: 18px;
+}
+
+.security-copy > p {
+  margin: 0;
+  font-size: var(--text-body);
+  line-height: 1.7;
+  color: #8b949e;
+  max-width: 58ch;
+}
+
+.sec-flow {
+  list-style: none;
+  margin: 24px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.sec-item {
+  background: #0d1117;
+  border: 1px solid #21262d;
+  border-radius: 6px;
+  padding: 16px;
+}
+
+.sec-item .n {
+  display: block;
+  font-family: ui-monospace, monospace;
+  font-size: var(--text-fine);
+  color: #58a6ff;
+  margin-bottom: 8px;
+}
+
+.sec-item h3 {
+  margin: 0 0 6px;
+  font-size: 15px;
+}
+
+.sec-item p {
+  margin: 0;
+  font-size: var(--text-small);
+  line-height: 1.55;
+  color: #8b949e;
+}
+
+.sec-bridge {
+  margin: 20px 0 0;
+  font-size: var(--text-small);
+  line-height: 1.6;
+  color: #8b949e;
+}
+
+.security .button {
+  margin-top: 20px;
+}
+
+/* Keep your agents busy at work: the GitHub calendar drawn by the page
+   from the synced snapshot (scripts/sync-gh-history.py), not a screenshot. */
+
+.oss {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 32px;
+}
+
+.oss-copy {
+  max-width: 68ch;
+}
+
+.oss-copy p {
+  margin: 0;
+  font-size: var(--text-body);
+  line-height: 1.6;
+  color: #8b949e;
+}
+
+.oss-figure {
+  margin: 24px 0 0;
+}
+
+.oss-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-bottom: 10px;
+}
+
+.oss-total {
+  font-size: var(--text-body);
+  font-weight: 600;
+  color: #e6edf3;
+}
+
+.oss-legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: var(--text-small);
+  color: #8b949e;
+}
+
+.oss-legend i {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+.oss-graph {
+  display: block;
+}
+
+.contrib {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+}
+
+.contrib-month,
+.contrib-wday {
+  fill: #8b949e;
+  font-size: 10px;
+}
+
+.contrib-wday {
+  text-anchor: end;
+}
+
+/* Per-day tooltip on the contribution graph: fixed to the viewport at the
+   cursor so the responsive SVG needs no coordinate mapping. */
+.contrib-tip {
+  position: fixed;
+  z-index: 10;
+  pointer-events: none;
+  transform: translate(12px, 14px);
+  padding: 6px 10px;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  font-size: var(--text-small);
+  color: #8b949e;
+  white-space: nowrap;
+}
+
+.contrib-tip strong {
+  color: #e6edf3;
+  font-weight: 600;
+  margin-right: 6px;
+}
+
+/* FAQ: collapsible cards, centered column. */
+
+.faq {
+  display: grid;
+  gap: 12px;
+  max-width: 760px;
+  margin: 24px auto 0;
+}
+
+.faq details {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+}
+
+.faq summary {
+  cursor: pointer;
+  padding: 16px 20px;
+  font-size: var(--text-body);
+  font-weight: 600;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq summary::after {
+  content: '+';
+  font-family: ui-monospace, monospace;
+  font-size: var(--text-h3);
+  color: #8b949e;
+}
+
+.faq details[open] summary::after {
+  content: '\2212';
+}
+
+.faq details p {
+  margin: 0;
+  padding: 0 20px 16px;
+  font-size: var(--text-body);
+  line-height: 1.6;
+  color: #8b949e;
+}
+
+/* Closing CTA and footer. */
+
+.final-cta {
+  text-align: center;
+  padding: 8px 0;
+}
+
+/* Generated brand illustration above the closing CTA; kept modest so the
+   headline still leads. */
+.final-cta-visual {
+  display: block;
+  width: 100%;
+  max-width: 640px;
+  height: auto;
+  margin: 0 auto 28px;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  background: #0d1117;
+}
+
+.final-cta p {
+  margin: 0 0 24px;
+  color: #8b949e;
+  font-size: var(--text-lede);
+}
+
+.landing-footer {
+  margin-top: var(--gap-section);
+  border-top: 1px solid #21262d;
+}
+
+.footer-row {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: var(--text-fine);
+}
+
+.foot-brand {
+  font-weight: 700;
+  font-size: var(--text-small);
+  color: #e6edf3;
+}
+
+.footer-row .foot-dim {
+  color: #8b949e;
+}
+
+.footer-nav {
+  margin-left: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-nav a {
+  color: #8b949e;
+  padding: 6px 0;
+  white-space: nowrap;
+}
+
+.footer-nav a:hover {
+  color: #58a6ff;
+}
+
+/* Bare links get an observable hover change without leaving the palette:
+   dim underline -> accent (the same idiom as .nav-link). */
+.landing .brand:hover {
+  color: #58a6ff;
+}
+
+.faq summary:hover {
+  color: #58a6ff;
+}
+
+.oss-copy a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: #30363d;
+}
+
+.oss-copy a:hover {
+  text-decoration-color: #58a6ff;
+}
+
+@media (max-width: 900px) {
+  .landing {
+    --gap-section: 56px;
+  }
+
+  .hero {
+    padding-top: 48px;
+  }
+
+  .hero-visual {
+    margin-top: 40px;
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
+  .fact-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .frow {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 28px 0;
+  }
+
+  .frow--flip .frow-copy {
+    order: 0;
+  }
+
+  .band {
+    margin-top: 32px;
+    padding-top: 24px;
+  }
+
+  .sec-flow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .security,
+  .oss {
+    padding: 24px 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  /* SVG labels scale below readability on phone widths — GitHub's own
+     mobile view drops them too; the grid alone still reads. */
+  .contrib-month,
+  .contrib-wday {
+    display: none;
+  }
+
+  /* Wrap the section anchors onto a second row instead of hiding them. */
+  .topbar.landing-topbar .topbar-rail {
+    flex-wrap: wrap;
+    row-gap: 0;
+  }
+
+  .topbar.landing-topbar .site-nav {
+    order: 3;
+    width: 100%;
+    padding-bottom: 10px;
+    gap: 18px;
+    flex-wrap: wrap;
+    row-gap: 2px;
+  }
+
+  /* Tap targets: keep anchor rows ~44px tall on touch screens. */
+  .topbar.landing-topbar .site-nav a {
+    padding: 12px 0;
+  }
+
+  .footer-nav a {
+    padding: 12px 0;
+  }
+
+  .cards,
+  .blog-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .fact-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .sec-flow {
+    grid-template-columns: 1fr;
+  }
+
+  /* Scale the device trio into the 1-col row (350px inside the rail). */
+  .devices {
+    flex-wrap: wrap;
+    gap: 14px;
+    padding: 16px;
+  }
+
+  .device--laptop .screen {
+    width: 138px;
+    height: 92px;
+  }
+
+  .device--tablet .screen {
+    width: 94px;
+    height: 116px;
+  }
+
+  .device--phone .screen {
+    width: 54px;
+    height: 92px;
+  }
+
+  .term-mock pre {
+    font-size: var(--text-fine);
+    padding: 14px;
+  }
+}
+
+/* Sign-in (/login) — centered auth card. All rules are auth-namespaced and
+   appended here so the rest of the sheet stays untouched. Type follows the
+   landing scale; surfaces/borders reuse the shared tokens. */
+.auth-page {
+  --text-small: 14px;
+  --text-lede: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 40px);
+  min-height: calc(100dvh - 40px);
+  padding: 32px 20px;
+}
+
+.auth-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(400px, 100%);
+  padding: 32px 28px;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.auth-mark {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 16px;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  color: #3fb950;
+  font-family: ui-monospace, monospace;
+  font-size: var(--text-lede);
+  font-weight: 700;
+}
+
+.auth-card h1 {
+  margin: 0 0 8px;
+  font-size: var(--text-lede);
+  line-height: 1.3;
+}
+
+.auth-lede {
+  margin: 0;
+  font-size: var(--text-small);
+  color: #8b949e;
+}
+
+.auth-slot {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  width: min(360px, 100%);
+  min-height: 40px;
+  margin-top: 24px;
+}
+
+/* Placeholder and real button share one grid cell, so the iframe arriving
+   never shifts the surrounding layout. */
+.auth-slot > * {
+  grid-area: 1 / 1;
+}
+
+.auth-slot-button {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  min-height: 40px;
+}
+
+/* Skeleton for the in-flight GIS script: dashed and text-only, so it never
+   reads as a clickable button. */
+.auth-slot-pending {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 40px;
+  border: 1px dashed #30363d;
+  border-radius: 6px;
+  color: #8b949e;
+  font-size: var(--text-small);
+}
+
+.auth-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid #30363d;
+  border-top-color: #8b949e;
+  border-radius: 50%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .auth-spinner {
+    animation: auth-spin 0.8s linear infinite;
+  }
+}
+
+@keyframes auth-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* One alert idiom for the operator (not configured) and runtime failures. */
+.auth-notice {
+  width: 100%;
+  margin-top: 24px;
+  padding: 14px 16px;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  color: #f85149;
+  font-size: var(--text-small);
+}
+
+.auth-notice p {
+  margin: 0;
+}
+
+.auth-notice code {
+  font-family: ui-monospace, monospace;
+  font-size: 0.9em;
+}
+
+.auth-notice button {
+  margin-top: 12px;
+  padding: 12px 16px;
+  font-size: var(--text-small);
+}
+
+.auth-back {
+  margin-top: 12px;
+  font-size: var(--text-small);
+}
+
+/* Padded to a 44px+ tap target on touch screens. */
+.auth-back a {
+  display: inline-block;
+  padding: 12px 16px;
+}
+
+/* ---- Static-site additions ----------------------------------------------
+   The hero mock renders every folder/tab up front and js/landing.js toggles
+   visibility between them; [hidden] must always win over the layout rules. */
+.desk-pane {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* ---- Static-site additions ----------------------------------------------
+   The hero mock renders every folder/tab up front and js/landing.js toggles
+   visibility between them; [hidden] must always win over the layout rules. */
+.desk-pane {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+[hidden] {
+  display: none !important;
+}

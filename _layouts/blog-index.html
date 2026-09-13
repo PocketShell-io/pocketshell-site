@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+{% include head.html %}
+</head>
+<body>
+  {% include topbar.html %}
+  <main>
+    <div class="container blog-index">
+      <h1>Blog</h1>
+      <p class="band-sub">SSH, terminals, and running things on remote machines.</p>
+    </div>
+    <section class="band">
+      <div class="container">
+        <div class="cards blog-cards">{% for p in site.posts %}{% if p.featured %}
+          <a class="card card-link" href="/blog/{{ p.slug }}">{% if p.cover %}
+            <img class="card-cover" src="{{ p.cover }}" alt="" width="1200" height="630" loading="lazy" />{% endif %}
+            <h3>{{ p.title }}</h3>
+            <p>{{ p.description }}</p>
+            <span class="card-meta">{{ p.date | date: '%B %-d, %Y' }} · {{ p.reading_minutes }} min read</span>
+          </a>{% endif %}{% endfor %}{% for p in site.posts %}{% unless p.featured %}
+          <a class="card card-link" href="/blog/{{ p.slug }}">{% if p.cover %}
+            <img class="card-cover" src="{{ p.cover }}" alt="" width="1200" height="630" loading="lazy" />{% endif %}
+            <h3>{{ p.title }}</h3>
+            <p>{{ p.description }}</p>
+            <span class="card-meta">{{ p.date | date: '%B %-d, %Y' }} · {{ p.reading_minutes }} min read</span>
+          </a>{% endunless %}{% endfor %}
+        </div>
+      </div>
+    </section>
+  </main>
+  {% include footer.html %}
+</body>
+</html>
