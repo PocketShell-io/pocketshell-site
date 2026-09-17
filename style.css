@@ -967,6 +967,16 @@ button.dir-row {
   color: #3fb950;
 }
 
+/* aplexer's crash-warning banner: the ⚠ lines and needs-attention mark. */
+.t-warn {
+  color: #e3b341;
+}
+
+/* Broken-session state glyph (✗) in aplexer listings. */
+.t-err {
+  color: #f85149;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .cursor {
     animation: blink 1.2s steps(1) infinite;

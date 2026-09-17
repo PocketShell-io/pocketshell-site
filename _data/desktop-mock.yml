@@ -94,8 +94,31 @@ folders:
     root: git
     label: aplexer
     time: 3d
-    activeTab: spec
+    activeTab: list
     tabs:
+      - id: list
+        label: list
+        draft: ack the rollup crash, then check the memory cap
+        term: |-
+          <span class="t-prompt">$</span> a list
+          <span class="t-dim">[4] ~/git/dataops  0 active ·
+          1 needs you · 1 stopped</span>
+          └──  1  rollup  python
+            <span class="t-err">✗ broken</span> <span class="t-warn">!</span> <span class="t-dim">12h</span>
+
+          <span class="t-warn">⚠ 1 unacknowledged crash
+          warning (cleared by `a ack`):</span>
+            <span class="t-warn">⚠ oom</span> ~/git/dataops:rollup
+            — <span class="t-dim">killed by the kernel OOM
+            killer · 12h ago</span>
+
+          <span class="t-prompt">$</span> a ack ~/git/dataops:rollup
+          acknowledged ~/git/dataops:rollup
+            (oom) — <span class="t-dim">killed by the kernel
+            OOM killer</span>
+          <span class="t-green">acknowledged 1 warning(s)</span>
+
+          <span class="t-prompt">$</span> <span class="cursor">█</span>
       - id: spec
         label: spec
         draft: summarise the open questions from the sync doc
