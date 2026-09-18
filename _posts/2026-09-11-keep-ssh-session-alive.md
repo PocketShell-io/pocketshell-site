@@ -156,7 +156,7 @@ These cover most of the pain:
 ## The payoff
 
 Once your session state lives on the server, the client stops mattering.
-Reattach to the same session from an iPad, a borrowed Chromebook, or a work
+Reattach to the same session from a tablet, a borrowed Chromebook, or a work
 laptop you can't install software on. It makes no difference whether the
 session is tmux or an [aplexer agent session](/blog/aplexer-agent-multiplexer).
 

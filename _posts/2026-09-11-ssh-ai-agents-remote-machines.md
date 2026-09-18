@@ -181,7 +181,7 @@ favor:
 The one annoyance with the setup above is that it still requires an SSH client
 and your config file on whatever machine you're sitting at. That's the reason I
 built [PocketShell](https://pocketshell.io/#how): it's a real terminal to your
-saved hosts, in a browser tab. The `a attach` step above works from an iPad
+saved hosts, in a browser tab. The `a attach` step above works from a tablet
 or a locked-down work laptop with nothing installed, which is where a lot of
 agent babysitting happens.
 

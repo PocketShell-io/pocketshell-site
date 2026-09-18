@@ -208,7 +208,7 @@ The real config then pulls that folder in:
 Include ~/sync/ssh/*.conf
 ```
 
-And when the machine you're sitting at is borrowed (an iPad, a locked-down work
+And when the machine you're sitting at is borrowed (a tablet, a locked-down work
 laptop where you can't edit `~/.ssh` at all),
 [PocketShell](https://pocketshell.io/#security) keeps your saved host list synced to your account end-to-end encrypted. Private keys never sync. The alias follows you even when the config file can't.
 
