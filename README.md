@@ -41,6 +41,11 @@ Neither needs to be fresh; run them when you feel like it.
 
 Push to `main` → `.github/workflows/deploy.yml` builds with rustkyll and
 publishes to GitHub Pages. The custom domain (pocketshell.io) is set in the
-repo's Pages settings and in the `CNAME` file; DNS lives in the Route 53
-zone `pocketshell.io` (apex + www → GitHub Pages, `app` → CloudFront; see
-`aws-infra/sandbox/pocketshell-web`).
+repo's Pages settings and in the `CNAME` file.
+
+> DNS does NOT live here. Domain / DNS changes (A, AAAA, CNAME, TXT —
+> e.g. `google-site-verification`) belong in
+> `aws-infra/sandbox/pocketshell-web`: the Route 53 `pocketshell.io` zone
+> is defined in `template.yaml` (apex + www → GitHub Pages, `app` →
+> CloudFront via `domain.yaml`; `route53-site-records.json` holds the
+> hand-applied apex/www records).
