@@ -150,14 +150,14 @@
               <li class="chip">Sessions live on your machine</li>
             </ul>
           </div>
-          <section id="fact-strip" aria-label="Key facts">
+          <div class="fact-wrap">
             <ul class="fact-strip">
-              <li class="fact"><strong>AES-256-GCM · PBKDF2 600k</strong>zero-knowledge, end-to-end</li>
-              <li class="fact"><strong>Claude Code · Codex · OpenCode · Grok</strong>first-class sessions, not hidden panes</li>
-              <li class="fact"><strong>Real xterm.js terminal</strong>scrollback, copy/paste, resize</li>
-              <li class="fact"><strong>Tablet · Chromebook · phone</strong>any browser tab works</li>
+              <li class="fact"><strong>AES-256-GCM, PBKDF2 600k</strong><span class="fact-note">zero-knowledge, end-to-end</span></li>
+              <li class="fact"><strong>Claude Code, Codex, OpenCode, Grok</strong><span class="fact-note">first-class agent sessions</span></li>
+              <li class="fact"><strong>Real xterm.js terminal</strong><span class="fact-note">scrollback, copy/paste, resize</span></li>
+              <li class="fact"><strong>Tablet, Chromebook, phone</strong><span class="fact-note">any browser tab works</span></li>
             </ul>
-          </section>
+          </div>
           <div class="hero-visual" role="group" aria-label="Interactive preview of the PocketShell desktop app — click the folders and tabs">
             {% include desktop-mock.html %}
           </div>
@@ -174,7 +174,7 @@
               </li>
               <li class="step">
                 <span class="num">2</span>
-                <h3>Only you can read them</h3>
+                <h3>Only you can read your hosts</h3>
                 <p>Enter your sync passphrase once to decrypt the host list. It never leaves this browser.</p>
               </li>
               <li class="step">
@@ -198,7 +198,7 @@
                   encrypted in your browser before it leaves it, and the server stores ciphertext it
                   can't read.
                 </p>
-                <ul class="chips" aria-label="Highlights">
+                <ul class="chips">
                   <li class="chip">Zero-knowledge sync</li>
                   <li class="chip">AES-256-GCM</li>
                   <li class="chip">Passphrase never leaves the device</li>
@@ -226,7 +226,7 @@
                   the agent left it&nbsp;— full xterm.js in the tab, not a
                   screen-sharing approximation.
                 </p>
-                <ul class="chips" aria-label="Highlights">
+                <ul class="chips">
                   <li class="chip">Full scrollback</li>
                   <li class="chip">Reattach anywhere</li>
                   <li class="chip">Survives disconnects</li>
@@ -258,7 +258,7 @@
                   travels once, over the authenticated WebSocket, to the PocketShell
                   bridge&nbsp;— used in memory to open your session, never stored there.
                 </p>
-                <ul class="chips" aria-label="Highlights">
+                <ul class="chips">
                   <li class="chip">Keys never sync</li>
                   <li class="chip">Nothing to install</li>
                   <li class="chip">Any modern browser</li>
@@ -290,27 +290,28 @@
                   The keyboard-first home base. A session tree with an agent badge
                   on every session, a prompt composer, file browser, port
                   forwards, and provider quota. Hosts come straight from
-                  <code>~/.ssh/config</code>; a small helper on the box reads the
-                  rest.
+                  <code>~/.ssh/config</code>.
                 </p>
-                <a class="text-link" href="https://github.com/PocketShell-io/pocketshell-desktop/releases/latest">Download the latest desktop release&nbsp;→</a>
+                <a class="button large" href="https://github.com/PocketShell-io/pocketshell-desktop/releases/latest">Download desktop</a>
               </div>
               <div class="card">
                 <h3>Android</h3>
                 <p>
                   Voice-first. Check on your agents from your phone, dictate
                   prompts and commands, and unlock key passphrases biometrically.
+                  The session keeps running on your own hardware.
                 </p>
-                <a class="text-link" href="https://github.com/PocketShell-io/pocketshell/releases/latest">Download the latest APK&nbsp;→</a>
+                <a class="button large" href="https://github.com/PocketShell-io/pocketshell/releases/latest">Download the APK</a>
               </div>
               <div class="card">
                 <h3>Web</h3>
                 <p>
-                  The same PocketShell in a browser tab&nbsp;— a real terminal to
-                  any synced host, for tablets, Chromebooks, and locked-down
-                  machines where you can't install anything.
+                  The same PocketShell in a tab&nbsp;— a real terminal to any synced
+                  host, for tablets, Chromebooks, and locked-down machines where
+                  you can't install anything. Nothing to install, nothing to
+                  configure.
                 </p>
-                <a class="text-link" href="{{ site.app_url }}/">Open the web app&nbsp;→</a>
+                <a class="button large" href="{{ site.app_url }}/">Sign in on the web</a>
               </div>
             </div>
           </div>
@@ -326,22 +327,22 @@
                   <li class="sec-item">
                     <span class="n">01</span>
                     <h3>Passphrase stays local</h3>
-                    <p>Typed once per session and used in your browser, never sent&nbsp;— there is no server-side reset, because the server never had it.</p>
+                    <p>Typed once per session and used in your browser, never sent&nbsp;— so there is no server-side reset: the server never had your passphrase.</p>
                   </li>
                   <li class="sec-item">
                     <span class="n">02</span>
                     <h3>PBKDF2, 600,000 iterations</h3>
-                    <p>The encryption key is derived from your passphrase with PBKDF2-SHA256, so the stored blob resists offline guessing.</p>
+                    <p>The encryption key is derived from your passphrase with PBKDF2-SHA256, so the stored blob still resists any offline guessing.</p>
                   </li>
                   <li class="sec-item">
                     <span class="n">03</span>
                     <h3>AES-256-GCM before sync</h3>
-                    <p>The host list is encrypted before it leaves the browser. The sync server stores ciphertext it cannot read.</p>
+                    <p>The host list is encrypted in your browser before it leaves. The sync server stores ciphertext it can never turn back into plaintext.</p>
                   </li>
                   <li class="sec-item">
                     <span class="n">04</span>
                     <h3>Keys never sync at all</h3>
-                    <p>SSH private keys are entered per host and encrypted with your passphrase in that one browser. On connect, a key goes once to the PocketShell bridge over the authenticated WebSocket and is used in memory to open the session&nbsp;— the sync server never sees it.</p>
+                    <p>Private keys never sync. Each key attached to a host is encrypted with your passphrase and used in memory to open the connection.</p>
                   </li>
                 </ol>
                 <p class="sec-bridge">
@@ -358,21 +359,22 @@
         <section id="opensource" class="band">
           <div class="container">
             <div class="oss">
-              <div class="oss-copy">
-                <h2>Keep your agents busy at work</h2>
-                <p>
-                  A year of
-                  <a href="https://github.com/alexeygrigorev">Alexey Grigorev</a>'s GitHub
-                  contributions&nbsp;— agents committing in PocketShell sessions on his
-                  machines, while he checks in from a phone. Sign in, pick a host, and
-                  drop in on what they're doing right now.
-                </p>
-              </div>
-              <figure class="oss-figure">
+              <div class="oss-head">
+                <div class="oss-copy">
+                  <h2>Work that keeps going</h2>
+                  <p>
+                    PocketShell keeps
+                    <a href="https://github.com/alexeygrigorev">Alexey Grigorev's</a>
+                    agent sessions within reach across desktop, web, and phone. The
+                    graph is his public GitHub activity over the last 12 months.
+                  </p>
+                </div>
                 <div class="oss-meta">
                   <span class="oss-total">{{ site.data.gh-history.total_formatted }} contributions in the last year</span>
                   <span class="oss-legend" aria-hidden="true">Less<i style="background: #161b22"></i><i style="background: #0e4429"></i><i style="background: #006d32"></i><i style="background: #26a641"></i><i style="background: #39d353"></i>More</span>
                 </div>
+              </div>
+              <figure class="oss-figure">
                 <div class="oss-graph">
                   {% include contrib-graph.svg %}
                   <div class="contrib-tip" hidden></div>
@@ -499,7 +501,7 @@
                 loading="lazy"
               />
               <h2>Your agents are still running.</h2>
-              <p>Check on them from any browser tab&nbsp;— same hosts, same account as the desktop app.</p>
+              <p>Check on them from any browser tab&nbsp;— same hosts, same account, and your running sessions.</p>
               <a class="button primary large" href="{{ site.app_url }}/">Sign in with Google</a>
             </div>
           </div>
