@@ -290,13 +290,23 @@ details.keybox textarea {
   --text-small: 14px;
   --text-body: 16px;
   --text-lede: 18px;
-  --text-h3: 18px;
-  --text-h2: clamp(26px, 3vw, 32px);
-  --text-h1: clamp(36px, 5vw, 54px);
-  /* One vertical rhythm: every section sits --gap-section below the previous. */
-  --gap-section: 96px;
+  --text-h3: 20px;
+  --text-h3-lg: 24px;
+  --text-h2: clamp(26px, 3vw, 34px);
+  --text-h1: clamp(36px, 5vw, 60px);
+  /* The closing ask is the one step above a section heading. */
+  --text-h2-lg: clamp(30px, 3.4vw, 44px);
+  /* One body leading, inherited everywhere; headings and mocks set their own. */
+  --leading-body: 1.6;
+  /* One vertical rhythm: every band sits --gap-section below the previous. */
+  --gap-section: 56px;
+  /* One gap from a heading to the content it introduces. */
+  --gap-content: 24px;
+  /* Anchor targets clear the sticky topbar by this much. */
+  --scroll-pad: 78px;
   /* One card padding for every card-like surface. */
   --card-pad: 24px;
+  line-height: var(--leading-body);
 }
 
 .container {
@@ -306,11 +316,21 @@ details.keybox textarea {
   padding-right: 20px;
 }
 
+main > section[id] {
+  scroll-margin-top: var(--scroll-pad);
+}
+
 .topbar.landing-topbar {
   /* Block: the base .topbar is flex, which would shrink-to-fit the rail.
-     The outer bar carries only the border; the rail aligns to .container. */
+     The outer bar carries only the border; the rail aligns to .container.
+     Sticky, so "Sign in" and the section anchors stay reachable down the
+     whole page; --scroll-pad keeps targets clear of it. */
   display: block;
   padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: #0d1117;
 }
 
 .topbar.landing-topbar .topbar-rail {
@@ -359,6 +379,13 @@ details.keybox textarea {
   font-size: var(--text-body);
 }
 
+/* The conversion controls in #apps are .button, not .text-link: a
+   secondary button box, so they cannot be mistaken for the cross-links
+   the feature rows use for the same blue accent. */
+.landing .button.large {
+  font-size: var(--text-body);
+}
+
 .landing .text-link:hover {
   text-decoration-color: #58a6ff;
 }
@@ -393,7 +420,6 @@ details.keybox textarea {
 
 .hero .sub {
   font-size: var(--text-lede);
-  line-height: 1.6;
   color: #8b949e;
   max-width: 56ch;
   margin: 0 auto 28px;
@@ -426,20 +452,30 @@ details.keybox textarea {
   background: rgba(22, 27, 34, 0.6);
 }
 
+/* Centred like every other line of the hero, with a cap so the sentence
+   does not run the width of a 2560px frame. */
 .cta-note {
-  margin: 14px 0 0;
+  margin: 14px auto 0;
+  max-width: 64ch;
   font-size: var(--text-fine);
   color: #8b949e;
+  /* Two lines of small print: balance them so the second is not a stub. */
+  text-wrap: balance;
 }
 
 /* Fact strip: one hairline-grid row of concrete claims under the hero. */
 
 .fact-strip {
   list-style: none;
-  margin: 48px 0 0;
+  margin: 52px 0 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  /* Two across until the wide frame can hold all four labels on one line
+     each (>=1600). Four across below it gave the second label two lines
+     while the others had one, so the labels did not share a baseline and
+     the descriptions — pinned to each cell's floor — did not share one
+     either. Two across puts every cell on the same footing. */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1px;
   background: #30363d;
   border: 1px solid #30363d;
@@ -447,19 +483,28 @@ details.keybox textarea {
   overflow: hidden;
 }
 
+/* A data strip reads left, and every cell is a column so the description
+   pins to the same line in all four cells however long the label runs. */
 .fact {
   background: #161b22;
-  padding: 16px 20px;
+  padding: 14px 16px 4px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
   font-size: var(--text-fine);
-  line-height: 1.5;
   color: #8b949e;
 }
 
 .fact strong {
-  display: block;
+  display: flex;
+  align-items: flex-end;
   color: #e6edf3;
   font-size: var(--text-small);
   margin-bottom: 2px;
+}
+
+.fact-note {
+  margin-top: auto;
 }
 
 .hero-visual {
@@ -479,7 +524,24 @@ details.keybox textarea {
 }
 
 .desktop-mock {
-  max-width: 860px;
+  /* The mock is the hero's widest object, so it spans the content frame
+     instead of hanging in it: .fact-strip and the mock share one left and
+     one right edge. Its chrome is then sized from the mock's OWN width
+     (cqw), not the viewport, so the transcript holds the same share of its
+     pane at 900px and at 2560px instead of drifting emptier as the frame
+     grows. */
+  container-type: inline-size;
+  /* One scale for the whole window. The transcript is the largest thing in
+     it, --ui the smallest, and --row the row rhythm: the app's 28px rows
+     are 1.12x its 13px labels, so a window scaled to any width needs rows
+     near 2x its type or the session panel next to the terminal reads as two
+     products. All three move together, which is what keeps the transcript
+     within 1.6x of the panel labels it sits beside. */
+  --term: clamp(15px, 2.05cqw, 40px);
+  --ui: max(13px, calc(var(--term) / 1.5));
+  --ui-mono: max(13px, calc(var(--term) / 1.55));
+  --row: calc(var(--term) * 1.95);
+  --head: calc(var(--term) * 1.5);
   margin: 0 auto;
   text-align: left;
   background: #0d1117;
@@ -529,8 +591,13 @@ details.keybox textarea {
 /* Session panel: root -> folder tree, 28px rows, cyan rail on the current
    folder, violet agent badges, green dot = something attached. */
 
+/* The session panel takes a fixed share of the window, so widening the
+   frame widens the terminal pane in the same proportion (see --term). */
 .desk-side {
-  flex: 0 0 238px;
+  /* A fixed share of the window: widening the frame widens the terminal
+     pane in the same proportion (see --term) while the panel keeps the
+     proportion a session tree actually has. */
+  flex: 0 0 clamp(238px, 26%, 380px);
   display: flex;
   flex-direction: column;
   background: #161b22;
@@ -541,7 +608,7 @@ details.keybox textarea {
   display: flex;
   align-items: center;
   gap: 2px;
-  height: 36px;
+  height: var(--head);
   padding: 0 6px;
   border-bottom: 1px solid #21262d;
 }
@@ -565,22 +632,25 @@ details.keybox textarea {
 }
 
 .side-tree {
-  padding: 6px 0;
+  /* The tree is a short list in a tall window: inset it from the head and
+     the panel floor so the air reads as a list's own margin rather than as
+     the panel running out of rows. */
+  padding: calc(var(--term) * 0.55) 0;
 }
 
 .root-row,
 .dir-row {
   display: flex;
   align-items: center;
+  font-size: var(--ui);
   /* Rows are <button>s, and Chromium's UA sheet centers button content
      (justify-content: center). With the auto-margined .time that free space
      splits both ways and short rows visibly drift off the shared left line —
      pin the start edge. */
   justify-content: flex-start;
   gap: 6px;
-  height: 28px;
+  height: var(--row);
   padding: 0 10px;
-  font-size: 12.5px;
   white-space: nowrap;
 }
 
@@ -621,13 +691,13 @@ details.keybox textarea {
    row treatment). */
 .dlabel.mono {
   font-family: ui-monospace, monospace;
-  font-size: 11.5px;
+  font-size: var(--ui-mono);
   color: #8b949e;
 }
 
 .count {
   color: #8b949e;
-  font-size: 11px;
+  font-size: var(--ui-mono);
   font-variant-numeric: tabular-nums;
 }
 
@@ -639,7 +709,7 @@ details.keybox textarea {
 
 .badge {
   flex: none;
-  font-size: 10px;
+  font-size: var(--text-fine);
   font-weight: 500;
   line-height: 1.5;
   color: #a78bfa;
@@ -651,7 +721,7 @@ details.keybox textarea {
 .time {
   margin-left: auto;
   color: #8b949e;
-  font-size: 11px;
+  font-size: var(--ui-mono);
   font-variant-numeric: tabular-nums;
 }
 
@@ -709,7 +779,7 @@ button.dir-row {
   display: flex;
   align-items: center;
   gap: 2px;
-  height: 34px;
+  height: calc(var(--term) * 1.45);
   padding: 0 8px;
   border-bottom: 1px solid #21262d;
 }
@@ -718,10 +788,10 @@ button.dir-row {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  height: 26px;
+  height: calc(var(--term) * 1.1);
   padding: 0 8px;
   border-radius: 6px;
-  font-size: 12px;
+  font-size: var(--ui);
   color: #8b949e;
   white-space: nowrap;
 }
@@ -764,8 +834,12 @@ button.dir-row {
 .desk-term pre {
   margin: 0;
   font-family: ui-monospace, monospace;
-  font-size: 13.5px;
-  line-height: 1.7;
+  font-size: var(--term);
+  /* The app's terminal leading. The panel's seven rows and this thirteen-line
+     transcript are the two halves of the same window: whichever is looser
+     sets the height the other has to fill, so the leading is the one dial
+     that keeps the session panel from running out of rows. */
+  line-height: 1.2;
   color: #cccccc;
   /* Transcript lines are authored to fit the desktop panel; pre-wrap lets
      them reflow at phone width instead of overflowing the panel edge. */
@@ -801,13 +875,13 @@ button.dir-row {
   display: flex;
   align-items: center;
   gap: 8px;
-  height: 28px;
+  height: calc(var(--term) * 1.15);
   padding: 0 10px;
   border-bottom: 1px solid #21262d;
 }
 
 .comp-title {
-  font-size: 10px;
+  font-size: var(--text-fine);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -825,9 +899,9 @@ button.dir-row {
 }
 
 .comp-draft {
-  min-height: 20px;
+  min-height: calc(var(--term) * 1.25);
   padding: 10px 12px 4px;
-  font-size: 13px;
+  font-size: var(--ui);
   color: #e6edf3;
 }
 
@@ -843,11 +917,12 @@ button.dir-row {
   align-items: center;
   gap: 6px;
   padding: 6px 10px 8px;
+  min-height: calc(var(--term) * 1.4 + 14px);
 }
 
 .comp-tool {
-  width: 24px;
-  height: 24px;
+  width: max(24px, calc(var(--term) * 0.72));
+  height: max(24px, calc(var(--term) * 0.72));
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -863,14 +938,14 @@ button.dir-row {
 
 .comp-hint {
   margin-left: auto;
-  font-size: 11px;
+  font-size: var(--ui-mono);
   color: #8b949e;
 }
 
 .comp-send {
   background: #22d3ee;
   color: #04101a;
-  font-size: 12px;
+  font-size: var(--ui);
   font-weight: 600;
   border-radius: 6px;
   padding: 4px 12px;
@@ -890,9 +965,9 @@ button.dir-row {
     display: none;
   }
 
-  .desk-term pre {
-    font-size: 12px;
-  }
+  /* Below 701px the session panel is hidden, so the transcript owns the
+     whole frame: --term already tracks the frame, so the pane keeps the same
+     share of the type as on a desktop width. Nothing to override. */
 
   .comp-hint {
     display: none;
@@ -939,8 +1014,7 @@ button.dir-row {
   margin: 0;
   padding: 18px 22px;
   font-family: ui-monospace, monospace;
-  font-size: 15px;
-  line-height: 1.75;
+  font-size: var(--text-small);
   /* Same reflow guarantee as .desk-term pre: wrap, never overflow. */
   white-space: pre-wrap;
   /* Mocks are decorative: content must scroll on narrow screens, never clip. */
@@ -993,7 +1067,7 @@ button.dir-row {
 
 .band {
   /* Hairline divider between bands: gap, line, then breathing room. */
-  margin-top: 56px;
+  margin-top: var(--gap-section);
   border-top: 1px solid #21262d;
   padding-top: 40px;
 }
@@ -1002,24 +1076,35 @@ button.dir-row {
   font-size: var(--text-h2);
   line-height: 1.2;
   letter-spacing: -0.01em;
-  margin: 0 0 12px;
+  /* One heading-to-content gap on the page. Bands whose next block carries
+     its own top margin collapse to the same value. */
+  margin: 0 0 var(--gap-content);
+  text-wrap: balance;
 }
 
+/* 58ch is ~660px at 18px in this font, which is 70-75 characters of this
+   copy: under the 80-character line and, with balance, never a stub. */
 .band-sub {
   margin: 0;
+  max-width: 58ch;
   font-size: var(--text-lede);
-  line-height: 1.6;
   color: #8b949e;
+  text-wrap: balance;
 }
 
 .cards {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
-  margin-top: 32px;
+  margin-top: var(--gap-content);
 }
 
+/* A card is a column: its last child (a download action, or the blog meta)
+   is pushed to the bottom with margin-top:auto, so a row of cards shares
+   one action line instead of one line per paragraph length. */
 .card {
+  display: flex;
+  flex-direction: column;
   background: #161b22;
   border: 1px solid #30363d;
   border-radius: 6px;
@@ -1030,14 +1115,52 @@ button.dir-row {
 .step h3 {
   margin: 0 0 8px;
   font-size: var(--text-h3);
+  line-height: 1.3;
 }
 
 .card p,
 .step p {
   margin: 0;
   font-size: var(--text-body);
-  line-height: 1.6;
   color: #8b949e;
+}
+
+/* No last line reduced to a single short word in the copy that is free to
+   re-break. (#apps and .sec-item are excluded on purpose: their paragraphs
+   are measured to a common line count, and re-breaking them would undo
+   the shared baseline.) */
+#blog .card p,
+.step p,
+.frow .outcome,
+.faq details p {
+  text-wrap: pretty;
+}
+
+.cards .card > p {
+  margin-bottom: var(--gap-content);
+}
+
+.card > .button {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+/* The three #apps actions are one system, so they also share one box: 18px of
+   side padding (not 22px) is what keeps "Download desktop" on one line inside a
+   230px card at 320px, beside two bars of the same height. */
+#apps .card > .button {
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+/* Fill only: a border or wide padding here puts a visible hole between the
+   path and the punctuation that follows it. */
+.card code {
+  font-family: ui-monospace, monospace;
+  font-size: 0.875em;
+  background: #0d1117;
+  border-radius: 6px;
+  padding: 1px 2px;
 }
 
 .card-link {
@@ -1055,7 +1178,7 @@ button.dir-row {
 
 .card-meta {
   display: block;
-  margin-top: 12px;
+  margin: auto 0 0;
   font-size: var(--text-fine);
   color: #8b949e;
 }
@@ -1070,7 +1193,7 @@ button.dir-row {
 
 .steps {
   list-style: none;
-  margin: 32px 0 0;
+  margin: var(--gap-content) 0 0;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1078,6 +1201,8 @@ button.dir-row {
 }
 
 .step {
+  display: flex;
+  flex-direction: column;
   background: #161b22;
   border: 1px solid #30363d;
   border-radius: 6px;
@@ -1121,14 +1246,20 @@ button.dir-row {
 }
 
 .frow h3 {
-  margin: 0 0 10px;
-  font-size: 20px;
+  margin: 0 0 var(--gap-content);
+  font-size: var(--text-h3-lg);
+  line-height: 1.3;
 }
 
+/* One measure everywhere: 59ch is 601px, which is where 16px body copy stops
+   adding characters to a line (7.7px a character, so a 78-character measure).
+   Below the wide frame the column is narrower than the cap and the cap simply
+   does not apply; at 900 and below, where the row is one column, the 601px
+   measure leaves a reading column rather than a 100-character line. */
 .frow .outcome {
   margin: 0 0 16px;
+  max-width: min(59ch, 100%);
   font-size: var(--text-body);
-  line-height: 1.65;
   color: #8b949e;
 }
 
@@ -1138,10 +1269,34 @@ button.dir-row {
   margin: 0 0 16px;
 }
 
+/* The feature visuals are illustrations, so each one is sized from the column it
+   is drawn in — the same contract the hero mock has with .desktop-mock. Without
+   it the terminal kept a 14px face inside a panel the fluid frame grows to
+   1112px, so the panel's dead space grew with the frame: 54% of it at 1600 and
+   74% at 2560. */
+.frow-visual {
+  container-type: inline-size;
+  /* One size for all three panels, and the size at which the terminal's
+     transcript fills the panel: 29 characters of monospace is 17.4em, so a
+     panel of 600px needs a 26px face to leave a fifth of itself empty.
+     justify-self, not auto margins: an auto margin cancels the grid's own
+     stretch, and an inline-size-contained box has no content left to size it. */
+  justify-self: center;
+  width: 100%;
+  max-width: 600px;
+}
+
 /* Keep the shared term-mock idiom but let rows use the full column. */
 .frow .term-mock {
   max-width: none;
   margin: 0;
+}
+
+/* 4.6cqi - 1.3px is 80% of the panel's content box at every width, and the 13px
+   floor is the same one the hero mock holds to. */
+.frow-visual .term-mock pre {
+  font-size: max(13px, calc(4.6cqi - 1.3px));
+  line-height: 1.15;
 }
 
 .hosts-mock {
@@ -1167,7 +1322,7 @@ button.dir-row {
   border: 1px solid #30363d;
   border-radius: 999px;
   padding: 1px 8px;
-  font-size: 12px;
+  font-size: var(--text-fine);
 }
 
 .hosts-row {
@@ -1202,8 +1357,8 @@ button.dir-row {
   background: #161b22;
   border: 1px solid #30363d;
   border-radius: 6px;
-  padding: 3px 10px;
-  font-size: 12px;
+  padding: 4px 10px;
+  font-size: var(--text-fine);
 }
 
 /* Any-device panel: three CSS device silhouettes with terminal lines. */
@@ -1258,13 +1413,38 @@ button.dir-row {
 
 .device--tablet .screen {
   width: 122px;
-  height: 150px;
+  height: 128px;
 }
 
 .device--phone .screen {
   width: 68px;
   height: 118px;
   border-radius: 10px;
+}
+
+/* The trio is 428px of silhouettes plus 48px of padding. In the 901-1000px
+   window the feature row's visual column is 444px at its widest, so the
+   phone wrapped to a second line and the panel grew 30% taller than the two
+   above it. Scale the silhouettes into that column. */
+@media (min-width: 901px) and (max-width: 1000px) {
+  .devices {
+    gap: 14px;
+    /* Padded back out to the height of the panels above it: the silhouettes
+       shrink in this window, the panel they sit in should not. */
+    padding: 30px 16px;
+  }
+
+  .device--laptop .screen {
+    width: 164px;
+  }
+
+  .device--tablet .screen {
+    width: 108px;
+  }
+
+  .device--phone .screen {
+    width: 60px;
+  }
 }
 
 /* Security band: the data path as a numbered flow, CTA below. */
@@ -1284,25 +1464,70 @@ button.dir-row {
 .security-copy > p {
   margin: 0;
   font-size: var(--text-body);
-  line-height: 1.7;
   color: #8b949e;
   max-width: 58ch;
 }
 
 .sec-flow {
   list-style: none;
-  margin: 24px 0 0;
+  margin: var(--gap-content) 0 0;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  /* Cards take their own height: a claim whose paragraph wraps one line
+     short must not inherit an empty box from its tallest neighbour. */
+  align-items: start;
   gap: 16px;
 }
 
+/* One step per row below 812px. Three across needs ~340px of text per card
+   before the longest title ("Click a host, drop in on a session") fits on
+   one line, and the frame only offers that from 1600 up; between those two
+   widths a row of three titles cannot share a line count, and a row whose
+   titles differ in height is a row that steps. A single column has no row to
+   align, so every title is free to break as it needs. The column is capped so
+   the paragraph keeps a 76-character measure. */
+@media (max-width: 811px) {
+  .steps {
+    grid-template-columns: 1fr;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .step p {
+    max-width: 60ch;
+  }
+}
+
+/* Three steps side by side, 812-1599: the cards are 197-286px of text there,
+   which is exactly the band where all three titles take two lines — 322px,
+   330px and 372px of heading against a 286px column. Reserve that second line
+   so the three paragraphs start on one line. The wide frame (>=1600) gives
+   every card 393px, all three titles fit on one line there, and reserving a
+   second one would open a 26px hole under each heading. */
+@media (min-width: 812px) and (max-width: 1599px) {
+  .step h3 {
+    min-height: 2lh;
+  }
+}
+
+/* The longest claim title needs two lines: reserve that line, the way the
+   step cards do, so all four titles end on the same line and the paragraphs
+   start together. */
+@media (min-width: 641px) {
+  .sec-item h3 {
+    min-height: 2lh;
+  }
+}
+
+/* The four claims read as one row: a tight bottom inset means a card whose
+   paragraph runs a line short shows no dead space under it. */
 .sec-item {
   background: #0d1117;
   border: 1px solid #21262d;
   border-radius: 6px;
-  padding: 16px;
+  padding: 16px 16px 6px;
 }
 
 .sec-item .n {
@@ -1315,20 +1540,20 @@ button.dir-row {
 
 .sec-item h3 {
   margin: 0 0 6px;
-  font-size: 15px;
+  font-size: var(--text-h3);
+  line-height: 1.3;
 }
 
 .sec-item p {
   margin: 0;
   font-size: var(--text-small);
-  line-height: 1.55;
   color: #8b949e;
 }
 
 .sec-bridge {
   margin: 20px 0 0;
+  max-width: 58ch;
   font-size: var(--text-small);
-  line-height: 1.6;
   color: #8b949e;
 }
 
@@ -1336,38 +1561,39 @@ button.dir-row {
   margin-top: 20px;
 }
 
-/* Keep your agents busy at work: the GitHub calendar drawn by the page
-   from the synced snapshot (scripts/sync-gh-history.py), not a screenshot. */
-
-.oss {
-  background: #161b22;
-  border: 1px solid #30363d;
-  border-radius: 6px;
-  padding: 32px;
+.oss-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 24px 32px;
 }
 
 .oss-copy {
-  max-width: 68ch;
+  max-width: 62ch;
 }
 
 .oss-copy p {
   margin: 0;
   font-size: var(--text-body);
-  line-height: 1.6;
   color: #8b949e;
 }
 
+/* The graph is the brightest object in the lower half of the page: frame it
+   on a panel so it belongs to its section instead of floating on the ground. */
 .oss-figure {
-  margin: 24px 0 0;
+  margin: var(--gap-content) 0 0;
+  padding: 12px;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
 }
 
 .oss-meta {
   display: flex;
   align-items: baseline;
-  justify-content: space-between;
+  justify-content: flex-end;
   flex-wrap: wrap;
   gap: 8px 16px;
-  margin-bottom: 10px;
 }
 
 .oss-total {
@@ -1400,7 +1626,6 @@ button.dir-row {
   width: 100%;
   height: auto;
   background: #0d1117;
-  border: 1px solid #30363d;
   border-radius: 6px;
 }
 
@@ -1438,11 +1663,18 @@ button.dir-row {
 
 /* FAQ: collapsible cards, centered column. */
 
+/* The answers are the page's longest read: one centred measure column, and
+   #faq's h2 is centred on the same axis so the block has one left edge
+   to speak of. */
+#faq h2 {
+  text-align: center;
+}
+
 .faq {
   display: grid;
   gap: 12px;
-  max-width: 760px;
-  margin: 24px auto 0;
+  max-width: 620px;
+  margin: var(--gap-content) auto 0;
 }
 
 .faq details {
@@ -1471,6 +1703,7 @@ button.dir-row {
   content: '+';
   font-family: ui-monospace, monospace;
   font-size: var(--text-h3);
+  line-height: 1.3;
   color: #8b949e;
 }
 
@@ -1482,15 +1715,21 @@ button.dir-row {
   margin: 0;
   padding: 0 20px 16px;
   font-size: var(--text-body);
-  line-height: 1.6;
   color: #8b949e;
 }
 
 /* Closing CTA and footer. */
 
+/* The closing ask is the one panel on the page with a headline above every
+   section heading, and a capped illustration so the ask still leads. */
 .final-cta {
+  max-width: 760px;
+  margin: 0 auto;
   text-align: center;
-  padding: 8px 0;
+  padding: 40px 32px 44px;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
 }
 
 /* Generated brand illustration above the closing CTA; kept modest so the
@@ -1498,7 +1737,7 @@ button.dir-row {
 .final-cta-visual {
   display: block;
   width: 100%;
-  max-width: 640px;
+  max-width: 440px;
   height: auto;
   margin: 0 auto 28px;
   border: 1px solid #30363d;
@@ -1506,14 +1745,23 @@ button.dir-row {
   background: #0d1117;
 }
 
+.final-cta h2 {
+  font-size: var(--text-h2-lg);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  margin: 0 0 var(--gap-content);
+}
+
 .final-cta p {
-  margin: 0 0 24px;
+  margin: 0 auto 24px;
+  max-width: 64ch;
   color: #8b949e;
   font-size: var(--text-lede);
 }
 
 .landing-footer {
-  margin-top: var(--gap-section);
+  margin-top: calc(var(--gap-section) + 40px);
   border-top: 1px solid #21262d;
 }
 
@@ -1575,9 +1823,59 @@ button.dir-row {
   text-decoration-color: #58a6ff;
 }
 
+/* Wide desktops get a wider frame, and it keeps widening with the window
+   instead of stopping at one breakpoint: the gutter stays ~330px per side
+   from 2100px up (a fixed 1400px left 580px of void on a 2560px screen).
+   1920px caps the frame so a 4K panel does not stretch the ribbon. */
+@media (min-width: 1600px) {
+  .container,
+  .topbar.landing-topbar .topbar-rail,
+  .footer-row {
+    max-width: max(1400px, min(1920px, 100% - 660px));
+  }
+
+  /* Four facts in one row: the frame is 1400px from here up, which holds
+     the longest label ("Claude Code, Codex, OpenCode, Grok") on one line in
+     a quarter of it. Below 1600 the strip stays two across. */
+  .fact-strip {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  /* Four teasers in one row: two across a 1900px frame gave each card a
+     100-character measure, and four is the number of teasers there is. */
+  .blog-cards {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Wide frames: the copy column keeps a readable measure and the visual takes
+   the rest, instead of the 5fr/6fr split handing the copy 988px it never
+   fills. 800px is where 68ch of body copy stops growing into empty column. */
+@media (min-width: 1600px) {
+  .frow {
+    grid-template-columns: minmax(0, 700px) minmax(0, 600px);
+    justify-content: center;
+  }
+
+  .frow--flip {
+    grid-template-columns: minmax(0, 600px) minmax(0, 700px);
+    justify-content: center;
+  }
+
+}
+
+/* Four cards of claim-sized text stop being readable inside 184px of
+   column: below 1100 the flow is two across, and the two 767px-wide
+   layouts it replaced keep the same 2x2 and 1-column shapes. */
+@media (max-width: 1100px) {
+  .sec-flow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 900px) {
   .landing {
-    --gap-section: 56px;
+    --gap-section: 32px;
   }
 
   .hero {
@@ -1592,12 +1890,28 @@ button.dir-row {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .steps {
-    grid-template-columns: 1fr;
+  /* The steps keep their three columns: collapsing them here is what gave
+     one 810px line of 16px body copy (99 characters) at this width. */
+
+  /* Between 641px and 900px the five anchors no longer fit beside the brand
+     and Sign in. The brand and the button hold their width, the anchors hold
+     their own, and the anchor row scrolls: no link wraps its words, and the
+     bar stays the one row it is above 900px. */
+  .topbar.landing-topbar .site-nav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
   }
 
-  .fact-strip {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .topbar.landing-topbar .site-nav a {
+    flex: none;
+    white-space: nowrap;
+  }
+
+  .topbar.landing-topbar .brand,
+  .topbar.landing-topbar .topbar-rail > .button {
+    flex: none;
+    white-space: nowrap;
   }
 
   .frow {
@@ -1611,21 +1925,92 @@ button.dir-row {
   }
 
   .band {
-    margin-top: 32px;
     padding-top: 24px;
   }
 
-  .sec-flow {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .security {
+    padding: 24px 20px;
   }
 
-  .security,
-  .oss {
-    padding: 24px 20px;
+  .oss-head {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .oss-meta {
+    justify-content: flex-start;
+  }
+
+  .oss-figure {
+    margin-top: 24px;
+  }
+}
+
+/* Two balanced topbar rows — brand and Sign in above, the five section
+   anchors on one row below — from here to 700px. Below 760px of viewport the
+   five anchors no longer fit beside the brand and the button: at 641 the row
+   was 60px short, and the anchor row scrolled them out of sight, so "Blog"
+   disappeared from the navigation with nothing on screen to say so. On its
+   own row the five anchors need 348px and the rail is 600px wide here. */
+@media (max-width: 700px) {
+  .landing {
+    --scroll-pad: 124px;
+  }
+
+  .topbar.landing-topbar .topbar-rail {
+    flex-wrap: wrap;
+    row-gap: 0;
+    column-gap: 16px;
+    padding: 6px 20px;
+  }
+
+  .topbar.landing-topbar .brand {
+    padding: 10px 0;
+  }
+
+  .topbar.landing-topbar .button {
+    min-height: 44px;
+  }
+
+  .topbar.landing-topbar .site-nav {
+    order: 3;
+    width: 100%;
+    /* 11px keeps all five anchors on one row inside a 350px rail, so at
+       390 the bar never has to hide a link behind a sideways scroll. */
+    gap: 11px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .topbar.landing-topbar .site-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Tap targets: every row of the topbar and footer nav is a 44px band.
+     The links keep their natural width, so the one nav row scrolls
+     sideways instead of wrapping "How it works" onto a second line. */
+  .topbar.landing-topbar .site-nav a {
+    flex: none;
+    white-space: nowrap;
+    padding: 10px 0;
+  }
+}
+
+/* Below 390px even one row of five anchors is wider than the rail, so the row
+   does scroll — and says so: a fade on the trailing edge is the only cue
+   that there is more of the navigation past the edge. */
+@media (max-width: 387px) {
+  .topbar.landing-topbar .site-nav {
+    mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
   }
 }
 
 @media (max-width: 640px) {
+  .landing {
+    --scroll-pad: 124px;
+  }
+
   /* SVG labels scale below readability on phone widths — GitHub's own
      mobile view drops them too; the grid alone still reads. */
   .contrib-month,
@@ -1633,32 +2018,21 @@ button.dir-row {
     display: none;
   }
 
-  /* Wrap the section anchors onto a second row instead of hiding them. */
-  .topbar.landing-topbar .topbar-rail {
-    flex-wrap: wrap;
-    row-gap: 0;
-  }
-
-  .topbar.landing-topbar .site-nav {
-    order: 3;
-    width: 100%;
-    padding-bottom: 10px;
-    gap: 18px;
-    flex-wrap: wrap;
-    row-gap: 2px;
-  }
-
-  /* Tap targets: keep anchor rows ~44px tall on touch screens. */
-  .topbar.landing-topbar .site-nav a {
-    padding: 12px 0;
-  }
-
   .footer-nav a {
     padding: 12px 0;
   }
 
+  .landing .text-link {
+    min-height: 44px;
+    padding: 10px 2px;
+  }
+
   .cards,
   .blog-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .steps {
     grid-template-columns: 1fr;
   }
 
@@ -1684,7 +2058,7 @@ button.dir-row {
 
   .device--tablet .screen {
     width: 94px;
-    height: 116px;
+    height: 100px;
   }
 
   .device--phone .screen {
@@ -1695,6 +2069,17 @@ button.dir-row {
   .term-mock pre {
     font-size: var(--text-fine);
     padding: 14px;
+  }
+
+  /* The mock's own tab toggles stay real controls on a phone, so they get
+     touch-sized rows: a 44px tab inside a 52px tab bar. */
+  .desktop-mock .tabbar {
+    height: 52px;
+    padding: 4px 8px;
+  }
+
+  .desktop-mock .tab {
+    height: 44px;
   }
 }
 
@@ -1845,20 +2230,6 @@ button.dir-row {
 .auth-back a {
   display: inline-block;
   padding: 12px 16px;
-}
-
-/* ---- Static-site additions ----------------------------------------------
-   The hero mock renders every folder/tab up front and js/landing.js toggles
-   visibility between them; [hidden] must always win over the layout rules. */
-.desk-pane {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-[hidden] {
-  display: none !important;
 }
 
 /* ---- Static-site additions ----------------------------------------------
