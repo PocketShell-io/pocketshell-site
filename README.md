@@ -28,6 +28,7 @@ this site points there, landing directly on the sign-in screen.
     make install   # fetch the rustkyll binary into .bin/
     make serve     # dev server on http://localhost:4000
     make build     # production build into _site/
+    make check     # build and check SEO (requires Node.js)
     make graph     # re-render the contribution calendar SVG
 
 ## Contribution calendar
@@ -38,6 +39,14 @@ this site points there, landing directly on the sign-in screen.
 Neither needs to be fresh; run them when you feel like it.
 
 ## Deploy
+
+The generated canonical, Open Graph, and structured-data URLs must match
+the sitemap URLs, including the trailing slash. Use `page.url` / `p.url`
+in templates and link directly to `/blog/<slug>/` in Markdown. The SEO
+check runs on pull requests and before deployment. It also checks that
+descriptions fit within 160 characters and titles within 70; these are
+editorial limits for this site, not search-engine guarantees. A post can
+set `seo_title` for a shorter search title while keeping its visible `title`.
 
 Push to `main` → `.github/workflows/deploy.yml` builds with rustkyll and
 publishes to GitHub Pages. The custom domain (pocketshell.io) is set in the

@@ -5,13 +5,13 @@ slug: manage-ai-agents-over-ssh
 date: 2026-09-12
 reading_minutes: 4
 cover: /images/blog/manage-ai-agents-over-ssh.webp
-description: "Day-two operations for AI agents on remote servers: listing sessions and their states over SSH, attaching without losing context, reading transcripts, sending input safely, and cleaning up stuck runs."
+description: "Manage AI agents over SSH: list sessions, attach without losing context, read transcripts, send input safely, and clean up stuck runs on remote servers."
 keywords: [manage ai agents over ssh, monitor claude code on remote server, ai agent remote management, ssh agent management, check on claude code via ssh]
 ---
 
 Getting an agent onto a server is the solved part. You SSH in, start it in a
 session that survives disconnects, and walk away. (If that part isn't done
-yet, [the day-one setup guide](/blog/ssh-ai-agents-remote-machines) covers it
+yet, [the day-one setup guide](/blog/ssh-ai-agents-remote-machines/) covers it
 first.)
 
 Day two is when the real job starts. You have a handful of runs on a handful
@@ -24,7 +24,7 @@ attach blind.
 Attaching to a session to find out what it's doing costs you a terminal and
 your train of thought. Listing costs one command.
 
-With [aplexer](/blog/aplexer-agent-multiplexer) running the
+With [aplexer](/blog/aplexer-agent-multiplexer/) running the
 sessions, `a list` shows every workspace and the agent inside each session:
 
 ```bash
@@ -146,6 +146,6 @@ The inventory question stops depending on which machine you're SSH'd into.
 
 These three pick up where this one stops:
 
-- [Configuring a remote machine over SSH with AI agents](/blog/ssh-ai-agents-remote-machines)
-- [aplexer: an agent multiplexer for AI coding agents](/blog/aplexer-agent-multiplexer)
-- [How to Keep SSH Sessions Alive: Keepalives, tmux, Mosh](/blog/keep-ssh-session-alive)
+- [Configuring a remote machine over SSH with AI agents](/blog/ssh-ai-agents-remote-machines/)
+- [aplexer: an agent multiplexer for AI coding agents](/blog/aplexer-agent-multiplexer/)
+- [How to Keep SSH Sessions Alive: Keepalives, tmux, Mosh](/blog/keep-ssh-session-alive/)

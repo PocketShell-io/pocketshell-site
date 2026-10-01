@@ -146,7 +146,7 @@ These five pitfalls cover most forwarding problems:
 - Forwarding enabled on the wrong hop. `ForwardAgent yes` must apply to the
   host you connect to (the bastion), not the final target. Enabling it in a
   `Host *` block forwards your agent everywhere, which is the worst of both
-  worlds. See [the `~/.ssh/config` guide](/blog/ssh-config-file) for per-host
+  worlds. See [the `~/.ssh/config` guide](/blog/ssh-config-file/) for per-host
   blocks.
 - **`SSH_AUTH_SOCK` is empty on the remote.** Check that `AllowAgentForwarding`
   hasn't been set to `no` in `sshd_config`, and that the remote shell's rc files
@@ -157,7 +157,7 @@ These five pitfalls cover most forwarding problems:
   connecting: `tmux set-environment -g SSH_AUTH_SOCK "$SSH_AUTH_SOCK"`. In an
   already-running pane, re-point it at the newest socket with
   `export SSH_AUTH_SOCK=$(ls -t /tmp/ssh-*/agent.* 2>/dev/null | head -1)`. More
-  on this in [tmux sessions that survive SSH disconnects](/blog/tmux-persistent-ssh-sessions).
+  on this in [tmux sessions that survive SSH disconnects](/blog/tmux-persistent-ssh-sessions/).
 - **`sudo git pull` fails.** `sudo` strips the environment, so the agent socket
   is lost. Use `sudo -E` (preserves `SSH_AUTH_SOCK`), or better, check out with
   the deploy key of the user you're sudoing into.
@@ -169,5 +169,5 @@ These five pitfalls cover most forwarding problems:
 
 These two pick up where this one stops:
 
-- [The `~/.ssh/config` file: aliases, ProxyJump, and multiplexing](/blog/ssh-config-file)
-- [Run AI agents on a remote machine over SSH](/blog/ssh-ai-agents-remote-machines)
+- [The `~/.ssh/config` file: aliases, ProxyJump, and multiplexing](/blog/ssh-config-file/)
+- [Run AI agents on a remote machine over SSH](/blog/ssh-ai-agents-remote-machines/)

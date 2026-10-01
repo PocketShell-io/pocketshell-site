@@ -5,7 +5,7 @@ slug: multiple-ai-coding-agents
 date: 2026-09-12
 reading_minutes: 3
 cover: /images/blog/multiple-ai-coding-agents.webp
-description: "How to run several AI coding agents at the same time without collisions: git worktrees for isolation, named sessions you can address, a status board instead of terminal piles, and task sequencing that keeps agents from stepping on each other."
+description: "Run multiple AI coding agents in parallel using git worktrees, named sessions, a status board, and task sequencing to keep their changes from colliding."
 keywords: [run multiple ai agents, multiple claude code sessions, parallel ai coding agents, manage multiple ai agents, git worktree multiple agents, claude code parallel sessions]
 ---
 
@@ -40,10 +40,10 @@ A checkout alone doesn't help if your only handle on the work is "the tmux
 pane in window 3". Sessions need names tied to what they're doing, so you
 can attach, message, or kill them without hunting.
 
-With [aplexer](/blog/aplexer-agent-multiplexer), a session is addressed by
+With [aplexer](/blog/aplexer-agent-multiplexer/), a session is addressed by
 its workspace and tag, which maps one-to-one onto the worktree layout.
 
-The [introduction post](/blog/aplexer-agent-multiplexer) covers the install
+The [introduction post](/blog/aplexer-agent-multiplexer/) covers the install
 if you're starting from scratch:
 
 ```bash
@@ -108,7 +108,7 @@ keep the downside bounded:
 - Run unattended agents on a server, not your laptop: the run survives your
   laptop closing, and you skip permission prompts only on machines with
   nothing precious on them. [The remote setup
-  guide](/blog/ssh-ai-agents-remote-machines) gets an agent onto a server
+  guide](/blog/ssh-ai-agents-remote-machines/) gets an agent onto a server
   from zero.
 - Sandbox credentials with short-lived sessions and scoped accounts, and let
   real deployments go through CI, where a human can still see the diff.
@@ -124,6 +124,6 @@ every server you run.
 
 These three pick up where this one stops:
 
-- [aplexer: an agent multiplexer for AI coding agents](/blog/aplexer-agent-multiplexer)
-- [Configuring a remote machine over SSH with AI agents](/blog/ssh-ai-agents-remote-machines)
-- [Check on your AI coding agents from your phone](/blog/check-ai-agents-from-phone)
+- [aplexer: an agent multiplexer for AI coding agents](/blog/aplexer-agent-multiplexer/)
+- [Configuring a remote machine over SSH with AI agents](/blog/ssh-ai-agents-remote-machines/)
+- [Check on your AI coding agents from your phone](/blog/check-ai-agents-from-phone/)
