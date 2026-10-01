@@ -24,9 +24,9 @@
         <nav class="keep-reading band">
           <h2>Keep reading</h2>
           <div class="cards blog-cards">{% assign shown = 0 %}{% for p in site.posts %}{% if p.featured %}{% if p.slug != page.slug and shown < 2 %}
-            <a class="card card-link" href="/blog/{{ p.slug }}">{% if p.cover %}
+            <a class="card card-link" href="{{ p.url }}">{% if p.cover %}
               <img class="card-cover" src="{{ p.cover }}" alt="" width="1200" height="630" loading="lazy" />{% endif %}<h3>{{ p.title }}</h3><p>{{ p.description }}</p></a>{% assign shown = shown | plus: 1 %}{% endif %}{% endif %}{% endfor %}{% for p in site.posts %}{% unless p.featured %}{% if p.slug != page.slug and shown < 2 %}
-            <a class="card card-link" href="/blog/{{ p.slug }}">{% if p.cover %}
+            <a class="card card-link" href="{{ p.url }}">{% if p.cover %}
               <img class="card-cover" src="{{ p.cover }}" alt="" width="1200" height="630" loading="lazy" />{% endif %}<h3>{{ p.title }}</h3><p>{{ p.description }}</p></a>{% assign shown = shown | plus: 1 %}{% endif %}{% endunless %}{% endfor %}
           </div>
         </nav>

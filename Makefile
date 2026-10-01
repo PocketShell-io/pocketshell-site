@@ -3,7 +3,7 @@ RUSTKYLL_ASSET ?= rustkyll-linux-amd64
 RUSTKYLL_INSTALL_DIR ?= .bin
 RUSTKYLL ?= $(RUSTKYLL_INSTALL_DIR)/rustkyll
 
-.PHONY: help install serve build clean graph
+.PHONY: help install serve build check clean graph
 
 help: ## Show this help message
 	@echo "Available targets:"
@@ -19,6 +19,9 @@ serve: ## Start the development server (http://localhost:4000)
 
 build: ## Build the site for production
 	$(RUSTKYLL) build
+
+check: build ## Build and check canonical URLs, links, and metadata (Node.js required)
+	node scripts/check-seo.mjs
 
 graph: ## Re-render the contribution calendar from _data/gh-history.json
 	python3 scripts/gen-contrib-graph.py

@@ -5,7 +5,7 @@ slug: ssh-from-ipad-iphone
 date: 2026-09-12
 reading_minutes: 5
 cover: /images/blog/ssh-from-ipad-iphone.webp
-description: "How to SSH from an iPad or iPhone in 2026: native clients, key setup, mosh for flaky mobile networks, the keyboard problem, and the browser option when you can't install apps."
+description: "SSH from an iPad or iPhone: choose a client, set up keys, handle mobile networks with mosh, and use a browser terminal when you cannot install apps."
 keywords: [ssh from ipad, ssh client for ipad, ssh from iphone, ssh iphone, mosh ios, best ssh client ipad]
 ---
 
@@ -60,7 +60,7 @@ Give each device its own key, so losing the iPad means removing one line from
 `authorized_keys` instead of rotating everything. Comment each line with the
 device it belongs to, because in three months you won't remember which
 `AAAA...` is which. Our
-[guide to hardening `authorized_keys`](/blog/ssh-authorized-keys-hardening)
+[guide to hardening `authorized_keys`](/blog/ssh-authorized-keys-hardening/)
 covers the `from=` and `restrict` options that limit a key to one device.
 
 ## Mosh fixes the connection, not the app
@@ -116,7 +116,7 @@ Host deploy
   Port 2222
 ```
 
-Our [`~/.ssh/config` guide](/blog/ssh-config-file) covers aliases, jump hosts,
+Our [`~/.ssh/config` guide](/blog/ssh-config-file/) covers aliases, jump hosts,
 and per-host keys in depth. Write the config once on a real keyboard, and the
 iPad then only ever types `ssh deploy`. Apply the same treatment to long
 commands. Anything you'll want to re-run on a phone should become an alias, a
@@ -145,7 +145,7 @@ For exactly this case, [PocketShell](https://pocketshell.io/) opens a real
 xterm.js SSH session in a browser tab. You sign in, pick a host, and connect,
 and the server sees your usual key and `authorized_keys` file. Nothing is
 installed there beyond the
-[aplexer](/blog/aplexer-agent-multiplexer)
+[aplexer](/blog/aplexer-agent-multiplexer/)
 session layer, which keeps your agent sessions alive between visits. On a
 device where you can't generate or store an SSH key at all, that's often the
 only path that works.
@@ -154,6 +154,6 @@ only path that works.
 
 These three pick up where this one stops:
 
-- [tmux sessions that survive SSH disconnects](/blog/tmux-persistent-ssh-sessions)
-- [The `~/.ssh/config` file: aliases, ProxyJump, and multiplexing](/blog/ssh-config-file)
-- [Run AI agents on a remote machine over SSH](/blog/ssh-ai-agents-remote-machines)
+- [tmux sessions that survive SSH disconnects](/blog/tmux-persistent-ssh-sessions/)
+- [The `~/.ssh/config` file: aliases, ProxyJump, and multiplexing](/blog/ssh-config-file/)
+- [Run AI agents on a remote machine over SSH](/blog/ssh-ai-agents-remote-machines/)

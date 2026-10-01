@@ -5,7 +5,7 @@ slug: check-ai-agents-from-phone
 date: 2026-09-12
 reading_minutes: 3
 cover: /images/blog/check-ai-agents-from-phone.webp
-description: "How to keep an eye on AI coding agents running on a server from your phone: the 30-second check-in over SSH, thumb-sized commands, voice input, and when a browser tab beats an SSH client."
+description: "Check AI coding agents from your phone with SSH or a browser terminal: quick status checks, simple commands, voice input, and access to remote sessions."
 keywords: [claude code from phone, check ai agents from phone, monitor ai agents remotely, ai agent mobile monitoring, ssh from phone]
 ---
 
@@ -41,11 +41,11 @@ laptop.
 
 This post assumes the agent already runs on a server. If it's still on your
 laptop, start with [the remote machine setup
-guide](/blog/ssh-ai-agents-remote-machines) and come back once it's running
+guide](/blog/ssh-ai-agents-remote-machines/) and come back once it's running
 there.
 
 Plain SSH from a phone works, and the [iPad and iPhone client
-guide](/blog/ssh-from-ipad-iphone) covers picking a client and setting up
+guide](/blog/ssh-from-ipad-iphone/) covers picking a client and setting up
 keys. On Android, Termius is the same polished client, and Termux gives you a
 full terminal under the app. A couple more habits make it fast enough for one
 thumb.
@@ -98,6 +98,6 @@ and the sessions you already run keep running exactly as they were.
 
 These three pick up where this one stops:
 
-- [SSH from an iPad or iPhone: what actually works](/blog/ssh-from-ipad-iphone)
-- [Managing AI agents over SSH: a day-two guide](/blog/manage-ai-agents-over-ssh)
-- [How to run multiple AI coding agents in parallel](/blog/multiple-ai-coding-agents)
+- [SSH from an iPad or iPhone: what actually works](/blog/ssh-from-ipad-iphone/)
+- [Managing AI agents over SSH: a day-two guide](/blog/manage-ai-agents-over-ssh/)
+- [How to run multiple AI coding agents in parallel](/blog/multiple-ai-coding-agents/)

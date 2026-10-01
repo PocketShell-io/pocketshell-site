@@ -35,7 +35,7 @@ casualties.
 
 Tell your SSH client to send an encrypted liveness probe during idle periods.
 
-Put this in `~/.ssh/config` (the [config file guide](/blog/ssh-config-file)
+Put this in `~/.ssh/config` (the [config file guide](/blog/ssh-config-file/)
 explains how files and blocks are organised):
 
 ```text
@@ -109,7 +109,7 @@ alone. The `-A` flag attaches to an existing session or creates a new one. GNU
 `screen -R` works the same way if that's what's installed, but tmux is the
 modern default. Panes inherit
 `SSH_AUTH_SOCK` from when they started, so long-lived tmux sessions on jump hosts
-can hold a stale agent socket. See [the agent forwarding guide](/blog/ssh-agent-forwarding) for the fix.
+can hold a stale agent socket. See [the agent forwarding guide](/blog/ssh-agent-forwarding/) for the fix.
 
 ## Fix 3: mosh for unreliable networks
 
@@ -158,7 +158,7 @@ These cover most of the pain:
 Once your session state lives on the server, the client stops mattering.
 Reattach to the same session from a tablet, a borrowed Chromebook, or a work
 laptop you can't install software on. It makes no difference whether the
-session is tmux or an [aplexer agent session](/blog/aplexer-agent-multiplexer).
+session is tmux or an [aplexer agent session](/blog/aplexer-agent-multiplexer/).
 
 A browser-based client like [PocketShell](https://pocketshell.io/#faq) is
 built for exactly this. Sign in with Google and pick a host. The list syncs

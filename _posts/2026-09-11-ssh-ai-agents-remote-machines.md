@@ -6,7 +6,7 @@ date: 2026-09-11
 reading_minutes: 5
 cover: /images/blog/ssh-ai-agents-remote-machines.webp
 featured: true
-description: "How to run Claude Code or Codex CLI on a remote server over SSH: key-based access, a sandboxed user, headless authentication, and aplexer sessions for long-running jobs."
+description: "Run Claude Code or Codex CLI on a remote server over SSH, with key-based access, a sandboxed user, headless authentication, and persistent aplexer sessions."
 keywords: [ssh, claude code remote server, codex cli headless, ai agent ssh, configure remote server]
 ---
 
@@ -117,7 +117,7 @@ the train went through a tunnel" is the session layer. The agent has to run on
 the server, independent of your SSH connection, and you need a way to check on
 it later.
 
-For agent work we use [aplexer](/blog/aplexer-agent-multiplexer), a
+For agent work we use [aplexer](/blog/aplexer-agent-multiplexer/), a
 session layer built for agents. A session is a workspace, a tag, and an engine,
 not a flat pane name.
 
@@ -156,7 +156,7 @@ tmux:
 - Zellij is a modern multiplexer with discoverable keybindings and layout
   files that make it a solid pick for plain shell work.
 - aplexer is the main one for agent work and the session layer PocketShell
-  runs on, and the [aplexer introduction](/blog/aplexer-agent-multiplexer)
+  runs on, and the [aplexer introduction](/blog/aplexer-agent-multiplexer/)
   covers the install and the daily verbs.
 
 All three keep a process alive through a disconnect. Only the last one tells
@@ -189,7 +189,7 @@ agent babysitting happens.
 
 Keep going with these:
 
-- Keep long jobs alive: [tmux sessions that survive disconnects](/blog/tmux-persistent-ssh-sessions)
-- Organize your hosts: [`~/.ssh/config` examples](/blog/ssh-config-file)
+- Keep long jobs alive: [tmux sessions that survive disconnects](/blog/tmux-persistent-ssh-sessions/)
+- Organize your hosts: [`~/.ssh/config` examples](/blog/ssh-config-file/)
 - [Codex CLI on a remote server: the auth problem](https://medium.com/@djangoist/how-to-log-into-codex-cli-on-a-remote-server-0798162da0b2)
 - [Running any AI tool remotely with SSH + tmux](https://stacktoheap.com/blog/2026/02/15/how-i-code-from-the-gym-part-2/)
