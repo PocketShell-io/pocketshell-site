@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Your AI agents run on your own machines. PocketShell opens a real SSH terminal to them in a browser tab - sign in with Google, pick a host, and check on Claude Code, Codex, or OpenCode. Your browser is the terminal."
+      content="Your AI agents run on your own machines. PocketShell opens a real SSH terminal to them on desktop, in the browser, and on your phone - sign in with Google, pick a host, and check on Claude Code, Codex, or OpenCode from anywhere."
     />
     <meta name="theme-color" content="#0d1117" />
     <meta name="robots" content="index, follow" />
@@ -14,20 +14,20 @@
     <meta property="og:url" content="{{ site.url }}/" />
     <meta property="og:site_name" content="PocketShell" />
     <meta property="og:locale" content="en_US" />
-    <meta property="og:title" content="PocketShell - SSH client in your browser tab" />
+    <meta property="og:title" content="PocketShell - SSH client on desktop, web, and phone" />
     <meta
       property="og:description"
-      content="Your AI agents run on your own machines. PocketShell opens a real SSH terminal to them in a browser tab - sign in with Google, pick a host, and check on Claude Code, Codex, or OpenCode. Your browser is the terminal."
+      content="Your AI agents run on your own machines. PocketShell opens a real SSH terminal to them on desktop, in the browser, and on your phone - sign in with Google, pick a host, and check on Claude Code, Codex, or OpenCode from anywhere."
     />
     <meta property="og:image" content="{{ site.url }}/images/og-cover.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="PocketShell - SSH client in your browser tab" />
+    <meta property="og:image:alt" content="PocketShell - SSH client on desktop, web, and phone" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="PocketShell - SSH client in your browser tab" />
+    <meta name="twitter:title" content="PocketShell - SSH client on desktop, web, and phone" />
     <meta
       name="twitter:description"
-      content="Your AI agents run on your own machines. PocketShell opens a real SSH terminal to them in a browser tab - sign in with Google, pick a host, and check on Claude Code, Codex, or OpenCode. Your browser is the terminal."
+      content="Your AI agents run on your own machines. PocketShell opens a real SSH terminal to them on desktop, in the browser, and on your phone - sign in with Google, pick a host, and check on Claude Code, Codex, or OpenCode from anywhere."
     />
     <meta name="twitter:image" content="{{ site.url }}/images/og-cover.png" />
     <link rel="alternate" type="application/atom+xml" title="PocketShell blog" href="/feed.xml" />
@@ -35,7 +35,7 @@
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d1117' stroke='%2330363d' stroke-width='2'/%3E%3Ctext x='12' y='45' font-family='ui-monospace,monospace' font-size='30' font-weight='bold' fill='%233fb950'%3E%3E_%3C/text%3E%3C/svg%3E"
     />
-    <title>PocketShell - SSH client in your browser tab</title>
+    <title>PocketShell - SSH client on desktop, web, and phone</title>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -78,7 +78,7 @@
             "name": "Which devices can I use?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Anything with a modern browser: Linux, macOS, Windows, Chromebooks, and tablets — including locked-down machines where you can't install software."
+              "text": "Desktop apps for Linux, macOS, and Windows, an Android app for your phone, and the web app in any modern browser — including tablets, Chromebooks, and locked-down machines where you can't install software."
             }
           },
           {
@@ -131,13 +131,13 @@
       <main>
         <section class="hero container">
           <div class="hero-copy">
-            <p class="eyebrow">Agent-aware SSH, in a browser tab</p>
-            <h1>Drop in on your AI agents from any browser tab.</h1>
+            <p class="eyebrow">Agent-aware SSH — desktop, web, and phone</p>
+            <h1>Control your AI agents from anywhere.</h1>
             <p class="sub">
-              Your agents run on your own machines. PocketShell opens a real
-              terminal to them&nbsp;— sign in with Google, click a host, and see
-              exactly where Claude Code, Codex, or OpenCode left off. Your
-              browser is the terminal.
+              Your agents run on your own machines, and PocketShell opens a
+              real terminal to them&nbsp;— on your desktop, in a browser tab,
+              or from your phone. Sign in with Google, click a host, and see
+              exactly where Claude Code, Codex, or OpenCode left off.
             </p>
             <div class="cta-row">
               <a class="button primary large" href="{{ site.app_url }}/">Sign in with Google</a>
@@ -160,7 +160,7 @@
               <li class="fact"><strong>AES-256-GCM, PBKDF2 600k</strong><span class="fact-note">zero-knowledge, end-to-end</span></li>
               <li class="fact"><strong>Claude Code, Codex, OpenCode, Grok</strong><span class="fact-note">first-class agent sessions</span></li>
               <li class="fact"><strong>Real xterm.js terminal</strong><span class="fact-note">scrollback, copy/paste, resize</span></li>
-              <li class="fact"><strong>Tablet, Chromebook, phone</strong><span class="fact-note">any browser tab works</span></li>
+              <li class="fact"><strong>Desktop, web, and phone</strong><span class="fact-note">same hosts, same sessions</span></li>
             </ul>
           </div>
           <figure class="hero-visual desktop-preview">
@@ -458,9 +458,10 @@
               <details>
                 <summary>Which devices can I use?</summary>
                 <p>
-                  Anything with a modern browser: Linux, macOS, Windows,
-                  Chromebooks, and tablets&nbsp;— including locked-down
-                  machines where you can't install software.
+                  Desktop apps for Linux, macOS, and Windows, an Android app
+                  for your phone, and the web app in any modern
+                  browser&nbsp;— including tablets, Chromebooks, and
+                  locked-down machines where you can't install software.
                 </p>
               </details>
               <details>
@@ -506,7 +507,7 @@
                 loading="lazy"
               />
               <h2>Your agents are still running.</h2>
-              <p>Check on them from any browser tab&nbsp;— same hosts, same account, and your running sessions.</p>
+              <p>Check on them from your desktop, your phone, or any browser tab&nbsp;— same hosts, same account, and your running sessions.</p>
               <a class="button primary large" href="{{ site.app_url }}/">Sign in with Google</a>
             </div>
           </div>
