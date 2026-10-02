@@ -541,7 +541,7 @@ main > section[id] {
   margin-top: 52px;
 }
 
-/* Actual desktop screenshot in a compact, responsive frame. */
+/* Vector capture of the desktop renderer in a compact, responsive frame. */
 .desktop-preview {
   width: 100%;
   max-width: 1000px;

@@ -12,9 +12,10 @@ this site points there, landing directly on the sign-in screen.
 ## Layout
 
 - `index.html` + `_layouts/landing.html` — the landing page (hero desktop
-  preview, contribution calendar, FAQ). The actual desktop screenshot lives in
-  `images/desktop/session-workspace.svg`. The SVG embeds the original PNG
-  capture without modification; the screenshot remains raster content.
+  preview, contribution calendar, FAQ). The vector desktop capture lives in
+  `images/desktop/session-workspace.svg`. It is exported from the actual Vue
+  and xterm desktop renderer with sample session data. All shapes and text
+  are vector paths; it contains no embedded images.
 - `_posts/` — blog posts (`_posts/YYYY-MM-DD-<slug>.md`, permalink
   `/blog/<slug>/`). `reading_minutes` and the other front-matter fields
   drive the post layout and cards.
@@ -30,6 +31,18 @@ this site points there, landing directly on the sign-in screen.
     make serve     # dev server on http://localhost:4000
     make build     # production build into _site/
     make graph     # re-render the contribution calendar SVG
+
+Regenerate the desktop capture after building the sibling desktop app:
+
+    node scripts/capture-desktop-svg.cjs ../pocketshell-desktop
+
+This uses the desktop app's installed Playwright and Chromium, plus
+`pdftocairo` (Poppler). Set `CHROMIUM_PATH` if Chromium is installed elsewhere.
+The capture uses the built `out/renderer` bundle and a sample IPC transport;
+Vue renders the app and xterm renders the sample terminal stream. Chromium
+prints the screen to vector PDF, then Poppler exports SVG with outlined font
+glyphs. Decorative shadows and filters are disabled to avoid rasterization.
+The script rejects any export containing raster images or HTML objects.
 
 ## Contribution calendar
 
