@@ -40,11 +40,9 @@
 })();
 
 // Double opt-in for the PocketShell list. Relay sends the confirmation as
-// hello@pocketshell.io. Production relay (relay.datatalks.club) is not serving
-// the app yet, so this posts to the sandbox relay, which is the one that can
-// send today.
+// hello@pocketshell.io.
 (function () {
-  var RELAY_LIST = 'https://relay.dtcdev.click/api/public/lists/pocketshell';
+  var RELAY_LIST = 'https://relay.datatalks.club/api/public/lists/pocketshell';
   var form = document.getElementById('list-signup');
   if (!form) return;
   var input = form.querySelector('input[type="email"]');
