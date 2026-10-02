@@ -2,6 +2,21 @@
 
 Date: 2026-09-11. Grounded in live search-result scans (sources at the bottom).
 
+## Search Console priorities from October 2 2026
+
+The [query baseline and SEO priorities](search-console-2026-10-02.md) records
+all 28 disclosed queries, including impressions and average positions. Use
+this first-party evidence to set the next editorial order: improve the existing
+iPad/iPhone SSH guide, then the SSH configuration guide, then authorized_keys
+location and setup coverage. Several iPad SSH queries already average positions
+9–10; broad configuration terms mostly rank much lower.
+
+The sample is small: disclosed rows account for 55 impressions and no clicks,
+while property totals are 235 impressions and 3 clicks. It supports testing these
+priorities, not claims about market search volume. Keep the agent cluster for
+product relevance while gathering more evidence. This order supersedes the
+original publication cadence below for the next content updates.
+
 ## Strategy
 
 PocketShell's audience searches for **SSH how-tos, not "web SSH client"** (that
