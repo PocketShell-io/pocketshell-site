@@ -12,8 +12,9 @@ this site points there, landing directly on the sign-in screen.
 ## Layout
 
 - `index.html` + `_layouts/landing.html` — the landing page (hero desktop
-  mock, contribution calendar, FAQ). The mock's content lives in
-  `_data/desktop-mock.yml`; `js/landing.js` toggles folders/tabs.
+  preview, contribution calendar, FAQ). The actual desktop screenshot lives in
+  `images/desktop/session-workspace.svg`. The SVG embeds the original PNG
+  capture without modification; the screenshot remains raster content.
 - `_posts/` — blog posts (`_posts/YYYY-MM-DD-<slug>.md`, permalink
   `/blog/<slug>/`). `reading_minutes` and the other front-matter fields
   drive the post layout and cards.
