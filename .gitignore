@@ -4,3 +4,5 @@ _site/
 .rustkyll-manifest.json
 .jekyll-cache/
 __pycache__/
+
+.tmp/

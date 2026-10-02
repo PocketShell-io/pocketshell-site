@@ -8,6 +8,8 @@ markdown: CommonMarkGhPages
 markdown: CommonMarkGhPages
 
 exclude:
+  - .tmp/
+  - docs/
   - _site/
   - .bin/
   - .rustkyll/

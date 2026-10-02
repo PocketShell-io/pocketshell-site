@@ -20,8 +20,11 @@ this site points there, landing directly on the sign-in screen.
   `/blog/<slug>/`). `reading_minutes` and the other front-matter fields
   drive the post layout and cards.
 - `_data/gh-history.json` — GitHub contribution snapshot for the calendar.
-- `blog.css` — blog-page styles; `style.css` — landing-page styles (both
-  inherited from the web app, kept at the same URLs as before the split).
+- `style.css` — shared design tokens, typography, site shell, and landing styles.
+  `blog.css` imports it and adds article and blog-index layouts.
+- `fonts/` — self-hosted Space Grotesk and IBM Plex Mono, with their licenses.
+- `docs/design-contract.md` — visual direction, design rules, and the original
+  interface audit. Design-review screenshots belong in ignored `.tmp/design/`.
 - `app.md`, `login.md` — noindex meta-refresh pages so old
   pocketshell.io/app and /login bookmarks land on the app subdomain.
 
