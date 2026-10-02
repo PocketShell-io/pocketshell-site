@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ page.title | escape }} — PocketShell</title>
+  <meta name="description" content="{{ page.description | escape }}" />
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0d1117" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="PocketShell" />
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+  <meta property="og:title" content="{{ page.title | escape }} — PocketShell" />
+  <meta property="og:description" content="{{ page.description | escape }}" />
+  <meta property="og:image" content="{{ site.url }}/images/og-cover.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ page.title | escape }} — PocketShell" />
+  <meta name="twitter:description" content="{{ page.description | escape }}" />
+  <meta name="twitter:image" content="{{ site.url }}/images/og-cover.png" />
+  <link rel="stylesheet" href="/blog.css" />
+</head>
+<body>
+  {% include topbar.html %}
+  <main>
+    <div class="container">
+      <article class="prose">
+{{ content }}
+      </article>
+    </div>
+  </main>
+  {% include footer.html %}
+</body>
+</html>
