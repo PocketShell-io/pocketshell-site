@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "aplexer crash warnings: dead sessions stay visible until you acknowledge them"
+seo_title: "aplexer crash warnings: acknowledge dead agent sessions"
 slug: aplexer-crash-warnings
 date: 2026-09-17
 reading_minutes: 5
 cover: /images/blog/aplexer-crash-warnings.webp
-description: "An OOM kill or a worker crash used to be erased by routine cleanup. aplexer now writes an ack-gated warning that shows in every listing until you explicitly acknowledge it."
+description: "See when an aplexer agent crashes or is killed by OOM. Dead sessions stay visible with a warning in every listing until you explicitly acknowledge them."
 keywords: [aplexer, crash warning, oom kill, oom killed process, ai agent crashed, agent session manager, a warnings, a ack]
 ---
 
@@ -184,6 +185,6 @@ flow.
 
 These three pick up where this one stops:
 
-- [aplexer: an agent multiplexer for AI coding agents](/blog/aplexer-agent-multiplexer)
-- [How to run multiple AI coding agents in parallel](/blog/multiple-ai-coding-agents)
-- [Stop losing work when SSH drops: tmux sessions that survive anything](/blog/tmux-persistent-ssh-sessions)
+- [aplexer: an agent multiplexer for AI coding agents](/blog/aplexer-agent-multiplexer/)
+- [How to run multiple AI coding agents in parallel](/blog/multiple-ai-coding-agents/)
+- [Stop losing work when SSH drops: tmux sessions that survive anything](/blog/tmux-persistent-ssh-sessions/)

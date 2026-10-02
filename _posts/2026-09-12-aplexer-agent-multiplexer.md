@@ -6,7 +6,7 @@ date: 2026-09-12
 reading_minutes: 5
 cover: /images/blog/aplexer-agent-multiplexer.webp
 featured: true
-description: "aplexer is an agent-first alternative to tmux: sessions with a workspace, tag, and engine, per-session process isolation, and commands built for managing Claude, Codex, and Gemini over SSH."
+description: "Manage Claude, Codex, and Gemini over SSH with aplexer: named agent sessions, isolated processes, workspaces, tags, and commands for parallel coding work."
 keywords: [aplexer, agent multiplexer, tmux alternative, ai agent session manager, manage claude code sessions, aplexer vs tmux]
 ---
 
@@ -181,6 +181,6 @@ walks through the whole flow.
 
 These three pick up where this one stops:
 
-- [Configuring a remote machine over SSH with AI agents](/blog/ssh-ai-agents-remote-machines)
-- [How to run multiple AI coding agents in parallel](/blog/multiple-ai-coding-agents)
-- [Stop losing work when SSH drops: tmux sessions that survive anything](/blog/tmux-persistent-ssh-sessions)
+- [Configuring a remote machine over SSH with AI agents](/blog/ssh-ai-agents-remote-machines/)
+- [How to run multiple AI coding agents in parallel](/blog/multiple-ai-coding-agents/)
+- [Stop losing work when SSH drops: tmux sessions that survive anything](/blog/tmux-persistent-ssh-sessions/)

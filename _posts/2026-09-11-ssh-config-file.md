@@ -110,7 +110,7 @@ Since OpenSSH 7.3, `ProxyJump` is the clean way to reach hosts behind a bastion.
 It makes a TCP tunnel through the jump host and runs the real SSH session
 end-to-end from your machine. The bastion never sees your keys or your agent.
 That's a meaningful security advantage over the older agent-forwarding approach
-(see [SSH agent forwarding](/blog/ssh-agent-forwarding) for when forwarding is
+(see [SSH agent forwarding](/blog/ssh-agent-forwarding/) for when forwarding is
 still the right tool).
 
 ```text
@@ -148,7 +148,7 @@ multiplex over its socket instantly, and `ControlPersist 10m` keeps the master
 alive for ten minutes after the last session closes. You'll need to create
 `~/.ssh/sockets` first. One caveat: a multiplexed session inherits the master's
 forwarded agent and environment, which can behave oddly in [long-lived tmux
-sessions](/blog/tmux-persistent-ssh-sessions). If in doubt,
+sessions](/blog/tmux-persistent-ssh-sessions/). If in doubt,
 `ssh -o ControlPath=none host` bypasses the socket.
 
 ## Match blocks for conditional settings
@@ -216,5 +216,5 @@ laptop where you can't edit `~/.ssh` at all),
 
 These two pick up where this one stops:
 
-- [SSH agent forwarding: what it hands over, and when ProxyJump is better](/blog/ssh-agent-forwarding)
-- [tmux sessions that survive SSH disconnects](/blog/tmux-persistent-ssh-sessions)
+- [SSH agent forwarding: what it hands over, and when ProxyJump is better](/blog/ssh-agent-forwarding/)
+- [tmux sessions that survive SSH disconnects](/blog/tmux-persistent-ssh-sessions/)

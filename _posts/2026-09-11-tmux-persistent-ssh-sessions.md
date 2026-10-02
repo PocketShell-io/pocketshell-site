@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Stop losing work when SSH drops: tmux sessions that survive anything"
+seo_title: "Keep SSH work alive with persistent tmux sessions"
 slug: tmux-persistent-ssh-sessions
 date: 2026-09-11
 reading_minutes: 4
@@ -62,7 +63,7 @@ Automatic reattach only helps if you notice the drop. These settings in
 `~/.ssh/config` on your laptop make a dead connection fail fast instead of
 hanging forever.
 
-The full tour of [the `~/.ssh/config` file](/blog/ssh-config-file) covers where
+The full tour of [the `~/.ssh/config` file](/blog/ssh-config-file/) covers where
 this belongs:
 
 ```text
@@ -109,7 +110,7 @@ For shell work, tmux stays the right answer and everything above applies as
 written.
 
 When your sessions hold AI coding agents, switch to
-[aplexer](/blog/aplexer-agent-multiplexer) instead. It's the better tmux
+[aplexer](/blog/aplexer-agent-multiplexer/) instead. It's the better tmux
 alternative for agent work. Every session has a workspace, a tag, and an
 engine. `a list` shows whether Claude Code, Codex, or OpenCode is running
 inside and whether
@@ -120,8 +121,8 @@ and it's the session layer PocketShell runs on.
 
 Keep going with these:
 
-- [aplexer: an agent multiplexer for AI coding agents](/blog/aplexer-agent-multiplexer)
-- [Run AI agents on a remote machine over SSH](/blog/ssh-ai-agents-remote-machines)
-- [Stop idle sessions freezing: keepalives, tmux, mosh](/blog/keep-ssh-session-alive)
+- [aplexer: an agent multiplexer for AI coding agents](/blog/aplexer-agent-multiplexer/)
+- [Run AI agents on a remote machine over SSH](/blog/ssh-ai-agents-remote-machines/)
+- [Stop idle sessions freezing: keepalives, tmux, mosh](/blog/keep-ssh-session-alive/)
 - [Use screen to keep SSH sessions alive (the classic alternative)](https://embedjournal.com/screen-keep-ssh-sessions-alive-between-connections/)
 - [How to keep processes running after ending an SSH session (Ask Ubuntu)](https://askubuntu.com/questions/8653/how-to-keep-processes-running-after-ending-ssh-session)

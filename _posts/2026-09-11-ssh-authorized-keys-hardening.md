@@ -140,7 +140,7 @@ These five checks find the cause most of the time:
 1. **Run `ssh -vvv`.** If the key is never offered, the problem is client-side.
    Wrong identity file, wrong alias, or an agent issue (check with `ssh -G host`,
    which prints the fully resolved config - see the
-   [`~/.ssh/config` guide](/blog/ssh-config-file) for how blocks resolve).
+   [`~/.ssh/config` guide](/blog/ssh-config-file/) for how blocks resolve).
 2. Read the server log. `journalctl -u ssh -n 50` (Debian/Ubuntu) or
    `journalctl -u sshd` (RHEL) states the exact reason. "Authentication refused:
    bad ownership or modes" is the permissions problem from Step 2.

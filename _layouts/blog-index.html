@@ -13,13 +13,13 @@
     <section class="band">
       <div class="container">
         <div class="cards blog-cards">{% for p in site.posts %}{% if p.featured %}
-          <a class="card card-link" href="/blog/{{ p.slug }}">{% if p.cover %}
+          <a class="card card-link" href="{{ p.url }}">{% if p.cover %}
             <img class="card-cover" src="{{ p.cover }}" alt="" width="1200" height="630" loading="lazy" />{% endif %}
             <h3>{{ p.title }}</h3>
             <p>{{ p.description }}</p>
             <span class="card-meta">{{ p.date | date: '%B %-d, %Y' }} · {{ p.reading_minutes }} min read</span>
           </a>{% endif %}{% endfor %}{% for p in site.posts %}{% unless p.featured %}
-          <a class="card card-link" href="/blog/{{ p.slug }}">{% if p.cover %}
+          <a class="card card-link" href="{{ p.url }}">{% if p.cover %}
             <img class="card-cover" src="{{ p.cover }}" alt="" width="1200" height="630" loading="lazy" />{% endif %}
             <h3>{{ p.title }}</h3>
             <p>{{ p.description }}</p>
