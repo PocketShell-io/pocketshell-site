@@ -7,7 +7,7 @@
       name="description"
       content="Control Claude Code, Codex, and OpenCode over SSH from desktop, web, or phone. PocketShell connects to AI agents running on your own machines."
     />
-    <meta name="theme-color" content="#0d1117" />
+    <meta name="theme-color" content="#f3f1e9" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="{{ site.url }}/" />
     <meta property="og:type" content="website" />
@@ -33,7 +33,7 @@
     <link rel="alternate" type="application/atom+xml" title="PocketShell blog" href="/feed.xml" />
     <link
       rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d1117' stroke='%2330363d' stroke-width='2'/%3E%3Ctext x='12' y='45' font-family='ui-monospace,monospace' font-size='30' font-weight='bold' fill='%233fb950'%3E%3E_%3C/text%3E%3C/svg%3E"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='0' fill='%23f3f1e9' stroke='%2320241f' stroke-width='2'/%3E%3Ctext x='12' y='45' font-family='ui-monospace,monospace' font-size='30' font-weight='bold' fill='%23b83b16'%3E%3E_%3C/text%3E%3C/svg%3E"
     />
     <title>PocketShell - SSH client on desktop, web, and phone</title>
     <script type="application/ld+json">
@@ -116,7 +116,7 @@
       <header class="topbar landing-topbar">
         <div class="topbar-rail">
           <a class="brand" href="/"><span class="brand-mark">&gt;_</span> PocketShell</a>
-          <nav class="site-nav">
+          <nav class="site-nav" aria-label="Main navigation">
             <a class="nav-link" href="/#features">Features</a>
             <a class="nav-link" href="/#how">How it works</a>
             <a class="nav-link" href="/#security">Security</a>
@@ -128,49 +128,37 @@
         </div>
       </header>
 
-      <main>
+      <a class="skip-link" href="#main">Skip to content</a>
+      <main id="main">
         <section class="hero container">
           <div class="hero-copy">
-            <p class="eyebrow">Agent-aware SSH — desktop, web, and phone</p>
-            <h1>Control your AI agents from anywhere.</h1>
-            <p class="sub">
-              Your agents run on your own machines, and PocketShell opens a
-              real terminal to them&nbsp;— on your desktop, in a browser tab,
-              or from your phone. Sign in with Google, click a host, and see
-              exactly where Claude Code, Codex, or OpenCode left off.
-            </p>
-            <div class="cta-row">
-              <a class="button primary large" href="{{ site.app_url }}/">Sign in with Google</a>
-              <a class="text-link" href="#how">See how it works</a>
-            </div>
-            <p class="cta-note">Want to know when we launch? Leave your email — access is allowlisted during the alpha, and we’ll send a confirmation from hello@pocketshell.io.</p>
-            <form class="signup" id="list-signup" novalidate>
-              <input type="email" name="email" required autocomplete="email" inputmode="email" placeholder="you@example.com" aria-label="Email" />
-              <button class="button primary" type="submit">Subscribe</button>
-              <p class="signup-status" role="status" hidden></p>
-            </form>
-            <ul class="chips" aria-label="Key facts">
-              <li class="chip">Zero-knowledge sync</li>
-              <li class="chip">Keys stay local</li>
-              <li class="chip">Sessions live on your machine</li>
-            </ul>
+            <p class="eyebrow"><span class="signal-dot"></span> Agent-aware SSH</p>
+            <h1>Your agents.<br /><span>Still running.</span></h1>
           </div>
-          <div class="fact-wrap">
-            <ul class="fact-strip">
-              <li class="fact"><strong>AES-256-GCM, PBKDF2 600k</strong><span class="fact-note">zero-knowledge, end-to-end</span></li>
-              <li class="fact"><strong>Claude Code, Codex, OpenCode, Grok</strong><span class="fact-note">first-class agent sessions</span></li>
-              <li class="fact"><strong>Real xterm.js terminal</strong><span class="fact-note">scrollback, copy/paste, resize</span></li>
-              <li class="fact"><strong>Desktop, web, and phone</strong><span class="fact-note">same hosts, same sessions</span></li>
-            </ul>
+          <div class="hero-aside">
+            <p class="sub">Close the laptop. Keep the momentum.</p>
+            <p>Connect to Claude Code, Codex, OpenCode, and Grok on your own machines. Pick up the same session from your desktop, browser, or phone.</p>
+            <div class="cta-row">
+              <a class="button primary large" href="{{ site.app_url }}/">Open PocketShell <span aria-hidden="true">↗</span></a>
+              <a class="text-link" href="#apps">Get the apps</a>
+            </div>
+            <p class="alpha-note">Free during alpha · Access is allowlisted<br />Sign in with your Google account.</p>
           </div>
           <figure class="hero-visual desktop-preview">
+            <figcaption><span><span class="signal-dot"></span> Your machine. Your sessions.</span><a href="/images/desktop/session-workspace.svg" aria-label="View the desktop workspace at full size">View full size ↗</a></figcaption>
             <img src="/images/desktop/session-workspace.svg" width="1100" height="620" alt="PocketShell desktop renderer with project folders, agent icons, session tabs, and a sample Codex session." fetchpriority="high" />
           </figure>
+          <ul class="hero-facts" aria-label="PocketShell at a glance">
+            <li><strong>Encrypted host sync</strong><p>AES-256-GCM encryption.<br />Your passphrase stays on your device.</p></li>
+            <li><strong>Agent-aware sessions</strong><p>Claude Code, Codex, OpenCode, and Grok. Pick up where they left off.</p></li>
+            <li><strong>A real terminal</strong><p>Full xterm.js, with scrollback, copy and paste, and resize.</p></li>
+            <li><strong>Desktop to pocket</strong><p>Desktop, web, and Android.<br />Same hosts. Same running sessions.</p></li>
+          </ul>
         </section>
 
         <section id="how" class="band">
           <div class="container">
-            <h2>From zero to your agents in three steps</h2>
+            <h2>Back at your terminal. In three steps.</h2>
             <ol class="steps">
               <li class="step">
                 <span class="num">1</span>
@@ -193,7 +181,7 @@
 
         <section id="features" class="band">
           <div class="container">
-            <h2>Why a browser tab beats another terminal app</h2>
+            <h2>Your work goes with you.</h2>
             <div class="frow">
               <div class="frow-copy">
                 <h3>Your hosts, already there</h3>
@@ -286,7 +274,7 @@
 
         <section id="apps" class="band">
           <div class="container">
-            <h2>One account, three ways in</h2>
+            <h2>Choose your way in.</h2>
             <p class="band-sub">Download the desktop or Android app, or get the same PocketShell experience on the web.</p>
             <div class="cards">
               <div class="card">
@@ -325,38 +313,35 @@
         <section id="security" class="band">
           <div class="container">
             <div class="security">
-              <div class="security-copy">
-                <h2>Zero-knowledge by design</h2>
-                <p>No badges, no promises&nbsp;— this is the actual data path, step by step.</p>
-                <ol class="sec-flow">
+              <div class="security-intro">
+                <h2>Your infrastructure.<br />Your business.</h2>
+                <p>Your host list is encrypted on your device. Here’s what happens before it reaches the sync server.</p>
+                <a class="button large" href="#faq">Read the security FAQ <span aria-hidden="true">↗</span></a>
+              </div>
+              <div class="security-path">
+                <ol class="sec-flow" aria-label="Host-list encryption and sync">
                   <li class="sec-item">
                     <span class="n">01</span>
-                    <h3>Passphrase stays local</h3>
-                    <p>Typed once per session and used in your browser, never sent&nbsp;— so there is no server-side reset: the server never had your passphrase.</p>
+                    <div><h3>Start with your passphrase.</h3>
+                    <p>PBKDF2-SHA256 derives an encryption key with 600,000 iterations. Your passphrase stays on your device, so there is no server-side reset.</p></div>
                   </li>
                   <li class="sec-item">
                     <span class="n">02</span>
-                    <h3>PBKDF2, 600,000 iterations</h3>
-                    <p>The encryption key is derived from your passphrase with PBKDF2-SHA256, so the stored blob still resists any offline guessing.</p>
+                    <div><h3>Encrypt before it leaves.</h3>
+                    <p>AES-256-GCM encrypts your host list locally. The readable addresses, users, and ports never reach the sync server.</p></div>
                   </li>
                   <li class="sec-item">
                     <span class="n">03</span>
-                    <h3>AES-256-GCM before sync</h3>
-                    <p>The host list is encrypted in your browser before it leaves. The sync server stores ciphertext it can never turn back into plaintext.</p>
-                  </li>
-                  <li class="sec-item">
-                    <span class="n">04</span>
-                    <h3>Keys never sync at all</h3>
-                    <p>Private keys never sync. Each key attached to a host is encrypted with your passphrase and used in memory to open the connection.</p>
+                    <div><h3>Sync only ciphertext.</h3>
+                    <p>The server stores the encrypted blob. Your other devices use your passphrase to decrypt it; the sync server cannot read it.</p></div>
                   </li>
                 </ol>
-                <p class="sec-bridge">
-                  On your servers, the one dependency is the PocketShell CLI&nbsp;— it
-                  hosts the agent sessions (aplexer is the session layer) that
-                  every PocketShell app attaches to.
-                </p>
-                <a class="button primary large" href="{{ site.app_url }}/">Sign in with Google</a>
+                <div class="security-keys">
+                  <h3>Private keys take a different path.</h3>
+                  <p>They never sync. Each key is encrypted in your browser with your passphrase. On connection, it travels over authenticated WSS to the PocketShell bridge, which uses it in memory and neither stores nor logs it.</p>
+                </div>
               </div>
+              <p class="sec-bridge">On your servers, install the PocketShell CLI. Its aplexer session layer hosts the agent sessions that the desktop, web, and Android apps attach to.</p>
             </div>
           </div>
         </section>
@@ -366,7 +351,7 @@
             <div class="oss">
               <div class="oss-head">
                 <div class="oss-copy">
-                  <h2>Work that keeps going</h2>
+                  <h2>Built in the open.</h2>
                   <p>
                     PocketShell keeps
                     <a href="https://github.com/alexeygrigorev">Alexey Grigorev's</a>
@@ -391,7 +376,7 @@
 
         <section id="blog" class="band">
           <div class="container">
-            <h2>From the blog</h2>
+            <h2>Notes from the terminal.</h2>
             <p class="band-sub">Practical notes on SSH, remote machines, and running AI agents on them&nbsp;— the kind of things you'll want a terminal for.</p>
             <div class="cards blog-cards">{% assign teaser_count = 0 %}{% for p in site.posts %}{% assign p_title = p.title | downcase %}{% assign p_desc = p.description | downcase %}{% if p.featured %}{% unless p_title contains 'tmux' or p_desc contains 'tmux' %}{% if teaser_count < 4 %}
               <a class="card card-link" href="{{ p.url }}">
@@ -411,7 +396,7 @@
 
         <section id="faq" class="band">
           <div class="container">
-            <h2>Frequently asked questions</h2>
+            <h2>Before you connect.</h2>
             <div class="faq">
               <details>
                 <summary>Who can see my host list?</summary>
@@ -498,17 +483,18 @@
         <section class="band">
           <div class="container">
             <div class="final-cta">
-              <img
-                class="final-cta-visual"
-                src="/images/landing-agents.webp"
-                alt=""
-                width="1536"
-                height="1024"
-                loading="lazy"
-              />
-              <h2>Your agents are still running.</h2>
-              <p>Check on them from your desktop, your phone, or any browser tab&nbsp;— same hosts, same account, and your running sessions.</p>
-              <a class="button primary large" href="{{ site.app_url }}/">Sign in with Google</a>
+              <h2>Step away.<br /><span>Stay connected.</span></h2>
+              <p>Check on your agents from your desktop, your phone, or any browser tab&nbsp;— same hosts, same account, and your running sessions.</p>
+              <a class="button primary large" href="{{ site.app_url }}/">Open PocketShell <span aria-hidden="true">↗</span></a>
+              <div class="newsletter">
+                <label for="signup-email">Get the launch email.</label>
+                <p class="cta-note">Alpha access is allowlisted. Subscribe for launch updates; we’ll send a confirmation from hello@pocketshell.io.</p>
+                <form class="signup" id="list-signup" novalidate>
+                  <input id="signup-email" type="email" name="email" required autocomplete="email" inputmode="email" placeholder="you@example.com" />
+                  <button class="button" type="submit">Subscribe</button>
+                  <p class="signup-status" role="status" hidden></p>
+                </form>
+              </div>
             </div>
           </div>
         </section>

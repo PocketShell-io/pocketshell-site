@@ -77,6 +77,8 @@
 
   async function confirmToken(token) {
     show('Confirming your email…', '');
+    // Confirmation links land on the newsletter, now below the product story.
+    form.scrollIntoView({ block: 'center' });
     try {
       var result = await post('/confirm', { token: token });
       if (result.response.ok && result.payload.status === 'subscribed') {
