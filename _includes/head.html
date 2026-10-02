@@ -2,6 +2,7 @@
   Shared <head> for the blog pages — mirrors what scripts/build-blog.mjs
   emitted for post and index pages on the old SPA deployment.
 {% endcomment %}{% if page.layout == 'post' %}{% assign head_title = page.seo_title | default: page.title | append: ' — PocketShell' %}{% assign head_desc = page.description %}{% assign head_type = 'article' %}{% if page.cover %}{% assign head_image = page.cover | replace: '.webp', '.png' %}{% else %}{% assign head_image = '/images/og-cover.png' %}{% endif %}{% else %}{% assign head_title = 'SSH and terminal guides — PocketShell blog' %}{% assign head_desc = 'Practical notes on SSH, terminals, and running things on remote machines — from building PocketShell, an SSH client in a browser tab.' %}{% assign head_type = 'website' %}{% assign head_image = '/images/og-cover.png' %}{% endif %}{% assign head_canonical = site.url | append: page.url %}{% assign head_abs_image = head_image | prepend: site.url %}
+  {% include analytics.html %}
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{ head_title | escape }}</title>

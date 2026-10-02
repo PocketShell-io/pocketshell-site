@@ -33,6 +33,12 @@ If you subscribe to PocketShell updates, we process your email address, confirma
 
 Hosting and connection services process technical information, such as IP addresses, request times, connection identifiers, and errors, to deliver the service and maintain security. The web app does not include analytics or advertising tracking scripts.
 
+## Website analytics
+
+With your consent, the public pocketshell.io website uses Google Analytics 4 to measure page visits, scrolling, outbound links, and downloads. Google processes usage information, browser and device information, and technical network information. Analytics cookies help distinguish visits. We disable advertising personalisation and Google signals, and remove query strings and fragments from page URLs and referrers sent by our tag.
+
+Google's analytics tag loads only after you accept analytics. You can reject analytics or change your choice using **Analytics preferences** in the website footer. Your choice is saved in this browser; withdrawing consent stops future collection and removes this website's analytics cookies. Analytics cookies are configured to expire after six months, subject to browser limits. This setup applies to the public website, not the SSH web app or terminal sessions. See [Google's privacy policy](https://policies.google.com/privacy) for information about Google's processing.
+
 ## Purposes and service providers
 
 We process account and connection information to provide the service you request, subscription information with your consent, and necessary operational information to protect and maintain the service. We do not sell your personal data or share it for third-party advertising.

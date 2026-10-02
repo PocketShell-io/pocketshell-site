@@ -1,0 +1,19 @@
+.analytics-choice[hidden] { display: none; }
+.analytics-choice {
+  position: fixed; bottom: 16px; left: 16px; right: 16px; z-index: 100;
+  max-width: 620px; padding: 20px; border: 1px solid #20241f;
+  background: #faf9f4; color: #20241f; font: 16px/1.5 "Space Grotesk", sans-serif;
+  box-shadow: 0 4px 20px #20241f22;
+}
+.analytics-choice p { margin: 0 0 16px; }
+.analytics-choice a { color: #b83b16; }
+.analytics-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.analytics-actions button, .analytics-settings {
+  font: inherit; cursor: pointer; border: 1px solid currentColor;
+  border-radius: 0; background: transparent; color: inherit; padding: 10px 16px;
+  min-height: 44px;
+}
+.analytics-actions button:focus-visible, .analytics-settings:focus-visible {
+  outline: 2px solid #b83b16; outline-offset: 4px;
+}
+.analytics-settings { font-size: inherit; padding: 0 8px; }

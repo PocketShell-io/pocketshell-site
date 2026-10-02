@@ -55,6 +55,18 @@ The script rejects any export containing raster images or HTML objects.
 
 Neither needs to be fresh; run them when you feel like it.
 
+## Website analytics
+
+The `pocketshell-site` GA4 web stream belongs to the existing Pocket Shell
+property (`541426830`, account `397810399`). Its measurement ID is set in
+`_config.yml`. The shared analytics include loads `js/analytics.js` on public
+pages. Google Analytics loads only after visitors accept analytics; the footer
+allows them to change their choice. Tracking runs only on pocketshell.io and
+www.pocketshell.io, never local previews or app.pocketshell.io. Query strings
+and fragments are stripped from page URLs/referrers. Advertising signals are
+disabled. Enhanced measurement covers page views, scrolls, outbound clicks,
+and downloads; form interactions, site search, and video events are disabled.
+
 ## Deploy
 
 The generated canonical, Open Graph, and structured-data URLs must match
