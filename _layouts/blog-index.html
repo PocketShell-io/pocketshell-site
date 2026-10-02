@@ -5,9 +5,10 @@
 </head>
 <body>
   {% include topbar.html %}
-  <main>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <main id="main">
     <div class="container blog-index">
-      <h1>Blog</h1>
+      <h1>Notes from<br />the terminal.</h1>
       <p class="band-sub">SSH, terminals, and running things on remote machines.</p>
     </div>
     <section class="band">
@@ -15,13 +16,13 @@
         <div class="cards blog-cards">{% for p in site.posts %}{% if p.featured %}
           <a class="card card-link" href="{{ p.url }}">{% if p.cover %}
             <img class="card-cover" src="{{ p.cover }}" alt="" width="1200" height="630" loading="lazy" />{% endif %}
-            <h3>{{ p.title }}</h3>
+            <h2>{{ p.title }}</h2>
             <p>{{ p.description }}</p>
             <span class="card-meta">{{ p.date | date: '%B %-d, %Y' }} · {{ p.reading_minutes }} min read</span>
           </a>{% endif %}{% endfor %}{% for p in site.posts %}{% unless p.featured %}
           <a class="card card-link" href="{{ p.url }}">{% if p.cover %}
             <img class="card-cover" src="{{ p.cover }}" alt="" width="1200" height="630" loading="lazy" />{% endif %}
-            <h3>{{ p.title }}</h3>
+            <h2>{{ p.title }}</h2>
             <p>{{ p.description }}</p>
             <span class="card-meta">{{ p.date | date: '%B %-d, %Y' }} · {{ p.reading_minutes }} min read</span>
           </a>{% endunless %}{% endfor %}
