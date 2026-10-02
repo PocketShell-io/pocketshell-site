@@ -7,7 +7,7 @@
   <meta name="description" content="{{ page.description | escape }}" />
   <link rel="canonical" href="{{ site.url }}{{ page.url }}" />
   <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#0d1117" />
+  <meta name="theme-color" content="#f3f1e9" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="PocketShell" />
   <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
@@ -22,9 +22,10 @@
 </head>
 <body>
   {% include topbar.html %}
-  <main>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <main id="main">
     <div class="container">
-      <article class="prose">
+      <article class="post prose">
 {{ content }}
       </article>
     </div>
