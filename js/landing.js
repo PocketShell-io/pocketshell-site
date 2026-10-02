@@ -73,3 +73,95 @@
     });
   });
 })();
+
+// Double opt-in for the PocketShell list. Relay sends the confirmation as
+// hello@pocketshell.io. Production relay (relay.datatalks.club) is not serving
+// the app yet, so this posts to the sandbox relay, which is the one that can
+// send today.
+(function () {
+  var RELAY_LIST = 'https://relay.dtcdev.click/api/public/lists/pocketshell';
+  var form = document.getElementById('list-signup');
+  if (!form) return;
+  var input = form.querySelector('input[type="email"]');
+  var button = form.querySelector('button');
+  var status = form.querySelector('.signup-status');
+  var buttonLabel = button.textContent;
+
+  function show(message, kind) {
+    status.hidden = false;
+    status.textContent = message;
+    status.classList.toggle('is-error', kind === 'error');
+    status.classList.toggle('is-ok', kind === 'ok');
+  }
+
+  function setPending(pending) {
+    button.disabled = pending;
+    input.disabled = pending;
+    form.setAttribute('aria-busy', pending ? 'true' : 'false');
+    button.textContent = pending ? 'Sending…' : buttonLabel;
+  }
+
+  async function post(path, body) {
+    var response = await fetch(RELAY_LIST + path, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(body),
+    });
+    var payload = {};
+    try { payload = await response.json(); } catch (e) { payload = {}; }
+    return { response: response, payload: payload };
+  }
+
+  async function confirmToken(token) {
+    show('Confirming your email…', '');
+    try {
+      var result = await post('/confirm', { token: token });
+      if (result.response.ok && result.payload.status === 'subscribed') {
+        show('You’re confirmed. We’ll write from hello@pocketshell.io.', 'ok');
+        form.querySelector('input').hidden = true;
+        button.hidden = true;
+      } else {
+        show('That confirmation link is invalid or has expired.', 'error');
+      }
+    } catch (e) {
+      show('Could not confirm your email. Try the link again.', 'error');
+    }
+    var url = new URL(window.location.href);
+    url.searchParams.delete('token');
+    window.history.replaceState({}, '', url.pathname + url.search + url.hash);
+  }
+
+  var token = new URLSearchParams(window.location.search).get('token');
+  if (token) confirmToken(token);
+
+  form.addEventListener('submit', async function (event) {
+    event.preventDefault();
+    var email = input.value.trim();
+    if (!email || email.indexOf('@') < 1) {
+      show('Enter a valid email address.', 'error');
+      return;
+    }
+    setPending(true);
+    show('', '');
+    status.hidden = true;
+    try {
+      var result = await post('/subscribe', { email: email });
+      if (result.response.ok && result.payload.status === 'verification_requested') {
+        show('Check your inbox — we sent a confirmation link.', 'ok');
+        input.hidden = true;
+        button.hidden = true;
+      } else if (result.response.ok && result.payload.status === 'already_subscribed') {
+        show('That email is already on the list.', 'ok');
+      } else if (result.response.status === 429) {
+        show('Too many confirmation emails. Try again in an hour.', 'error');
+        setPending(false);
+      } else {
+        show('Could not send the confirmation. Try again.', 'error');
+        setPending(false);
+      }
+    } catch (e) {
+      show('Could not send the confirmation. Try again.', 'error');
+      setPending(false);
+    }
+  });
+})();

@@ -463,6 +463,36 @@ main > section[id] {
   text-wrap: balance;
 }
 
+.signup {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 14px auto 0;
+  max-width: 440px;
+}
+
+.signup input[type="email"] {
+  flex: 1 1 200px;
+  min-width: 0;
+}
+
+.signup-status {
+  flex: 1 1 100%;
+  margin: 0;
+  font-size: var(--text-fine);
+  color: #8b949e;
+}
+
+.signup-status.is-error {
+  color: #f85149;
+}
+
+.signup-status.is-ok {
+  color: #3fb950;
+}
+
 /* Fact strip: one hairline-grid row of concrete claims under the hero. */
 
 .fact-strip {
