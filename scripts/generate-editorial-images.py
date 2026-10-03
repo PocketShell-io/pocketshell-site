@@ -266,10 +266,6 @@ def generate_features():
 
 def main():
     generate_features()
-    sheets=[]
-    for slug,num,title,subtitle,draw in ARTICLES:
-        p=Plate(num,title,subtitle); draw(p)
-        sheets.append(p.save(Path('images/blog')/slug))
     p=Plate('00','Your servers.|Within reach.','SSH / FILES / AGENTS / POCKETSHELL', ('A workspace for your servers', 'and remote agent sessions.'))
     multiplexer(p)
     p.save(Path('images/landing-agents'))
@@ -281,13 +277,7 @@ def main():
     p.text((620,375),'Pick up your work.',26)
     p.text((620,476),'pocketshell.io',23,mono=True,fill=ORANGE)
     p.save(Path('images/og-cover'),webp=False)
-    sheet=Image.new('RGB',(1800,1260),PAPER)
-    for i,im in enumerate(sheets):
-        sheet.paste(im.resize((600,315),Image.Resampling.LANCZOS),((i%3)*600,(i//3)*315))
-    evidence=ROOT/'.tmp/design/editorial-image-contact-sheet.png'
-    evidence.parent.mkdir(parents=True,exist_ok=True)
-    sheet.save(evidence)
-    print('Generated 27 raster assets, 3 feature SVG/WebP pairs, and review sheet.')
+    print('Generated landing/social assets and 3 feature SVG/WebP pairs. Original blog artwork is preserved.')
 
 if __name__=='__main__':
     import argparse

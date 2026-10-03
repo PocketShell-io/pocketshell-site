@@ -113,7 +113,8 @@ repo's Pages settings and in the `CNAME` file.
 
 ## Illustration assets
 
-Regenerate the product-themed blog, social, and feature illustrations with
+Regenerate the landing, social, and feature assets with
 `uv run --script scripts/generate-editorial-images.py`.
-Article PNG and WebP variants retain their original paths and 1200×630 dimensions.
+The original blog PNG and WebP artwork is preserved at its existing paths and
+1200×630 dimensions. The generator does not modify blog covers.
 The design and copy contracts live in `docs/`; rendered review evidence goes in `.tmp/`.
