@@ -57,7 +57,7 @@ Refresh the embedded app after building the sibling desktop app:
 This copies the original renderer assets without changing its components or CSS.
 Only the browser entry point loads the local IPC adapter before the app starts.
 The homepage embeds the app; the desktop layout can scroll within its frame on
-small screens, and the full-screen link opens it in a browser tab.
+small screens. The standalone renderer remains available at `/demo/`.
 
 Regenerate the desktop capture after building the sibling desktop app:
 
