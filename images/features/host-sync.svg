@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="400" viewBox="0 0 720 400" role="img" aria-labelledby="title desc">
+<title>Host details encrypted locally before synchronization</title><desc>Three saved host rows connect to an encrypted data block. The illustrated sync arrow carries ciphertext.</desc>
+<defs><marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0L7 3.5L0 7" fill="none" stroke="#22d3ee"/></marker></defs>
+<style>text{font-family:Segoe UI,Arial,sans-serif;fill:#e6edf3;font-size:17px}.mono{font-family:Consolas,DejaVu Sans Mono,monospace;font-size:14px}.meta{fill:#8b949e;font-size:12px;letter-spacing:.4px}.cyan{fill:#22d3ee}.rule{stroke:#2d333b;fill:none}.link{stroke:#22d3ee;fill:none;stroke-width:2;marker-end:url(#arrow)}</style>
+<rect width="720" height="400" fill="#0d1117"/><rect x="16" y="16" width="688" height="368" rx="10" fill="#161b22" stroke="#2d333b"/>
+<path d="M16 66H704M16 344H704" class="rule"/><text x="36" y="47" class="mono cyan">&gt;_</text><text x="79" y="46">Saved hosts</text><text x="36" y="368" class="mono meta">LOCAL ENCRYPTION → CIPHERTEXT SYNC</text>
+<text x="40" y="103" class="mono meta">ON YOUR DEVICE</text><text x="410" y="103" class="mono meta">ENCRYPTED HOST DATA</text>
+<rect x="36" y="123" width="269" height="168" rx="6" fill="#0d1117" stroke="#2d333b"/>
+<rect x="37" y="124" width="267" height="55" fill="#22d3ee" fill-opacity=".12"/><path d="M36 179H305M36 235H305" class="rule"/>
+<circle cx="57" cy="151" r="4" fill="#22d3ee"/><text x="73" y="157">workbox</text><text x="73" y="213">staging</text><text x="73" y="269">build-server</text>
+<path d="M316 207H389" class="link"/><text x="331" y="188" class="mono meta">encrypt</text>
+<rect x="409" y="123" width="271" height="168" rx="6" fill="#1c2129" stroke="#0891b2"/>
+<text x="430" y="157" class="mono cyan">encrypted payload</text><text x="430" y="195" class="mono meta">8f 2a 91 b7 d0 4c</text><text x="430" y="224" class="mono meta">6e c3 08 72 a5 9d</text><path d="M430 249H622" class="link"/><text x="430" y="276" class="mono">sync as ciphertext</text></svg>

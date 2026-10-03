@@ -3,7 +3,7 @@
 
 The landing page's contribution calendar is static HTML — this script does
 what the web app's LandingView.vue does at runtime (same geometry, same
-level colors, same month-label rules) at build time. Re-run after
+month-label rules, with the landing page reference palette) at build time. Re-run after
 sync-gh-history.py refreshes the snapshot; rustkyll picks the new include
 up on the next build.
 
@@ -24,7 +24,8 @@ PITCH = CELL + 3
 PAD_LEFT = 30
 PAD_TOP = 18
 
-LEVEL_COLORS = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"]
+LEVEL_COLORS = ["#1a1d22", "#163542", "#1d5c73", "#3197b8", "#5fd0ea"]
+METADATA_COLOR = "#8a909a"
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 
@@ -84,10 +85,10 @@ out = [
     '     aria-label="GitHub contribution calendar for alexeygrigorev, last 12 months">',
 ]
 for x, name in labels:
-    out.append(f'  <text class="contrib-month" x="{x}" y="12">{name}</text>')
+    out.append(f'  <text class="contrib-month" style="fill:{METADATA_COLOR}" x="{x}" y="12">{name}</text>')
 for name, row in wday_labels:
     y = PAD_TOP + row * PITCH + CELL - 2
-    out.append(f'  <text class="contrib-wday" x="{PAD_LEFT - 6}" y="{y}">{name}</text>')
+    out.append(f'  <text class="contrib-wday" style="fill:{METADATA_COLOR}" x="{PAD_LEFT - 6}" y="{y}">{name}</text>')
 for wi, w in enumerate(weeks):
     for d in w["days"]:
         x = PAD_LEFT + wi * PITCH
