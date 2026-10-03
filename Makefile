@@ -3,7 +3,7 @@ RUSTKYLL_ASSET ?= rustkyll-linux-amd64
 RUSTKYLL_INSTALL_DIR ?= .bin
 RUSTKYLL ?= $(RUSTKYLL_INSTALL_DIR)/rustkyll
 
-.PHONY: help install serve build check clean graph
+.PHONY: help install serve build check clean graph demo
 
 help: ## Show this help message
 	@echo "Available targets:"
@@ -20,11 +20,15 @@ serve: ## Start the development server (http://localhost:4000)
 build: ## Build the site for production
 	$(RUSTKYLL) build
 
-check: build ## Build and check canonical URLs, links, and metadata (Node.js required)
+check: build ## Build and check SEO plus original app assets (Node.js required)
 	node scripts/check-seo.mjs
+	node scripts/check-demo.mjs
 
 graph: ## Re-render the contribution calendar from _data/gh-history.json
 	python3 scripts/gen-contrib-graph.py
 
 clean: ## Remove generated site and caches
 	rm -rf _site .rustkyll-manifest.json
+
+demo: ## Refresh the embedded workspace from the built sibling desktop app
+	node scripts/sync-demo-renderer.cjs ../pocketshell-desktop

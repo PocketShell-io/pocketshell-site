@@ -1,0 +1,13 @@
+
+/* Deliberately the terminal's own background, inherited from the textarea this
+   replaces: an open file and the shell it came from should read as the same
+   surface. The height chain matters — CodeMirror measures its scroller against
+   an ancestor with a real height, and a `flex: 1` box that forgets `min-height`
+   grows to fit its content instead of scrolling. */
+.code-editor[data-v-be8cf19a] {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--term-bg);
+}
