@@ -11,8 +11,8 @@ this site points there, landing directly on the sign-in screen.
 
 ## Layout
 
-- `index.html` + `_layouts/landing.html` — the landing page (hero desktop
-  preview, contribution calendar, FAQ). The vector desktop capture lives in
+- `index.html` + `_layouts/landing.html` — the landing page (interactive workspace
+  demo, contribution calendar, FAQ). The vector desktop capture lives in
   `images/desktop/session-workspace.svg`. It is exported from the actual Vue
   and xterm desktop renderer with sample session data. All shapes and text
   are vector paths; it contains no embedded images.
@@ -20,9 +20,22 @@ this site points there, landing directly on the sign-in screen.
   `/blog/<slug>/`). `reading_minutes` and the other front-matter fields
   drive the post layout and cards.
 - `_data/gh-history.json` — GitHub contribution snapshot for the calendar.
-- `style.css` — shared design tokens, typography, site shell, and landing styles.
+- `_includes/interactive-demo.html`, `demo.css`, `js/demo.js` — the frame and lazy
+  loader for the actual PocketShell desktop renderer.
+- `demo/assets/` — unchanged compiled Vue/xterm app assets copied from the built
+  sibling desktop app. `demo/adapter.js` replaces Electron IPC with in-memory
+  sessions, files and terminal responses. `renderer-manifest.json` records asset
+  SHA-256 hashes. `demo/preferences.js` seeds a compact 520×190 native prompt
+  composer; users can resize it normally. Each session has its own sample task
+  and terminal history. The preview supports opening the app in a full browser tab.
+- `style.css` — shared reference typography, charcoal/cyan tokens and page shell.
+- `landing-design.css`, `js/landing-design.js` — the supplied landing composition,
+  responsive navigation, a persistent hide/show sidebar toggle, section highlighting
+  and the fixed page status bar.
+  `docs/references/pocketshell-landing.dc.html` preserves the original design export.
   `blog.css` imports it and adds article and blog-index layouts.
-- `fonts/` — self-hosted Space Grotesk and IBM Plex Mono, with their licenses.
+- `fonts/` — self-hosted IBM Plex Sans and JetBrains Mono from the supplied design,
+  plus legacy font assets, with licenses. The embedded app retains its own fonts.
 - `docs/design-contract.md` — visual direction, design rules, and the original
   interface audit. Design-review screenshots belong in ignored `.tmp/design/`.
 - `app.md`, `login.md` — noindex meta-refresh pages so old
@@ -33,8 +46,18 @@ this site points there, landing directly on the sign-in screen.
     make install   # fetch the rustkyll binary into .bin/
     make serve     # dev server on http://localhost:4000
     make build     # production build into _site/
-    make check     # build and check SEO (requires Node.js)
+    make check     # build, check SEO and verify original demo assets (requires Node.js)
     make graph     # re-render the contribution calendar SVG
+    make demo      # copy the built desktop renderer into demo/
+
+Refresh the embedded app after building the sibling desktop app:
+
+    make demo
+
+This copies the original renderer assets without changing its components or CSS.
+Only the browser entry point loads the local IPC adapter before the app starts.
+The homepage embeds the app; the desktop layout can scroll within its frame on
+small screens, and the full-screen link opens it in a browser tab.
 
 Regenerate the desktop capture after building the sibling desktop app:
 
@@ -87,3 +110,10 @@ repo's Pages settings and in the `CNAME` file.
 > is defined in `template.yaml` (apex + www → GitHub Pages, `app` →
 > CloudFront via `domain.yaml`; `route53-site-records.json` holds the
 > hand-applied apex/www records).
+
+## Illustration assets
+
+Regenerate the product-themed blog, social, and feature illustrations with
+`uv run --script scripts/generate-editorial-images.py`.
+Article PNG and WebP variants retain their original paths and 1200×630 dimensions.
+The design and copy contracts live in `docs/`; rendered review evidence goes in `.tmp/`.

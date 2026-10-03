@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#0e1013;color:#e4e6ea;-webkit-font-smoothing:antialiased}
+a{color:#5fd0ea;text-decoration:none}
+a:hover{color:#9fe3f3}
+::selection{background:#36708a;color:#fff}
+input::placeholder,textarea::placeholder{color:#5d636d}
+@keyframes psblink{50%{opacity:0}}
+</style>
+</helmet>
+<div style="min-height:100vh;background:#0e1013;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#e4e6ea;padding-bottom:28px">
+
+<header style="position:sticky;top:0;z-index:20;height:56px;display:flex;align-items:stretch;background:#0b0d10;border-bottom:1px solid #23272e">
+  <a href="#overview" style="flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:0 22px;color:#f3f4f6;font-weight:600;font-size:17px;letter-spacing:-0.01em">
+    <span style="font-family:'JetBrains Mono',monospace;color:#5fd0ea;font-weight:700;font-size:16px">&gt;_</span>PocketShell
+  </a>
+  <sc-if value="{{ showTabs }}" hint-placeholder-val="{{ true }}">
+    <nav style="display:flex;align-items:stretch;margin-left:24px">
+      <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="5">
+        <a href="{{ t.href }}" style="display:flex;align-items:center;padding:0 18px;font-size:15px;color:{{ t.color }};font-weight:{{ t.weight }};box-shadow:inset 0 -2px 0 {{ t.bar }}" style-hover="color:#f3f4f6">{{ t.label }}</a>
+      </sc-for>
+    </nav>
+  </sc-if>
+  <div style="flex:1"></div>
+  <div style="display:flex;align-items:center;gap:10px;padding:0 18px">
+    <a href="https://app.pocketshell.io/" style="font-size:14px;color:#c9cdd3;padding:8px 12px" style-hover="color:#fff">Sign in</a>
+    <a href="https://app.pocketshell.io/" style="font-size:14px;font-weight:600;color:#0b0d10;background:#5fd0ea;padding:8px 14px;border-radius:6px;white-space:nowrap" style-hover="background:#8fe0f2;color:#0b0d10">Open PocketShell ↗</a>
+  </div>
+</header>
+
+<div style="display:flex;align-items:flex-start">
+  <sc-if value="{{ showSidebar }}" hint-placeholder-val="{{ true }}">
+    <aside style="flex:0 0 250px;position:sticky;top:56px;height:calc(100vh - 84px);overflow:auto;background:#15181d;border-right:1px solid #23272e;padding:18px 0 12px;box-sizing:border-box;display:flex;flex-direction:column">
+      <div style="display:flex;align-items:center;gap:10px;padding:6px 20px 10px;font-size:15px;color:#8a909a">
+        <span style="width:7px;height:7px;border-radius:50%;background:#5d636d"></span>
+        <span>~/<span style="color:#e4e6ea;font-weight:500">pocketshell</span></span><span style="font-size:13px">{{ navCount }}</span>
+      </div>
+      <sc-for list="{{ nav }}" as="n" hint-placeholder-count="9">
+        <a href="{{ n.href }}" style="display:flex;align-items:center;gap:12px;padding:9px 20px 9px 30px;font-size:15px;color:{{ n.color }};background:{{ n.bg }}" style-hover="background:#1c2027;color:#f3f4f6">
+          <span style="width:7px;height:7px;border-radius:50%;background:{{ n.dot }};flex:none"></span>
+          <span style="flex:1">{{ n.label }}</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#5d636d">{{ n.meta }}</span>
+        </a>
+      </sc-for>
+      <div style="display:flex;align-items:center;gap:10px;padding:22px 20px 10px;font-size:15px;color:#8a909a">
+        <span style="width:7px;height:7px;border-radius:50%;background:#5d636d"></span>
+        <span>~/<span style="color:#e4e6ea;font-weight:500">get</span></span><span style="font-size:13px">3</span>
+      </div>
+      <a href="https://github.com/PocketShell-io/pocketshell-desktop/releases/latest" style="display:flex;align-items:center;gap:12px;padding:9px 20px 9px 30px;font-size:15px;color:#c9cdd3" style-hover="background:#1c2027;color:#fff"><span style="width:7px;height:7px;border-radius:50%;background:#3a3f47"></span><span style="flex:1">desktop</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#5d636d">lin·mac·win</span></a>
+      <a href="https://github.com/PocketShell-io/pocketshell/releases/latest" style="display:flex;align-items:center;gap:12px;padding:9px 20px 9px 30px;font-size:15px;color:#c9cdd3" style-hover="background:#1c2027;color:#fff"><span style="width:7px;height:7px;border-radius:50%;background:#3a3f47"></span><span style="flex:1">android</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#5d636d">apk</span></a>
+      <a href="https://app.pocketshell.io/" style="display:flex;align-items:center;gap:12px;padding:9px 20px 9px 30px;font-size:15px;color:#c9cdd3" style-hover="background:#1c2027;color:#fff"><span style="width:7px;height:7px;border-radius:50%;background:#3a3f47"></span><span style="flex:1">web</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#5d636d">browser</span></a>
+      <div style="flex:1"></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:16px 20px 4px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#8a909a;border-top:1px solid #23272e">
+        <span style="width:7px;height:7px;border-radius:50%;background:#4cc76a"></span>free during alpha
+      </div>
+    </aside>
+  </sc-if>
+
+  <main style="flex:1;min-width:0;padding:0 clamp(20px,4vw,64px)">
+    <div style="max-width:1160px;margin:0 auto">
+
+      <section id="overview" data-screen-label="Hero" style="padding:clamp(56px,8vw,96px) 0 0;scroll-margin-top:56px">
+        <div style="display:flex;flex-direction:column;align-items:center;text-align:center">
+          <div style="display:inline-flex;align-items:center;gap:10px;padding:6px 14px;border:1px solid #2a2e35;border-radius:999px;background:#15181d;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#8a909a;margin-bottom:32px">
+            <span style="width:7px;height:7px;border-radius:50%;background:#4cc76a"></span><span style="color:#c9cdd3">RUNNING</span><span>·</span><span>agent-aware ssh</span>
+          </div>
+          <h1 style="margin:0;font-size:clamp(48px,7.6vw,112px);line-height:0.94;letter-spacing:-0.045em;font-weight:600;color:#f3f4f6">Your agents.<br><span style="color:#5fd0ea">Still running.</span></h1>
+          <p style="margin:32px 0 0;font-size:clamp(18px,1.6vw,21px);font-weight:600;color:#f3f4f6">Close the laptop. Keep the momentum.</p>
+          <p style="margin:10px 0 0;max-width:560px;font-size:17px;line-height:1.6;color:#a9aeb6;text-wrap:pretty">Connect to Claude Code, Codex, OpenCode, and Grok on your own machines. Pick up the same session from your desktop, browser, or phone.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:32px">
+            <a href="https://app.pocketshell.io/" style="font-size:16px;font-weight:600;color:#0b0d10;background:#5fd0ea;padding:14px 22px;border-radius:7px" style-hover="background:#8fe0f2;color:#0b0d10">Open PocketShell ↗</a>
+            <a href="#clients" style="font-size:16px;font-weight:500;color:#e4e6ea;padding:13px 22px;border-radius:7px;border:1px solid #33383f" style-hover="border-color:#5fd0ea;color:#fff">Get the apps</a>
+          </div>
+          <p style="margin:18px 0 0;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.7;color:#7a808a">Free during alpha · access is allowlisted · sign in with Google</p>
+        </div>
+
+        <div style="margin-top:72px;border:1px solid #2a2e35;border-radius:10px;overflow:hidden;background:#0e1013;box-shadow:0 40px 80px -30px rgba(0,0,0,0.7)">
+          <div style="display:flex;align-items:center;gap:10px;height:38px;padding:0 14px;background:#0b0d10;border-bottom:1px solid #1f2329;font-size:13px;color:#a9aeb6">
+            <span style="font-family:'JetBrains Mono',monospace;color:#5fd0ea;font-weight:700">&gt;_</span>
+            <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">devbox · demo@devbox.example — PocketShell</span>
+            <span style="flex:1"></span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#5d636d;white-space:nowrap">try it · sample data</span>
+          </div>
+          <div style="display:flex;min-height:480px">
+            <sc-if value="{{ mockWide }}" hint-placeholder-val="{{ true }}">
+              <div style="flex:0 0 240px;background:#15181d;border-right:1px solid #23272e;padding:12px 0">
+                <div style="display:flex;align-items:center;gap:9px;padding:6px 16px 8px;font-size:14px;color:#8a909a"><span style="width:6px;height:6px;border-radius:50%;background:#5d636d"></span><span>~/<span style="color:#e4e6ea">git</span></span><span style="font-size:12px">4</span></div>
+                <sc-for list="{{ sessions }}" as="s" hint-placeholder-count="4">
+                  <div onClick="{{ s.pick }}" style="display:flex;align-items:center;gap:10px;padding:9px 16px 9px 24px;font-size:14px;cursor:pointer;color:{{ s.color }};background:{{ s.bg }}" style-hover="background:#1c2027">
+                    <span style="width:6px;height:6px;border-radius:50%;background:#5d636d;flex:none"></span>
+                    <span>{{ s.name }}</span>
+                    <span style="color:#6b717b;font-size:13px">{{ s.glyph }}</span>
+                    <span style="flex:1"></span>
+                    <span style="font-size:12.5px;color:#6b717b">{{ s.time }}</span>
+                  </div>
+                </sc-for>
+                <div style="padding:18px 16px 0 24px;font-size:12.5px;line-height:1.5;color:#5d636d">Click a session to switch.<br>Send a prompt below.</div>
+              </div>
+            </sc-if>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+              <div style="display:flex;align-items:stretch;height:44px;border-bottom:1px solid #1f2329;background:#121418;overflow:hidden">
+                <sc-for list="{{ openTabs }}" as="t" hint-placeholder-count="2">
+                  <div style="display:flex;align-items:center;gap:10px;padding:0 16px;font-size:14px;color:{{ t.color }};font-weight:{{ t.weight }};box-shadow:inset 0 -2px 0 {{ t.bar }};white-space:nowrap">
+                    <span style="color:#6b717b">{{ t.glyph }}</span>
+                    <span onClick="{{ t.pick }}" style="cursor:pointer">{{ t.name }}</span>
+                    <span onClick="{{ t.close }}" style="color:#6b717b;cursor:pointer;padding:2px" style-hover="color:#fff">×</span>
+                  </div>
+                </sc-for>
+                <span style="display:flex;align-items:center;padding:0 14px;color:#6b717b;font-size:16px">+</span>
+              </div>
+              <div style="position:relative;flex:1;display:flex;flex-direction:column;min-height:0">
+                <div data-ps-out="1" style="flex:1;height:330px;overflow:auto;padding:14px 0 {{ transcriptPad }};font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.6">
+                  <sc-for list="{{ lines }}" as="ln" hint-placeholder-count="5">
+                    <div>
+                      <sc-if value="{{ ln.u }}">
+                        <div style="display:flex;gap:12px;background:#24272c;padding:12px 18px;margin:0 12px 16px;color:#e4e6ea"><span style="color:#8a909a">›</span><span>{{ ln.text }}</span></div>
+                      </sc-if>
+                      <sc-if value="{{ ln.b }}">
+                        <div style="display:flex;gap:12px;padding:0 30px;margin-bottom:4px;color:#c9cdd3"><span style="color:{{ ln.dot }};flex:none">•</span><span style="flex:1;min-width:0"><b style="color:#f3f4f6">{{ ln.verb }}</b> <span style="color:#79b8ff;white-space:nowrap">{{ ln.code }}</span> {{ ln.text }}</span></div>
+                      </sc-if>
+                      <sc-if value="{{ ln.s }}">
+                        <div style="padding:0 30px 0 52px;margin-bottom:12px;color:#7a808a">└ {{ ln.text }}</div>
+                      </sc-if>
+                    </div>
+                  </sc-for>
+                </div>
+                <form onSubmit="{{ send }}" style="position:{{ composerPos }};right:16px;bottom:14px;width:{{ composerW }};box-sizing:border-box;margin:{{ composerMargin }};background:#181b20;border:1px solid #2a2e35;border-radius:10px;box-shadow:0 20px 40px -12px rgba(0,0,0,0.6)">
+                  <div style="display:flex;align-items:center;padding:10px 14px;border-bottom:1px solid #23272e">
+                    <span style="font-size:12px;font-weight:700;letter-spacing:0.08em;color:#e4e6ea">PROMPT</span>
+                    <span style="margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#6b717b">{{ agentUpper }}</span>
+                    <span style="flex:1"></span><span style="color:#6b717b;font-size:13px">⌃</span><span style="color:#6b717b;font-size:13px;margin-left:14px">×</span>
+                  </div>
+                  <div style="padding:10px">
+                    <textarea value="{{ draft }}" onChange="{{ onDraft }}" onKeyDown="{{ onKey }}" placeholder="{{ composePh }}" rows="3" style="width:100%;box-sizing:border-box;resize:none;background:#0e1013;color:#e4e6ea;border:2px solid #5fd0ea;border-radius:8px;padding:10px 12px;font-family:'JetBrains Mono',monospace;font-size:13px;outline:none"></textarea>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:10px;padding:0 10px 10px 14px">
+                    <span style="flex:1;font-size:12px;color:#7a808a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Enter send · nothing leaves this page</span>
+                    <button type="submit" style="background:#36708a;color:#0b0d10;border:0;border-radius:6px;padding:7px 16px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer" style-hover="background:#4a8aa5">Send</button>
+                  </div>
+                </form>
+              </div>
+              <div style="padding:8px 20px;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#e5b07a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-top:1px solid #1a1d22">{{ modelLine }} · <span style="color:#7fd18b">{{ path }}</span></div>
+              <div style="display:flex;gap:18px;padding:4px 14px;background:#c9ccd1;color:#0e1013;font-family:'JetBrains Mono',monospace;font-size:12.5px;white-space:nowrap;overflow:hidden">
+                <span>{{ path }}</span><span>⎇ main</span><span>● RUNNING</span><span>{{ agentLower }}</span><span style="flex:1"></span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis">{{ tabLine }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:28px 32px;margin-top:48px;font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.6">
+          <div><div style="display:flex;gap:10px"><span style="color:#4cc76a">•</span><b style="color:#f3f4f6">Encrypted host sync</b></div><div style="color:#8a909a;padding-left:20px">└ AES-256-GCM. Your passphrase stays on your device.</div></div>
+          <div><div style="display:flex;gap:10px"><span style="color:#4cc76a">•</span><b style="color:#f3f4f6">Agent-aware sessions</b></div><div style="color:#8a909a;padding-left:20px">└ Claude Code, Codex, OpenCode, Grok. Pick up where they left off.</div></div>
+          <div><div style="display:flex;gap:10px"><span style="color:#4cc76a">•</span><b style="color:#f3f4f6">A real terminal</b></div><div style="color:#8a909a;padding-left:20px">└ Full xterm.js — scrollback, copy and paste, resize.</div></div>
+          <div><div style="display:flex;gap:10px"><span style="color:#4cc76a">•</span><b style="color:#f3f4f6">Desktop to pocket</b></div><div style="color:#8a909a;padding-left:20px">└ Desktop, web, Android. Same hosts, same sessions.</div></div>
+        </div>
+      </section>
+
+      <section id="how" data-screen-label="How it works" style="padding-top:128px;scroll-margin-top:56px">
+        <div style="display:flex;gap:14px;background:#24272c;padding:15px 22px;margin-bottom:44px;font-family:'JetBrains Mono',monospace;font-size:15px"><span style="color:#8a909a">›</span><span>how does it work?</span></div>
+        <h2 style="margin:0 0 48px;font-size:clamp(34px,4.4vw,52px);line-height:1.05;letter-spacing:-0.03em;font-weight:600;color:#f3f4f6">From your machine<br>to any screen.</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:#23272e;border:1px solid #23272e;border-radius:10px;overflow:hidden">
+          <div style="background:#121418;padding:28px 28px 30px;display:flex;flex-direction:column;gap:14px">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#5fd0ea">01 · on your host</span>
+            <h3 style="margin:0;font-size:22px;font-weight:600;letter-spacing:-0.01em;color:#f3f4f6">Install the CLI.</h3>
+            <p style="margin:0;font-size:15.5px;line-height:1.6;color:#a9aeb6;text-wrap:pretty">Install the PocketShell CLI on each machine you want to reach. Its aplexer session layer keeps agent sessions running there.</p>
+            <code style="margin-top:auto;font-family:'JetBrains Mono',monospace;font-size:13px;color:#c9cdd3;background:#0b0d10;border:1px solid #23272e;border-radius:6px;padding:9px 12px"><span style="color:#5d636d">$</span> a ls</code>
+          </div>
+          <div style="background:#121418;padding:28px 28px 30px;display:flex;flex-direction:column;gap:14px">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#5fd0ea">02 · in any client</span>
+            <h3 style="margin:0;font-size:22px;font-weight:600;letter-spacing:-0.01em;color:#f3f4f6">Connect with PocketShell.</h3>
+            <p style="margin:0;font-size:15.5px;line-height:1.6;color:#a9aeb6;text-wrap:pretty">Add your SSH host in the desktop, web, or Android app. The same Google account and sync passphrase keep your host list in sync.</p>
+            <code style="margin-top:auto;font-family:'JetBrains Mono',monospace;font-size:13px;color:#c9cdd3;background:#0b0d10;border:1px solid #23272e;border-radius:6px;padding:9px 12px"><span style="color:#5d636d">+</span> deploy@203.0.113.10:22</code>
+          </div>
+          <div style="background:#121418;padding:28px 28px 30px;display:flex;flex-direction:column;gap:14px">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#5fd0ea">03 · anywhere</span>
+            <h3 style="margin:0;font-size:22px;font-weight:600;letter-spacing:-0.01em;color:#f3f4f6">Drop in on a session.</h3>
+            <p style="margin:0;font-size:15.5px;line-height:1.6;color:#a9aeb6;text-wrap:pretty">Attach to a running session from another device. Closing a client leaves the agent working on your host.</p>
+            <code style="margin-top:auto;font-family:'JetBrains Mono',monospace;font-size:13px;color:#c9cdd3;background:#0b0d10;border:1px solid #23272e;border-radius:6px;padding:9px 12px"><span style="color:#5d636d">$</span> a attach api-fix</code>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" data-screen-label="Features" style="padding-top:128px;scroll-margin-top:56px">
+        <div style="display:flex;gap:14px;background:#24272c;padding:15px 22px;margin-bottom:44px;font-family:'JetBrains Mono',monospace;font-size:15px"><span style="color:#8a909a">›</span><span>what happens when I switch devices?</span></div>
+        <h2 style="margin:0 0 48px;font-size:clamp(34px,4.4vw,52px);line-height:1.05;letter-spacing:-0.03em;font-weight:600;color:#f3f4f6">Your work<br>goes with you.</h2>
+        <div style="display:flex;flex-direction:column;gap:88px">
+
+          <div style="display:flex;flex-wrap:wrap;gap:40px 64px;align-items:center">
+            <div style="flex:1 1 320px;display:flex;flex-direction:column;gap:16px">
+              <h3 style="margin:0;font-size:28px;font-weight:600;letter-spacing:-0.02em;color:#f3f4f6">Your hosts, already there.</h3>
+              <p style="margin:0;font-size:16.5px;line-height:1.65;color:#a9aeb6;text-wrap:pretty">Hosts saved in the desktop app appear on the web automatically — no re-entering addresses, users, and ports. The blob is encrypted in your browser before it leaves; the server stores ciphertext it can’t read.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#a9aeb6">
+                <span style="border:1px solid #33383f;border-radius:4px;padding:3px 8px">zero-knowledge sync</span><span style="border:1px solid #33383f;border-radius:4px;padding:3px 8px">AES-256-GCM</span><span style="border:1px solid #33383f;border-radius:4px;padding:3px 8px">passphrase stays local</span>
+              </div>
+              <a href="https://pocketshell.io/blog/ssh-config-file/" style="font-family:'JetBrains Mono',monospace;font-size:13.5px">→ Keep ~/.ssh/config tidy across machines</a>
+            </div>
+            <div style="flex:1 1 420px;background:#15181d;border:1px solid #2a2e35;border-radius:10px;overflow:hidden">
+              <div style="display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid #23272e"><span style="font-size:12px;font-weight:700;letter-spacing:0.08em">HOSTS</span><span style="flex:1"></span><span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#4cc76a">● synced · encrypted</span></div>
+              <div style="display:flex;align-items:center;gap:12px;padding:11px 16px;font-size:14.5px;background:#1c2027"><span style="width:6px;height:6px;border-radius:50%;background:#4cc76a;flex:none"></span><span style="color:#f3f4f6;min-width:80px">edge-1</span><span style="flex:1;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#7a808a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">deploy@203.0.113.10:22</span><span style="font-size:12.5px;font-weight:600;color:#0b0d10;background:#36708a;border-radius:5px;padding:3px 10px">Connect</span></div>
+              <div style="display:flex;align-items:center;gap:12px;padding:11px 16px;font-size:14.5px"><span style="width:6px;height:6px;border-radius:50%;background:#4cc76a;flex:none"></span><span style="color:#e4e6ea;min-width:80px">db-prod</span><span style="flex:1;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#7a808a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">admin@db.internal:22</span><span style="font-size:12.5px;color:#a9aeb6;border:1px solid #33383f;border-radius:5px;padding:2px 9px">Connect</span></div>
+              <div style="display:flex;align-items:center;gap:12px;padding:11px 16px;font-size:14.5px"><span style="width:6px;height:6px;border-radius:50%;background:#5d636d;flex:none"></span><span style="color:#e4e6ea;min-width:80px">ci-runner</span><span style="flex:1;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#7a808a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">root@10.0.4.17:2222</span><span style="font-size:12.5px;color:#a9aeb6;border:1px solid #33383f;border-radius:5px;padding:2px 9px">Connect</span></div>
+              <div style="padding:12px 16px;border-top:1px solid #23272e;font-family:'JetBrains Mono',monospace;font-size:12px;color:#7a808a">└ sync server sees <span style="color:#a9aeb6">7f3a9e…c91e</span> · ciphertext only</div>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-wrap:wrap-reverse;gap:40px 64px;align-items:center">
+            <div style="flex:1 1 420px;background:#0b0d10;border:1px solid #2a2e35;border-radius:10px;overflow:hidden;font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.7">
+              <div style="display:flex;align-items:stretch;height:40px;background:#121418;border-bottom:1px solid #1f2329;font-family:'IBM Plex Sans',sans-serif;font-size:13.5px">
+                <span style="display:flex;align-items:center;padding:0 16px;color:#f3f4f6;font-weight:600;box-shadow:inset 0 -2px 0 #5fd0ea;white-space:nowrap">◎ api-fix</span>
+                <span style="display:flex;align-items:center;padding:0 16px;color:#8a909a">edge-1</span>
+              </div>
+              <div style="padding:18px 22px 20px">
+                <div style="color:#5d636d;padding-bottom:10px">— laptop closed 09:12 · phone attached 09:41 —</div>
+                <div><span style="color:#5d636d">$</span> <span style="color:#e4e6ea">a attach api-fix</span></div>
+                <div style="color:#c9cdd3"><span style="color:#4cc76a">●</span> codex — working <span style="color:#7a808a">(6m)</span></div>
+                <div style="color:#7fd18b;padding-left:18px">✓ auth middleware tested</div>
+                <div style="color:#c9cdd3;padding-left:18px"><span style="color:#5fd0ea">→</span> editing <span style="color:#79b8ff">src/api/handlers.ts</span></div>
+                <div><span style="color:#5d636d">$</span> <span style="display:inline-block;width:8px;height:15px;background:#e4e6ea;vertical-align:-2px;animation:psblink 1s steps(1) infinite"></span></div>
+              </div>
+            </div>
+            <div style="flex:1 1 320px;display:flex;flex-direction:column;gap:16px">
+              <h3 style="margin:0;font-size:28px;font-weight:600;letter-spacing:-0.02em;color:#f3f4f6">Sessions that outlive the tab.</h3>
+              <p style="margin:0;font-size:16.5px;line-height:1.65;color:#a9aeb6;text-wrap:pretty">Sessions live on your machine, managed by aplexer — the session layer that knows which agent runs in each one. Close the laptop mid-refactor, attach again from anywhere, and the screen is exactly where the agent left it.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#a9aeb6">
+                <span style="border:1px solid #33383f;border-radius:4px;padding:3px 8px">full scrollback</span><span style="border:1px solid #33383f;border-radius:4px;padding:3px 8px">reattach anywhere</span><span style="border:1px solid #33383f;border-radius:4px;padding:3px 8px">survives disconnects</span>
+              </div>
+              <a href="https://pocketshell.io/blog/ssh-ai-agents-remote-machines/" style="font-family:'JetBrains Mono',monospace;font-size:13.5px">→ Run AI agents on a remote machine over SSH</a>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-wrap:wrap;gap:40px 64px;align-items:center">
+            <div style="flex:1 1 320px;display:flex;flex-direction:column;gap:16px">
+              <h3 style="margin:0;font-size:28px;font-weight:600;letter-spacing:-0.02em;color:#f3f4f6">Works where clients can’t.</h3>
+              <p style="margin:0;font-size:16.5px;line-height:1.65;color:#a9aeb6;text-wrap:pretty">A tablet, a Chromebook, a locked-down work laptop — if it has a browser, it’s your terminal. A key you attach stays encrypted in that browser and travels once, over authenticated WSS, when you connect.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#a9aeb6">
+                <span style="border:1px solid #33383f;border-radius:4px;padding:3px 8px">keys never sync</span><span style="border:1px solid #33383f;border-radius:4px;padding:3px 8px">nothing to install</span><span style="border:1px solid #33383f;border-radius:4px;padding:3px 8px">any modern browser</span>
+              </div>
+              <a href="https://pocketshell.io/blog/ssh-authorized-keys-hardening/" style="font-family:'JetBrains Mono',monospace;font-size:13.5px">→ One key per device: SSH keys, hardened</a>
+            </div>
+            <div style="flex:1 1 420px;background:#15181d;border:1px solid #2a2e35;border-radius:10px;overflow:hidden">
+              <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid #23272e">
+                <span style="display:flex;gap:6px"><span style="width:9px;height:9px;border-radius:50%;background:#33383f"></span><span style="width:9px;height:9px;border-radius:50%;background:#33383f"></span><span style="width:9px;height:9px;border-radius:50%;background:#33383f"></span></span>
+                <span style="flex:1;background:#0e1013;border-radius:6px;padding:5px 12px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#8a909a;overflow:hidden;white-space:nowrap">app.pocketshell.io / edge-1</span>
+              </div>
+              <div style="background:#0b0d10;padding:18px 20px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.75;overflow:hidden">
+                <div style="color:#7a808a">connected via bridge · key used in memory, not stored</div>
+                <div style="white-space:nowrap"><span style="color:#7fd18b">deploy@edge-1</span><span style="color:#8a909a">:</span><span style="color:#79b8ff">~/relay</span><span style="color:#8a909a">$</span> <span style="color:#e4e6ea">git log --oneline -3</span></div>
+                <div style="color:#c9cdd3;white-space:nowrap"><span style="color:#e5b07a">a91c2e0</span> fix: back off reconnects to 30s</div>
+                <div style="color:#c9cdd3;white-space:nowrap"><span style="color:#e5b07a">4be0d17</span> test: auth ack ordering</div>
+                <div style="color:#c9cdd3;white-space:nowrap"><span style="color:#e5b07a">0f3a8c2</span> chore: bump ws to 8.18</div>
+                <div style="white-space:nowrap"><span style="color:#7fd18b">deploy@edge-1</span><span style="color:#8a909a">:</span><span style="color:#79b8ff">~/relay</span><span style="color:#8a909a">$</span> <span style="display:inline-block;width:8px;height:15px;background:#e4e6ea;vertical-align:-2px;animation:psblink 1s steps(1) infinite"></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="clients" data-screen-label="Clients" style="padding-top:128px;scroll-margin-top:56px">
+        <div style="display:flex;gap:14px;background:#24272c;padding:15px 22px;margin-bottom:44px;font-family:'JetBrains Mono',monospace;font-size:15px"><span style="color:#8a909a">›</span><span>which client should I use?</span></div>
+        <h2 style="margin:0 0 14px;font-size:clamp(34px,4.4vw,52px);line-height:1.05;letter-spacing:-0.03em;font-weight:600;color:#f3f4f6">Choose your way in.</h2>
+        <p style="margin:0 0 44px;font-size:17px;line-height:1.6;color:#a9aeb6">Desktop for the full workspace. Android for checking in. Web for a terminal in a tab.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:20px">
+          <div style="background:#181b20;border:1px solid #2a2e35;border-radius:10px;display:flex;flex-direction:column">
+            <div style="display:flex;align-items:center;padding:12px 18px;border-bottom:1px solid #23272e"><span style="font-size:12px;font-weight:700;letter-spacing:0.08em">DESKTOP</span><span style="flex:1"></span><span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#7a808a">linux · mac · win</span></div>
+            <div style="padding:18px 18px 6px;font-size:18px;font-weight:600;color:#f3f4f6">The keyboard-first home base.</div>
+            <p style="margin:0;padding:0 18px 18px;flex:1;font-size:15.5px;line-height:1.6;color:#a9aeb6;text-wrap:pretty">A session tree with an agent badge on every session, a prompt composer, file browser, port forwards, and provider quota. Hosts come straight from <code style="font-family:'JetBrains Mono',monospace;font-size:13.5px;color:#e4e6ea">~/.ssh/config</code>.</p>
+            <div style="display:flex;justify-content:flex-end;padding:0 14px 14px"><a href="https://github.com/PocketShell-io/pocketshell-desktop/releases/latest" style="color:#e4e6ea;border:1px solid #33383f;border-radius:6px;padding:8px 16px;font-size:14px;font-weight:500" style-hover="border-color:#5fd0ea;color:#fff">Download desktop</a></div>
+          </div>
+          <div style="background:#181b20;border:1px solid #2a2e35;border-radius:10px;display:flex;flex-direction:column">
+            <div style="display:flex;align-items:center;padding:12px 18px;border-bottom:1px solid #23272e"><span style="font-size:12px;font-weight:700;letter-spacing:0.08em">ANDROID</span><span style="flex:1"></span><span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#7a808a">apk</span></div>
+            <div style="padding:18px 18px 6px;font-size:18px;font-weight:600;color:#f3f4f6">Voice-first.</div>
+            <p style="margin:0;padding:0 18px 18px;flex:1;font-size:15.5px;line-height:1.6;color:#a9aeb6;text-wrap:pretty">Check on your agents from your phone, dictate prompts and commands, and unlock key passphrases biometrically. The session keeps running on your own hardware.</p>
+            <div style="display:flex;justify-content:flex-end;padding:0 14px 14px"><a href="https://github.com/PocketShell-io/pocketshell/releases/latest" style="color:#e4e6ea;border:1px solid #33383f;border-radius:6px;padding:8px 16px;font-size:14px;font-weight:500" style-hover="border-color:#5fd0ea;color:#fff">Download the APK</a></div>
+          </div>
+          <div style="background:#181b20;border:1px solid #2a2e35;border-radius:10px;display:flex;flex-direction:column">
+            <div style="display:flex;align-items:center;padding:12px 18px;border-bottom:1px solid #23272e"><span style="font-size:12px;font-weight:700;letter-spacing:0.08em">WEB</span><span style="flex:1"></span><span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#7a808a">any modern browser</span></div>
+            <div style="padding:18px 18px 6px;font-size:18px;font-weight:600;color:#f3f4f6">The same PocketShell in a tab.</div>
+            <p style="margin:0;padding:0 18px 18px;flex:1;font-size:15.5px;line-height:1.6;color:#a9aeb6;text-wrap:pretty">A real terminal to any synced host — for tablets, Chromebooks, and locked-down machines where you can’t install anything.</p>
+            <div style="display:flex;justify-content:flex-end;padding:0 14px 14px"><a href="https://app.pocketshell.io/" style="color:#e4e6ea;border:1px solid #33383f;border-radius:6px;padding:8px 16px;font-size:14px;font-weight:500" style-hover="border-color:#5fd0ea;color:#fff">Sign in on the web</a></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="security" data-screen-label="Security" style="padding-top:128px;scroll-margin-top:56px">
+        <div style="display:flex;gap:14px;background:#24272c;padding:15px 22px;margin-bottom:44px;font-family:'JetBrains Mono',monospace;font-size:15px"><span style="color:#8a909a">›</span><span>who can read my host list?</span></div>
+        <div style="display:flex;flex-wrap:wrap;gap:48px 72px">
+          <div style="flex:1 1 320px;display:flex;flex-direction:column;gap:20px;align-items:flex-start">
+            <h2 style="margin:0;font-size:clamp(32px,3.8vw,48px);line-height:1.05;letter-spacing:-0.03em;font-weight:600;color:#f3f4f6">Your infrastructure.<br><span style="color:#5fd0ea">Your business.</span></h2>
+            <p style="margin:0;font-size:17px;line-height:1.6;color:#a9aeb6;text-wrap:pretty">Your host list is encrypted on your device. Here’s what happens before it reaches the sync server.</p>
+            <a href="#faq" style="font-size:15px;font-weight:500;color:#e4e6ea;padding:11px 18px;border-radius:7px;border:1px solid #33383f" style-hover="border-color:#5fd0ea;color:#fff">Read the security FAQ</a>
+          </div>
+          <div style="flex:1.4 1 440px;display:flex;flex-direction:column">
+            <div style="display:grid;grid-template-columns:44px 1fr;gap:0 18px;padding-bottom:28px">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:14px;color:#5fd0ea;padding-top:3px">01</span>
+              <div><h3 style="margin:0 0 6px;font-size:19px;font-weight:600;color:#f3f4f6">Start with your passphrase.</h3><p style="margin:0;font-size:15.5px;line-height:1.6;color:#a9aeb6">PBKDF2-SHA256 derives an encryption key with 600,000 iterations. Your passphrase stays on your device, so there is no server-side reset.</p></div>
+            </div>
+            <div style="display:grid;grid-template-columns:44px 1fr;gap:0 18px;padding:28px 0;border-top:1px solid #23272e">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:14px;color:#5fd0ea;padding-top:3px">02</span>
+              <div><h3 style="margin:0 0 6px;font-size:19px;font-weight:600;color:#f3f4f6">Encrypt before it leaves.</h3><p style="margin:0;font-size:15.5px;line-height:1.6;color:#a9aeb6">AES-256-GCM encrypts your host list locally. Readable addresses, users, and ports never reach the sync server.</p></div>
+            </div>
+            <div style="display:grid;grid-template-columns:44px 1fr;gap:0 18px;padding:28px 0;border-top:1px solid #23272e">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:14px;color:#5fd0ea;padding-top:3px">03</span>
+              <div><h3 style="margin:0 0 6px;font-size:19px;font-weight:600;color:#f3f4f6">Sync only ciphertext.</h3><p style="margin:0;font-size:15.5px;line-height:1.6;color:#a9aeb6">The server stores the encrypted blob. Your other devices decrypt it with your passphrase; the server cannot.</p></div>
+            </div>
+            <div style="background:#181b20;border:1px solid #2a2e35;border-radius:10px;margin-top:8px">
+              <div style="padding:12px 18px;border-bottom:1px solid #23272e;font-size:12px;font-weight:700;letter-spacing:0.08em">PRIVATE KEYS TAKE A DIFFERENT PATH</div>
+              <p style="margin:0;padding:16px 18px;font-size:15px;line-height:1.6;color:#a9aeb6">They never sync. Each key is encrypted in your browser with your passphrase. On connection it travels over authenticated WSS to the PocketShell bridge, which uses it in memory and neither stores nor logs it.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="opensource" data-screen-label="Open source" style="padding-top:128px;scroll-margin-top:56px">
+        <div style="display:flex;gap:14px;background:#24272c;padding:15px 22px;margin-bottom:44px;font-family:'JetBrains Mono',monospace;font-size:15px"><span style="color:#8a909a">›</span><span>is it open source?</span></div>
+        <div style="display:flex;flex-wrap:wrap;gap:24px 64px;align-items:flex-end;justify-content:space-between;margin-bottom:32px">
+          <div style="flex:1 1 420px;display:flex;flex-direction:column;gap:16px">
+            <h2 style="margin:0;font-size:clamp(34px,4.4vw,52px);line-height:1.05;letter-spacing:-0.03em;font-weight:600;color:#f3f4f6">Built in the open.</h2>
+            <p style="margin:0;font-size:17px;line-height:1.6;color:#a9aeb6;max-width:560px;text-wrap:pretty"><a href="https://github.com/PocketShell-io">PocketShell is open source.</a> The graph is <a href="https://github.com/alexeygrigorev">Alexey Grigorev’s</a> public GitHub activity over the last 12 months.</p>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;text-align:right">
+            <div style="font-size:clamp(32px,4vw,44px);font-weight:500;color:#f3f4f6;letter-spacing:-0.02em">30,381</div>
+            <div style="font-size:12.5px;color:#7a808a">contributions in the last year</div>
+          </div>
+        </div>
+        <div style="background:#121418;border:1px solid #23272e;border-radius:10px;padding:22px;overflow-x:auto">
+          <div style="min-width:680px;display:grid;grid-template-rows:repeat(7,1fr);grid-auto-flow:column;grid-auto-columns:1fr;gap:3px">
+            <sc-for list="{{ cells }}" as="c" hint-placeholder-count="1">
+              <div title="{{ c.title }}" style="aspect-ratio:1;border-radius:2px;background:{{ c.bg }}"></div>
+            </sc-for>
+          </div>
+          <div style="display:flex;align-items:center;gap:4px;justify-content:flex-end;margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#7a808a">
+            <span style="margin-right:6px">Sep 2025 → Sep 2026</span><span style="flex:1"></span>less<span style="width:10px;height:10px;border-radius:2px;background:#1a1d22"></span><span style="width:10px;height:10px;border-radius:2px;background:#163542"></span><span style="width:10px;height:10px;border-radius:2px;background:#1d5c73"></span><span style="width:10px;height:10px;border-radius:2px;background:#3197b8"></span><span style="width:10px;height:10px;border-radius:2px;background:#5fd0ea"></span>more
+          </div>
+        </div>
+      </section>
+
+      <section id="blog" data-screen-label="Blog" style="padding-top:128px;scroll-margin-top:56px">
+        <div style="display:flex;gap:14px;background:#24272c;padding:15px 22px;margin-bottom:44px;font-family:'JetBrains Mono',monospace;font-size:15px"><span style="color:#8a909a">›</span><span>anything worth reading?</span></div>
+        <div style="display:flex;flex-wrap:wrap;gap:20px 48px;align-items:flex-end;justify-content:space-between;margin-bottom:28px">
+          <div style="display:flex;flex-direction:column;gap:14px;flex:1 1 420px">
+            <h2 style="margin:0;font-size:clamp(34px,4.4vw,52px);line-height:1.05;letter-spacing:-0.03em;font-weight:600;color:#f3f4f6">Notes from the terminal.</h2>
+            <p style="margin:0;font-size:17px;line-height:1.6;color:#a9aeb6;max-width:560px">Practical notes on SSH, remote machines, and running AI agents on them.</p>
+          </div>
+          <a href="https://pocketshell.io/blog/" style="font-family:'JetBrains Mono',monospace;font-size:13.5px">All posts →</a>
+        </div>
+        <div style="border-top:1px solid #23272e">
+          <sc-for list="{{ posts }}" as="p" hint-placeholder-count="4">
+            <a href="{{ p.href }}" style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:6px 18px;align-items:baseline;padding:22px 16px;border-bottom:1px solid #23272e;color:#e4e6ea" style-hover="background:#15181d;color:#fff">
+              <span style="width:7px;height:7px;border-radius:50%;background:#5d636d;align-self:center"></span>
+              <span style="font-size:18px;font-weight:500;letter-spacing:-0.01em">{{ p.title }}</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#7a808a;white-space:nowrap">{{ p.meta }}</span>
+              <span></span>
+              <span style="font-size:15px;line-height:1.55;color:#8a909a;text-wrap:pretty">{{ p.desc }}</span>
+            </a>
+          </sc-for>
+        </div>
+      </section>
+
+      <section id="faq" data-screen-label="FAQ" style="padding-top:128px;scroll-margin-top:56px">
+        <div style="display:flex;gap:14px;background:#24272c;padding:15px 22px;margin-bottom:44px;font-family:'JetBrains Mono',monospace;font-size:15px"><span style="color:#8a909a">›</span><span>anything I should know before I connect?</span></div>
+        <h2 style="margin:0 0 48px;font-size:clamp(34px,4.4vw,52px);line-height:1.05;letter-spacing:-0.03em;font-weight:600;color:#f3f4f6">Before you connect.</h2>
+        <div style="border-top:1px solid #23272e">
+          <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="8">
+            <div style="border-bottom:1px solid #23272e">
+              <div onClick="{{ f.toggle }}" style="display:flex;align-items:center;gap:16px;padding:20px 16px;cursor:pointer;font-size:18px;font-weight:500;color:{{ f.color }}" style-hover="background:#15181d">
+                <span style="font-family:'JetBrains Mono',monospace;color:#5fd0ea;width:14px;display:inline-block;text-align:center;transition:transform .15s;transform:{{ f.rot }}">›</span><span style="flex:1">{{ f.q }}</span>
+              </div>
+              <sc-if value="{{ f.open }}">
+                <p style="margin:0;padding:0 16px 24px 46px;max-width:760px;font-size:16px;line-height:1.65;color:#a9aeb6;text-wrap:pretty">{{ f.a }}</p>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+      <section id="start" data-screen-label="CTA" style="padding:128px 0 96px;scroll-margin-top:56px">
+        <div style="display:flex;flex-wrap:wrap;gap:48px 72px;align-items:center">
+          <div style="flex:1 1 420px;display:flex;flex-direction:column;gap:22px;align-items:flex-start">
+            <h2 style="margin:0;font-size:clamp(44px,6vw,80px);line-height:0.96;letter-spacing:-0.04em;font-weight:600;color:#f3f4f6">Step away.<br><span style="color:#5fd0ea">Stay connected.</span></h2>
+            <p style="margin:0;font-size:17px;line-height:1.6;color:#a9aeb6;max-width:480px;text-wrap:pretty">Check on your agents from your desktop, your phone, or any browser tab — same hosts, same account, same running sessions.</p>
+            <a href="https://app.pocketshell.io/" style="font-size:16px;font-weight:600;color:#0b0d10;background:#5fd0ea;padding:14px 22px;border-radius:7px" style-hover="background:#8fe0f2;color:#0b0d10">Open PocketShell ↗</a>
+          </div>
+          <form onSubmit="{{ subscribe }}" style="flex:1 1 380px;background:#181b20;border:1px solid #2a2e35;border-radius:10px;box-shadow:0 30px 60px -20px rgba(0,0,0,0.6)">
+            <div style="display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid #23272e">
+              <span style="font-size:12px;font-weight:700;letter-spacing:0.08em">GET THE LAUNCH EMAIL</span>
+            </div>
+            <sc-if value="{{ notSubscribed }}" hint-placeholder-val="{{ true }}">
+              <div style="padding:14px">
+                <input type="email" value="{{ email }}" onChange="{{ onEmail }}" placeholder="you@example.com" style="width:100%;box-sizing:border-box;background:#0e1013;color:#e4e6ea;border:2px solid #5fd0ea;border-radius:8px;padding:14px;font-family:'JetBrains Mono',monospace;font-size:14px;outline:none">
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;padding:0 14px 14px 16px">
+                <span style="flex:1;font-size:12.5px;line-height:1.5;color:#7a808a">Launch updates only. Confirmation from hello@pocketshell.io. Doesn’t grant alpha access.</span>
+                <button type="submit" style="background:#36708a;color:#0b0d10;border:0;border-radius:6px;padding:9px 18px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer" style-hover="background:#4a8aa5">Subscribe</button>
+              </div>
+            </sc-if>
+            <sc-if value="{{ subscribed }}">
+              <div style="padding:20px 18px 22px;font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.7">
+                <div style="display:flex;gap:12px;color:#c9cdd3"><span style="color:#4cc76a">•</span><span><b style="color:#f3f4f6">Sent</b> confirmation to <span style="color:#79b8ff">{{ email }}</span></span></div>
+                <div style="padding-left:22px;color:#7a808a">└ check your inbox to finish subscribing</div>
+              </div>
+            </sc-if>
+          </form>
+        </div>
+      </section>
+    </div>
+
+    <footer style="max-width:1160px;margin:0 auto;border-top:1px solid #23272e;padding:28px 0 40px;display:flex;flex-wrap:wrap;gap:16px 40px;align-items:baseline">
+      <span style="display:flex;gap:8px;align-items:baseline;font-weight:600"><span style="font-family:'JetBrains Mono',monospace;color:#5fd0ea">&gt;_</span>PocketShell</span>
+      <span style="flex:1 1 280px;font-size:14px;color:#7a808a">Built by Alexey Grigorev — a developer who wanted his servers from a tablet.</span>
+      <nav style="display:flex;flex-wrap:wrap;gap:8px 20px;font-size:14px">
+        <a href="https://pocketshell.io/privacy/" style="color:#a9aeb6" style-hover="color:#fff">Privacy</a>
+        <a href="https://pocketshell.io/terms/" style="color:#a9aeb6" style-hover="color:#fff">Terms</a>
+        <a href="https://github.com/PocketShell-io" style="color:#a9aeb6" style-hover="color:#fff">GitHub</a>
+        <a href="https://pocketshell.io/blog/" style="color:#a9aeb6" style-hover="color:#fff">Blog</a>
+        <a href="https://app.pocketshell.io/" style="color:#a9aeb6" style-hover="color:#fff">Sign in</a>
+      </nav>
+    </footer>
+  </main>
+</div>
+
+<sc-if value="{{ showStatus }}" hint-placeholder-val="{{ true }}">
+  <div style="position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;gap:20px;align-items:center;height:28px;padding:0 16px;background:#c9ccd1;color:#0e1013;font-family:'JetBrains Mono',monospace;font-size:12.5px;white-space:nowrap;overflow:hidden">
+    <span>~/pocketshell.io:{{ section }}</span><span>⎇ main</span><span>● ALPHA</span><span style="flex:1"></span><span style="overflow:hidden;text-overflow:ellipsis">{{ statusTabs }}</span>
+  </div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showSidebar&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;showStatusBar&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;}}">
+const COUNTS="2,6,8,4,15,27,18,20,28,0,11,8,19,15,10,9,4,25,21,13,14,2,9,0,12,9,11,21,8,3,0,7,5,2,5,1,3,0,14,7,1,5,1,3,3,7,6,2,9,14,2,0,4,5,3,4,1,5,3,8,6,2,6,0,1,1,8,5,0,3,1,10,15,9,8,12,4,1,9,10,7,5,6,4,5,3,3,11,8,12,21,7,1,1,3,9,6,26,4,2,0,5,2,2,0,0,4,28,6,42,9,45,49,9,4,19,12,11,5,5,29,11,7,13,2,3,22,25,2,17,14,14,38,26,22,0,17,33,37,17,16,9,6,36,15,34,13,34,21,8,13,15,23,50,27,30,6,23,13,45,43,73,21,6,43,62,84,40,25,28,5,21,6,38,127,61,27,12,17,19,8,20,45,123,133,176,90,110,72,71,86,1,38,49,57,58,58,163,98,52,21,19,54,90,150,135,169,54,186,258,173,32,69,42,61,31,41,83,132,82,42,52,61,69,57,132,98,35,54,73,176,42,28,40,56,84,230,426,283,111,12,58,97,97,79,44,55,22,23,119,184,245,30,81,328,91,22,235,105,167,173,153,312,27,135,142,65,163,169,208,35,214,222,215,159,119,216,151,144,260,92,147,64,34,62,154,172,186,284,299,187,449,762,455,259,204,145,135,84,185,280,169,92,93,133,170,119,144,72,49,59,16,60,212,53,76,73,36,32,87,69,100,77,84,62,85,102,66,90,247,115,132,122,212,215,467,117,81,131,67,90,58,233,57,128,237,366,139,330,276,116,254,384,120,99,321,428,233,534,354,520,1414,404,415,197,196".split(',').map(Number);
+
+const U=t=>({u:true,text:t}), B=(verb,code,text,dot)=>({b:true,verb,code:code||'',text:text||'',dot:dot||'#8a909a'}), S=t=>({s:true,text:t});
+const SESSIONS=[
+  {id:'pocketshell-site',glyph:'◎',agent:'Codex',model:'GPT-5 Codex medium · Context 62% left',time:'now',lines:[
+    U('Polish the homepage and check the mobile layout.'),
+    B('Ran','pnpm build','',  '#4cc76a'),S('12 pages built in 1.8s'),
+    B('Viewed image','mobile-375.png'),S('nav collapses cleanly at 375px'),
+    B('','','Updated the hero spacing and tab bar. Ready for your next prompt.')]},
+  {id:'relay',glyph:'✳',agent:'Claude',model:'Claude Code · Opus · Context 41% left',time:'1m',lines:[
+    U('Why do clients reconnect-storm after a deploy?'),
+    B('Ran','rg "reconnect" src/','','#4cc76a'),S('14 matches in 3 files'),
+    B('','','Clients retry instantly with no jitter. I added exponential backoff capped at 30s.'),
+    B('Ran','pnpm test','','#4cc76a'),S('88 passed · 0 failed')]},
+  {id:'api-server',glyph:'◇',agent:'OpenCode',model:'OpenCode · Context 77% left',time:'1h',lines:[
+    U('Add rate limiting to /v1/hosts.'),
+    B('Edited','src/middleware/limit.ts','(+42 −3)','#4cc76a'),
+    B('','','Token bucket per API key, 60 req/min. Returns 429 with Retry-After.'),
+    B('Working','','(4m · esc to interrupt)','#e5b07a')]},
+  {id:'dataops',glyph:'✦',agent:'Grok',model:'Grok · Context 88% left',time:'Sep 13',lines:[
+    U('Summarize last night’s ETL failures.'),
+    B('Read','logs/etl-0912.log'),S('3 failed jobs, all on the same S3 prefix'),
+    B('','','The bucket policy changed at 02:10. Waiting for you to confirm the rollback.')]},
+];
+const REPLIES=['Got it — working on that now.','Done. Changes are on the current branch; nothing pushed yet.','Looked into it. One file needs your call before I continue.'];
+
+const NAV=[['overview','overview','~'],['how','how-it-works','01'],['features','features','02'],['clients','clients','03'],['security','security','04'],['opensource','open-source','05'],['blog','blog','06'],['faq','faq','07'],['start','get-started','↗']];
+const TABS=[['Features','#features',['features','clients']],['How it works','#how',['how']],['Security','#security',['security']],['FAQ','#faq',['faq']],['Blog','#blog',['blog','opensource']]];
+const POSTS=[
+  ['aplexer: an agent multiplexer for AI coding agents','Named agent sessions, isolated processes, workspaces, tags, and commands for parallel coding work over SSH.','https://pocketshell.io/blog/aplexer-agent-multiplexer/'],
+  ['Configuring a remote machine over SSH with AI agents','Key-based access, a sandboxed user, headless authentication, and persistent aplexer sessions.','https://pocketshell.io/blog/ssh-ai-agents-remote-machines/'],
+  ['aplexer crash warnings: dead sessions stay visible','When an agent crashes or is OOM-killed, the session stays visible with a warning until you acknowledge it.','https://pocketshell.io/blog/aplexer-crash-warnings/'],
+  ['SSH from an iPad or iPhone: what actually works','Choosing a client, setting up keys, mosh on mobile networks, and a browser terminal when you can’t install apps.','https://pocketshell.io/blog/ssh-from-ipad-iphone/'],
+];
+const FAQS=[
+  ['Who can see my host list?','Only you. The list is encrypted in your browser before it syncs — PBKDF2 with 600,000 iterations derives the key from your sync passphrase, AES-256-GCM encrypts the blob. The server stores ciphertext it cannot read, and the passphrase never leaves your device.'],
+  ['Is my SSH private key safe?','Private keys never sync. A key you attach to a host is encrypted with your sync passphrase and stored only in this browser. When you connect, it travels once over authenticated WSS to the PocketShell bridge, which uses it in memory to open your SSH session and neither stores nor logs it.'],
+  ['Do I need the desktop app?','No. The Android app works on its own. Getting an SSH key onto your phone is the awkward part, so we suggest configuring the key in the web or desktop app first.'],
+  ['Do I need to install anything on my servers?','Yes — the PocketShell CLI, on each host you want in PocketShell. Your agent sessions live on the machine under aplexer, and the desktop, web, and Android apps all attach to those sessions. Nothing else to install.'],
+  ['Which devices can I use?','Desktop apps for Linux, macOS, and Windows, an Android app, and the web app in any modern browser — including tablets, Chromebooks, and locked-down machines.'],
+  ['What happens to my session when the tab closes?','The terminal in the tab ends — your agent doesn’t. Reconnect from any browser, attach again, and the screen is exactly where your agent left it.'],
+  ['What if I lose my sync passphrase?','Then the synced blob is undecryptable — by design. There is no reset: set a new passphrase, re-upload your hosts, and re-encrypt your SSH key. That’s the trade for a server that can never read your data.'],
+  ['What does it cost?','For now, nothing — PocketShell is in active alpha and free. Later, the open-source version stays free; syncing between devices is the part that will be paid.'],
+];
+
+class Component extends DCLogic {
+  state = { w: typeof window!=='undefined'?window.innerWidth:1400, active:'pocketshell-site', open:['relay','pocketshell-site'], extra:{}, draft:'', section:'overview', faq:0, email:'', subscribed:false };
+    componentDidMount(){
+    this.onResize=()=>this.setState({w:window.innerWidth});
+    this.onScroll=()=>{let cur='overview';const tops=NAV.map(([id])=>{const el=document.getElementById(id);return el?el.getBoundingClientRect().top:null;});
+      if(tops[0]==null||tops.every(t=>t!=null&&t<160&&t===tops[0]))return;
+      NAV.forEach(([id],i)=>{if(tops[i]!=null&&tops[i]<160)cur=id;});if(cur!==this.state.section)this.setState({section:cur});if(window.innerWidth!==this.state.w)this.setState({w:window.innerWidth});};
+    window.addEventListener('resize',this.onResize);document.addEventListener('scroll',this.onScroll,{passive:true,capture:true});
+    this.iv=setInterval(this.onScroll,400);this.t0=setTimeout(()=>{this.onResize();this.onScroll();},50);
+  }
+  componentWillUnmount(){window.removeEventListener('resize',this.onResize);document.removeEventListener('scroll',this.onScroll,{capture:true});clearInterval(this.iv);clearTimeout(this.t0);clearTimeout(this.t);}
+  componentDidUpdate(){ const k=this.state.active+':'+((this.state.extra[this.state.active]||[]).length); if(k!==this._k){this._k=k;const el=document.querySelector('[data-ps-out]');if(el)el.scrollTop=el.scrollHeight;} }
+  pick(id){this.setState(s=>({active:id,open:s.open.includes(id)?s.open:[...s.open,id]}));}
+  close(id){this.setState(s=>{const open=s.open.filter(x=>x!==id);if(!open.length)return {};return {open,active:s.active===id?open[open.length-1]:s.active};});}
+  doSend(){
+    const t=this.state.draft.trim(); if(!t)return; const id=this.state.active;
+    const prevExtra=this.state.extra[id]||[];
+    this.setState(s=>({draft:'',extra:{...s.extra,[id]:[...prevExtra,U(t),B('Working','','(esc to interrupt)','#e5b07a')]}}));
+    clearTimeout(this.t);
+    this.t=setTimeout(()=>this.setState(s=>{const arr=(s.extra[id]||[]).slice(0,-1);return {extra:{...s.extra,[id]:[...arr,B('','',REPLIES[arr.length/2%REPLIES.length|0]),S('sample response · nothing left this page')]}};}),1100);
+  }
+  renderVals(){
+    const {w,active,open,section,faq}=this.state;
+    const sess=SESSIONS.find(s=>s.id===active)||SESSIONS[0];
+    const wideMock=w>=760;
+    const start=new Date(2025,8,12); const cells=[];
+    for(let i=0;i<start.getDay();i++)cells.push({bg:'transparent',title:''});
+    COUNTS.forEach((c,i)=>{const d=new Date(start);d.setDate(d.getDate()+i);
+      const bg=c===0?'#1a1d22':c<10?'#163542':c<40?'#1d5c73':c<150?'#3197b8':'#5fd0ea';
+      cells.push({bg,title:c+' contributions · '+d.toDateString().slice(4)});});
+    const secIdx=NAV.findIndex(n=>n[0]===section);
+    return {
+      showTabs:w>=900, showSidebar:(this.props.showSidebar??true)&&w>=1180, showStatus:this.props.showStatusBar??true,
+      mockWide:wideMock,
+      tabs:TABS.map(([label,href,ids])=>{const on=ids.includes(section);return {label,href,color:on?'#f3f4f6':'#a9aeb6',weight:on?600:400,bar:on?'#5fd0ea':'transparent'};}),
+      navCount:NAV.length,
+      nav:NAV.map(([id,label,meta])=>{const on=id===section;return {href:'#'+id,label,meta,color:on?'#f3f4f6':'#c9cdd3',bg:on?'#23272e':'transparent',dot:on?'#5fd0ea':'#5d636d'};}),
+      sessions:SESSIONS.map(s=>({name:s.id,glyph:s.glyph,time:s.time,pick:()=>this.pick(s.id),color:s.id===active?'#f3f4f6':'#c9cdd3',bg:s.id===active?'#23272e':'transparent'})),
+      openTabs:open.map(id=>{const s=SESSIONS.find(x=>x.id===id);const on=id===active;return {name:id,glyph:s.glyph,color:on?'#f3f4f6':'#8a909a',weight:on?600:400,bar:on?'#5fd0ea':'transparent',pick:()=>this.pick(id),close:()=>this.close(id)};}),
+      lines:[...sess.lines,...(this.state.extra[active]||[])],
+            transcriptPad:wideMock?'230px':'14px', composerPos:wideMock?'absolute':'static', composerW:wideMock?'min(400px, 60%)':'auto', composerMargin:wideMock?'0':'0 12px 12px',
+      agentUpper:sess.agent.toUpperCase(), agentLower:sess.agent.toLowerCase(),
+      composePh:'Ask '+sess.agent+' to do anything…',
+      draft:this.state.draft, onDraft:e=>this.setState({draft:e.target.value}),
+      onKey:e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();this.doSend();}},
+      send:e=>{e.preventDefault();this.doSend();},
+      modelLine:sess.model, path:'~/git/'+active,
+      tabLine:open.map((id,i)=>(i+1)+':'+id+(id===active?'*':'')).join(' '),
+      cells,
+      posts:POSTS.map(([title,desc,href])=>({title,desc,href,meta:'5 min'})),
+      faqs:FAQS.map(([q,a],i)=>({q,a,open:faq===i,rot:faq===i?'rotate(90deg)':'none',color:faq===i?'#f3f4f6':'#c9cdd3',toggle:()=>this.setState({faq:faq===i?-1:i})})),
+      email:this.state.email, onEmail:e=>this.setState({email:e.target.value}),
+      subscribe:e=>{e.preventDefault();if(/\S+@\S+\.\S+/.test(this.state.email))this.setState({subscribed:true});},
+      subscribed:this.state.subscribed, notSubscribed:!this.state.subscribed,
+      section:NAV[secIdx>=0?secIdx:0][1],
+      statusTabs:NAV.slice(1,8).map(([id,label],i)=>(i+1)+':'+label+(id===section?'*':'')).join(' '),
+    };
+  }
+}
+</script>
+</body>
+</html>
