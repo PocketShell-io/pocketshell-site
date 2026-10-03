@@ -6,9 +6,12 @@
       <a class="nav-link" href="/#how">How it works</a>
       <a class="nav-link" href="/#security">Security</a>
       <a class="nav-link" href="/#faq">FAQ</a>
-      <a class="nav-link" href="/blog/">Blog</a>
+      <a class="nav-link" href="/blog/"{% if page.layout == 'blog-index' or page.layout == 'post' %} aria-current="page"{% endif %}>Blog</a>
     </nav>
     <span class="spacer"></span>
-    <a class="button" href="{{ site.app_url }}/">Sign in</a>
+    <div class="topbar-actions">
+      <a class="topbar-signin" href="{{ site.app_url }}/">Sign in</a>
+      <a class="button primary" href="{{ site.app_url }}/">Open PocketShell ↗</a>
+    </div>
   </div>
 </header>

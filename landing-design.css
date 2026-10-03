@@ -1,0 +1,101 @@
+/* The user-supplied PocketShell landing composition. Component inline styles
+   preserve its dimensions; these rules provide hover, navigation and responsive behavior. */
+html { scroll-behavior: smooth; }
+.reference-page { margin: 0; background: #0e1013; color: #e4e6ea; font-family: "IBM Plex Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+.reference-landing { line-height: 1.4; }
+.reference-landing a { color: #5fd0ea; text-decoration: none; }
+.reference-landing a:hover { color: #9fe3f3; }
+.reference-landing ::selection { background: #36708a; color: #fff; }
+.reference-landing input::placeholder, .reference-landing textarea::placeholder { color: #7a808a; }
+.reference-landing input { min-width: 0; }
+.reference-landing h1, .reference-landing h2 { text-wrap: initial; }
+.reference-layout, .reference-main, .reference-content { min-width: 0; }
+.reference-landing .reference-header { line-height: 1.3; }
+.reference-tab.is-active { color: #f3f4f6 !important; font-weight: 600 !important; box-shadow: inset 0 -2px 0 #5fd0ea !important; }
+.reference-section-link.is-active { color: #f3f4f6 !important; background: #23272e !important; }
+.reference-section-link.is-active > span:first-child { background: #5fd0ea !important; }
+.reference-sidebar a { min-height: 40px; box-sizing: border-box; }
+.reference-sidebar-toggle { display: flex; align-items: center; justify-content: center; align-self: center; flex: none; width: 36px; height: 36px; margin-left: 12px; padding: 0; border: 1px solid transparent; border-radius: 6px; background: transparent; color: #a9aeb6; cursor: pointer; }
+.reference-sidebar-toggle:hover { background: #23272e; color: #f3f4f6; }
+.reference-sidebar-toggle:focus-visible { outline: 2px solid #5fd0ea; outline-offset: 2px; }
+.reference-landing.is-sidebar-hidden .reference-sidebar { display: none !important; }
+.reference-open-short { display: none; }
+.reference-anchor { display: block; height: 0; scroll-margin-top: 64px; }
+.reference-faq { border-bottom: 1px solid #23272e; }
+.reference-faq summary { display: flex; align-items: center; gap: 16px; padding: 20px 16px; cursor: pointer; list-style: none; font-size: 18px; font-weight: 500; color: #c9cdd3; }
+.reference-faq summary::-webkit-details-marker { display: none; }
+.reference-faq summary:hover { background: #15181d; }
+.reference-faq-chevron { color: #5fd0ea; width: 14px; flex: none; font-family: "JetBrains Mono", monospace; text-align: center; }
+.reference-faq[open] summary { color: #f3f4f6; }
+.reference-faq[open] .reference-faq-chevron { transform: rotate(90deg); }
+.reference-faq p { margin: 0; padding: 0 16px 24px 46px; max-width: 760px; font-size: 16px; line-height: 1.65; color: #a9aeb6; text-wrap: pretty; }
+.reference-product .ps-demo { box-shadow: 0 40px 80px -30px rgba(0,0,0,.7); }
+.reference-product .ps-demo-caption { background: #0b0d10; border-bottom: 1px solid #23272e; }
+.reference-product .ps-demo-viewport { height: 520px; }
+.reference-newsletter .signup-status.is-ok { color: #7fd18b; }
+.reference-newsletter .signup-status.is-error { color: #ff9b96; }
+.reference-newsletter label { font-size: inherit; font-weight: inherit; }
+.reference-footer a { min-height: 44px; display: inline-flex; align-items: center; }
+.reference-statusbar { user-select: none; }
+.reference-page .skip-link:focus { position: fixed; z-index: 100; }
+@keyframes psblink { 50% { opacity: 0; } }
+@media (max-width:1179px) { .reference-landing .reference-sidebar, .reference-sidebar-toggle { display: none !important; } }
+@media (max-width:899px) { .reference-landing .reference-tabs { display: none !important; } }
+@media (max-width:600px) {
+  .reference-landing .reference-brand { padding-inline: 14px !important; font-size: 15px !important; gap: 7px !important; }
+  .reference-landing .reference-header-actions { padding-inline: 12px !important; gap: 0 !important; }
+  .reference-header-actions > a:first-child { display: none; }
+  .reference-open-label { display: none; }
+  .reference-open-short { display: inline; }
+  .reference-landing #overview { padding-top: 48px !important; }
+  .reference-landing #overview h1 { font-size: clamp(44px, 11.5vw, 68px) !important; }
+  .reference-product { margin-top: 48px !important; }
+  .reference-product .ps-demo-viewport { height: 500px; }
+  .reference-section:not(#overview) { padding-top: 80px !important; }
+  .reference-landing #start { padding-bottom: 64px !important; }
+  .reference-promptbar { margin-bottom: 32px !important; padding-inline: 16px !important; font-size: 13px !important; }
+  .reference-post { grid-template-columns: auto minmax(0,1fr) !important; padding-inline: 0 !important; gap: 6px 12px !important; }
+  .reference-post > span:nth-child(3) { grid-column: 2; grid-row: 3; }
+  .reference-post > span:nth-child(4) { display: none; }
+  .reference-post > span:nth-child(5) { grid-column: 2; grid-row: 2; }
+  .reference-footer { gap: 8px 24px !important; padding-bottom: 28px !important; }
+  .reference-statusbar { gap: 12px !important; font-size: 10px !important; padding-inline: 10px !important; }
+}
+@media (prefers-reduced-motion:reduce) {
+  html { scroll-behavior: auto; }
+  .reference-landing *, .reference-landing *::before, .reference-landing *::after { animation: none !important; transition: none !important; }
+}
+.reference-landing .ref-hover-0:hover {color:#f3f4f6 !important;}
+.reference-landing .ref-hover-1:hover {color:#f3f4f6 !important;}
+.reference-landing .ref-hover-2:hover {color:#f3f4f6 !important;}
+.reference-landing .ref-hover-3:hover {color:#f3f4f6 !important;}
+.reference-landing .ref-hover-4:hover {color:#f3f4f6 !important;}
+.reference-landing .ref-hover-5:hover {color:#fff !important;}
+.reference-landing .ref-hover-6:hover {background:#8fe0f2 !important;color:#0b0d10 !important;}
+.reference-landing .ref-hover-7:hover {background:#1c2027 !important;color:#f3f4f6 !important;}
+.reference-landing .ref-hover-8:hover {background:#1c2027 !important;color:#f3f4f6 !important;}
+.reference-landing .ref-hover-9:hover {background:#1c2027 !important;color:#f3f4f6 !important;}
+.reference-landing .ref-hover-10:hover {background:#1c2027 !important;color:#f3f4f6 !important;}
+.reference-landing .ref-hover-11:hover {background:#1c2027 !important;color:#f3f4f6 !important;}
+.reference-landing .ref-hover-12:hover {background:#1c2027 !important;color:#f3f4f6 !important;}
+.reference-landing .ref-hover-13:hover {background:#1c2027 !important;color:#f3f4f6 !important;}
+.reference-landing .ref-hover-14:hover {background:#1c2027 !important;color:#f3f4f6 !important;}
+.reference-landing .ref-hover-15:hover {background:#1c2027 !important;color:#f3f4f6 !important;}
+.reference-landing .ref-hover-16:hover {background:#1c2027 !important;color:#fff !important;}
+.reference-landing .ref-hover-17:hover {background:#1c2027 !important;color:#fff !important;}
+.reference-landing .ref-hover-18:hover {background:#1c2027 !important;color:#fff !important;}
+.reference-landing .ref-hover-19:hover {background:#8fe0f2 !important;color:#0b0d10 !important;}
+.reference-landing .ref-hover-20:hover {border-color:#5fd0ea !important;color:#fff !important;}
+.reference-landing .ref-hover-21:hover {border-color:#5fd0ea !important;color:#fff !important;}
+.reference-landing .ref-hover-22:hover {border-color:#5fd0ea !important;color:#fff !important;}
+.reference-landing .ref-hover-23:hover {border-color:#5fd0ea !important;color:#fff !important;}
+.reference-landing .ref-hover-24:hover {border-color:#5fd0ea !important;color:#fff !important;}
+.reference-landing .ref-hover-25:hover {background:#15181d !important;color:#fff !important;}
+.reference-landing .ref-hover-26:hover {background:#15181d !important;color:#fff !important;}
+.reference-landing .ref-hover-27:hover {background:#8fe0f2 !important;color:#0b0d10 !important;}
+.reference-landing .ref-hover-28:hover {background:#4a8aa5 !important;}
+.reference-landing .ref-hover-29:hover {color:#fff !important;}
+.reference-landing .ref-hover-30:hover {color:#fff !important;}
+.reference-landing .ref-hover-31:hover {color:#fff !important;}
+.reference-landing .ref-hover-32:hover {color:#fff !important;}
+.reference-landing .ref-hover-33:hover {color:#fff !important;}

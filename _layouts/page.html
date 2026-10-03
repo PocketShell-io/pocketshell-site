@@ -6,20 +6,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{ page.title }}</title>
   {% if page.noindex %}<meta name="robots" content="noindex, nofollow" />{% endif %}
-  <meta name="theme-color" content="#0d1117" />
+  <meta name="theme-color" content="#0e1013" />
   <link
     rel="icon"
-    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d1117' stroke='%2330363d' stroke-width='2'/%3E%3Ctext x='12' y='45' font-family='ui-monospace,monospace' font-size='30' font-weight='bold' fill='%233fb950'%3E%3E_%3C/text%3E%3C/svg%3E"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%2315181d' stroke='%2323272e' stroke-width='2'/%3E%3Ctext x='12' y='45' font-family='ui-monospace,monospace' font-size='30' font-weight='bold' fill='%235fd0ea'%3E%3E_%3C/text%3E%3C/svg%3E"
   />
   <link rel="stylesheet" href="/blog.css" />
 </head>
 <body>
   {% include topbar.html %}
-  <main>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <main id="main">
     <div class="container">
-      <div class="prose">
+      <article class="post prose">
 {{ content }}
-      </div>
+      </article>
     </div>
   </main>
   {% include footer.html %}
