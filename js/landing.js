@@ -119,13 +119,12 @@
         show('That email is already on the list.', 'ok');
       } else if (result.response.status === 429) {
         show('Too many confirmation emails. Try again in an hour.', 'error');
-        setPending(false);
       } else {
         show('Could not send the confirmation. Try again.', 'error');
-        setPending(false);
       }
     } catch (e) {
       show('Could not send the confirmation. Try again.', 'error');
+    } finally {
       setPending(false);
     }
   });
