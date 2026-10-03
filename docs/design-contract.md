@@ -27,7 +27,7 @@ Shared footer identifies PocketShell as open-source SSH for desktop, web and And
 - Preserve host-list encryption, passphrase/no-reset caveats and private-key bridge handling. A visual redesign does not authorize stronger security or uptime claims.
 - Keep the real renderer isolated inside its iframe. Its demo backend never opens SSH or sends prompts to an AI service. The iframe’s accessible title identifies sample sessions. Per the user’s later correction, there is no visible demo caption, explanatory note, or full-screen link.
 - Mobile product canvas can scroll horizontally to preserve the actual desktop interface; disclose the gesture. The site page itself must not overflow horizontally at 320px.
-- Keep keyboard focus visible, real app controls unchanged and reduced-motion behavior usable.
+- Keep keyboard focus visible and reduced-motion behavior usable. The compiled app assets remain unchanged; a separate demo stylesheet hides Settings as requested. Provider usage is populated with local sample quota rows.
 - The homepage side panel has a keyboard-accessible hide/show toggle with a remembered preference. Hiding it preserves the main/content/demo widths and centers the main container. The embedded app retains its native session-panel hide/show controls.
 - Seed the actual composer’s saved geometry at 520×190 for a compact initial panel; preserve native resize, expand, hide and per-session draft behavior. Session demos represent distinct tasks and retain their individual terminal histories.
 

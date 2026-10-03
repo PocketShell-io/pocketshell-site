@@ -22,6 +22,7 @@ let html = fs.readFileSync(path.join(source, 'index.html'), 'utf8');
 html = html.replace('<title>PocketShell</title>', '<meta name="robots" content="noindex, nofollow" />\n    <title>PocketShell interactive demo</title>');
 html = html.replace('<script type="module"', '<script src="./preview-style.js"></script>\n    <script src="./preferences.js"></script>\n    <script src="./adapter.js"></script>\n    <script type="module"');
 html = html.replace("connect-src 'self'", "connect-src 'none'");
+html = html.replace('</head>', '<link rel="stylesheet" href="./presentation.css">\n  </head>');
 fs.writeFileSync(path.join(destination, 'index.html'), html);
 const hashes = {};
 for (const name of fs.readdirSync(path.join(source, 'assets'))) {

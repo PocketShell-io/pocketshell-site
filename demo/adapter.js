@@ -18,6 +18,18 @@
   const handlers = new Map(), shells = new Map(), files = new Map(), dirs = new Set(['/home/demo', '/home/demo/git']);
   const encoder = new TextEncoder();
   const normalize = p => (p === '.' || !p ? '/home/demo' : p.replace(/^~(?=\/|$)/, '/home/demo')).replace(/\/$/, '');
+  // Local sample quota data in the real renderer's normalized UsageRow shape.
+  // Reset timestamps move with the demo clock so the examples stay readable.
+  const resetIn = minutes => new Date((now + minutes * 60) * 1000).toISOString();
+  const quota = (window, percent_remaining, minutes) => ({ window, percent_remaining, reset_at: minutes == null ? null : resetIn(minutes) });
+  const usage = [
+    { provider: 'Claude', status: 'ok', windows: [quota('5h', 95, 9), quota('7d', 58, 5 * 1440 + 7 * 60)] },
+    { provider: 'Codex', status: 'ok', windows: [quota('7d', 90, 6 * 1440 + 13 * 60)], resets_available: 2, resets_expire_at: resetIn(19 * 1440 + 13 * 60) },
+    { provider: 'Copilot', status: 'ok', windows: [quota('monthly', 100, 28 * 1440 + 16 * 60)] },
+    { provider: 'Go', status: 'ok', windows: [quota('5h', 99, 4 * 60), quota('7d', 99, 1440 + 16 * 60), quota('monthly', 99, 18 * 1440 + 22 * 60)] },
+    { provider: 'Grok', status: 'ok', windows: [quota('7d', 78, 2 * 1440 + 16 * 60)] },
+    { provider: 'Zai', status: 'ok', windows: [quota('5h', 98, null), quota('7d', 81, 3 * 1440 + 8 * 60)] }
+  ];
   const scenarios = {
     'demo-0': { task: 'Make the homepage navigation usable on phones.', lines: ['• Updated landing-design.css', '  Navigation wraps cleanly at 320px; the desktop rail stays fixed.', '', '• Checked the homepage in Chromium', '  \x1b[32m✓ 320px, 390px, and 1440px layouts passed\x1b[0m', '', '• Ready to review the responsive navigation.'], reply: 'The homepage navigation now fits small screens. The browser checks cover 320px, 390px, and desktop.' },
     'demo-1': { task: 'Review the homepage copy and alpha access details.', lines: ['• Read the hero, setup steps, and security section', '  The product category is clear and the host CLI requirement is visible.', '', '• Found two copy changes', '  Keep the allowlist note beside the sign-in action.', '  Describe encrypted host sync separately from SSH key handling.', '', '• Copy review complete. No source files changed.'], reply: 'The copy review covers the SSH setup requirement, allowlisted alpha access, and the distinction between host sync and private keys.' },
@@ -100,7 +112,8 @@
       if (name === 'sessionsList') return sessions;
       if (name === 'sessionsListing') return { sessions, errors: [] };
       if (name === 'bootstrap') return { pocketshell: 'installed', tmuxctl: 'installed', tmux: 'installed', aplexer: 'installed', installer: 'uv', daemonRunning: true, daemonEnabled: true };
-      if (name === 'usage' || name === 'warnings') return [];
+      if (name === 'usage') return usage;
+      if (name === 'warnings') return [];
       if (name === 'ackWarnings') return { ok: true, acknowledged: 0 };
       return true;
     }
