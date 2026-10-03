@@ -17,10 +17,9 @@
     try { localStorage.setItem('pocketshell.site.sidebar', hidden ? 'hidden' : 'shown'); } catch (_) {}
   });
   const sections = [...root.querySelectorAll('section[data-screen-label]')];
-  const names = { overview: 'overview', how: 'how-it-works', features: 'features', clients: 'clients', security: 'security', opensource: 'open-source', blog: 'blog', faq: 'faq', start: 'get-started' };
+  const names = { overview: 'overview', how: 'how-it-works', features: 'features', clients: 'clients', security: 'security', opensource: 'your-progress', blog: 'blog', faq: 'faq', start: 'get-started' };
   const sectionLinks = root.querySelectorAll('[data-section]');
   const position = root.querySelector('[data-current-section]');
-  const status = root.querySelector('[data-status-sections]');
   let active, scheduled = false;
   function update() {
     scheduled = false;
@@ -35,7 +34,6 @@
       if (selected) link.setAttribute('aria-current', 'location'); else link.removeAttribute('aria-current');
     });
     position.textContent = '~/pocketshell.io:' + names[current];
-    status.textContent = sections.slice(1,8).map((section,index) => (index+1) + ':' + names[section.id] + (section.id === current ? '*' : '')).join(' ');
   }
   function schedule() { if (!scheduled) { scheduled = true; requestAnimationFrame(update); } }
   addEventListener('scroll', schedule, { passive: true });

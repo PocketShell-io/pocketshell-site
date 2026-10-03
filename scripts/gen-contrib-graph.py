@@ -85,10 +85,10 @@ out = [
     '     aria-label="GitHub contribution calendar for alexeygrigorev, last 12 months">',
 ]
 for x, name in labels:
-    out.append(f'  <text class="contrib-month" style="fill:{METADATA_COLOR}" x="{x}" y="12">{name}</text>')
+    out.append(f'  <text class="contrib-month" font-size="10" style="fill:{METADATA_COLOR}" x="{x}" y="12">{name}</text>')
 for name, row in wday_labels:
     y = PAD_TOP + row * PITCH + CELL - 2
-    out.append(f'  <text class="contrib-wday" style="fill:{METADATA_COLOR}" x="{PAD_LEFT - 6}" y="{y}">{name}</text>')
+    out.append(f'  <text class="contrib-wday" font-size="9" text-anchor="end" style="fill:{METADATA_COLOR}" x="{PAD_LEFT - 6}" y="{y}">{name}</text>')
 for wi, w in enumerate(weeks):
     for d in w["days"]:
         x = PAD_LEFT + wi * PITCH

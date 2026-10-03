@@ -1,21 +1,21 @@
 <svg class="contrib" viewBox="0 0 724 110" role="img"
      aria-label="GitHub contribution calendar for alexeygrigorev, last 12 months">
-  <text class="contrib-month" style="fill:#8a909a" x="30" y="12">Sep</text>
-  <text class="contrib-month" style="fill:#8a909a" x="69" y="12">Oct</text>
-  <text class="contrib-month" style="fill:#8a909a" x="121" y="12">Nov</text>
-  <text class="contrib-month" style="fill:#8a909a" x="186" y="12">Dec</text>
-  <text class="contrib-month" style="fill:#8a909a" x="238" y="12">Jan</text>
-  <text class="contrib-month" style="fill:#8a909a" x="303" y="12">Feb</text>
-  <text class="contrib-month" style="fill:#8a909a" x="355" y="12">Mar</text>
-  <text class="contrib-month" style="fill:#8a909a" x="407" y="12">Apr</text>
-  <text class="contrib-month" style="fill:#8a909a" x="459" y="12">May</text>
-  <text class="contrib-month" style="fill:#8a909a" x="524" y="12">Jun</text>
-  <text class="contrib-month" style="fill:#8a909a" x="576" y="12">Jul</text>
-  <text class="contrib-month" style="fill:#8a909a" x="628" y="12">Aug</text>
-  <text class="contrib-month" style="fill:#8a909a" x="693" y="12">Sep</text>
-  <text class="contrib-wday" style="fill:#8a909a" x="24" y="39">Mon</text>
-  <text class="contrib-wday" style="fill:#8a909a" x="24" y="65">Wed</text>
-  <text class="contrib-wday" style="fill:#8a909a" x="24" y="91">Fri</text>
+  <text class="contrib-month" font-size="10" style="fill:#8a909a" x="30" y="12">Sep</text>
+  <text class="contrib-month" font-size="10" style="fill:#8a909a" x="69" y="12">Oct</text>
+  <text class="contrib-month" font-size="10" style="fill:#8a909a" x="121" y="12">Nov</text>
+  <text class="contrib-month" font-size="10" style="fill:#8a909a" x="186" y="12">Dec</text>
+  <text class="contrib-month" font-size="10" style="fill:#8a909a" x="238" y="12">Jan</text>
+  <text class="contrib-month" font-size="10" style="fill:#8a909a" x="303" y="12">Feb</text>
+  <text class="contrib-month" font-size="10" style="fill:#8a909a" x="355" y="12">Mar</text>
+  <text class="contrib-month" font-size="10" style="fill:#8a909a" x="407" y="12">Apr</text>
+  <text class="contrib-month" font-size="10" style="fill:#8a909a" x="459" y="12">May</text>
+  <text class="contrib-month" font-size="10" style="fill:#8a909a" x="524" y="12">Jun</text>
+  <text class="contrib-month" font-size="10" style="fill:#8a909a" x="576" y="12">Jul</text>
+  <text class="contrib-month" font-size="10" style="fill:#8a909a" x="628" y="12">Aug</text>
+  <text class="contrib-month" font-size="10" style="fill:#8a909a" x="693" y="12">Sep</text>
+  <text class="contrib-wday" font-size="9" text-anchor="end" style="fill:#8a909a" x="24" y="39">Mon</text>
+  <text class="contrib-wday" font-size="9" text-anchor="end" style="fill:#8a909a" x="24" y="65">Wed</text>
+  <text class="contrib-wday" font-size="9" text-anchor="end" style="fill:#8a909a" x="24" y="91">Fri</text>
   <rect x="30" y="83" width="10" height="10" rx="2" fill="#163542" data-count="2" data-date="2025-09-12" />
   <rect x="30" y="96" width="10" height="10" rx="2" fill="#163542" data-count="6" data-date="2025-09-13" />
   <rect x="43" y="18" width="10" height="10" rx="2" fill="#163542" data-count="8" data-date="2025-09-14" />

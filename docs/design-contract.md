@@ -2,7 +2,7 @@
 
 ## Authoritative reference
 
-The user-supplied `references/pocketshell-landing.dc.html` is the visual reference for the current homepage and shared page chrome. Earlier paper/orange and sparse dark-shell interpretations are superseded. The reference supplies the centered display hero, sticky 56px topbar, project-style navigation rail, charcoal panels, cyan signal color, compact typography, modest rounded corners and dense product presentation.
+The user-supplied `references/pocketshell-landing.dc.html` is the visual reference for the current homepage and shared page chrome. Earlier paper/orange and sparse dark-shell interpretations are superseded. The reference supplies the centered display hero, sticky 56px topbar, project-style navigation rail, charcoal panels, cyan signal color, compact typography, modest rounded corners and dense product presentation. Later user corrections remove the hero eyebrow, show header section navigation only when the sidebar is absent, and remove the bottom bar’s section list. Setup follows actual installation and app actions; the contribution graph is an aspirational example across the author’s projects.
 
 The homepage workspace remains the actual copied Vue/xterm desktop renderer. The reference's reconstructed product mock is replaced by that real renderer. Its app components, styles, icons, fonts and bundled assets remain byte-identical to the desktop build. A separate browser adapter supplies local sample sessions, files and simulated replies.
 

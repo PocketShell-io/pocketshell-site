@@ -40,6 +40,7 @@ html { scroll-behavior: smooth; }
 .reference-page .skip-link:focus { position: fixed; z-index: 100; }
 @keyframes psblink { 50% { opacity: 0; } }
 @media (max-width:1179px) { .reference-landing .reference-sidebar, .reference-sidebar-toggle { display: none !important; } }
+@media (min-width:1180px) { .reference-landing:not(.is-sidebar-hidden) .reference-tabs { display: none !important; } }
 @media (max-width:899px) { .reference-landing .reference-tabs { display: none !important; } }
 @media (max-width:600px) {
   .reference-landing .reference-brand { padding-inline: 14px !important; font-size: 15px !important; gap: 7px !important; }

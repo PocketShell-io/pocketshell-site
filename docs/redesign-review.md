@@ -39,3 +39,11 @@ At 1440 and 1180px, the homepage side panel collapses, stays collapsed after rel
 The native composer measures 520 × 190px on each fresh demo. Dragging its north resize grip increases the height to 223px, and sending a prompt produces the local terminal reply at 1440, 1180, 390 and 320px. All fresh loads preserve scrollY 0; no page overflow or JavaScript errors were observed. Desktop headers remain readable with the added panel control.
 
 The adapter now supplies six different session scenarios and project-specific sample files, retaining the original application components. Evidence for the independently exercised panel and composer actions is `.tmp/design-review/panel-results.json` and `panels-header-{1440,1180}.png`.
+
+## User corrections: copy, graph, navigation and original blog artwork
+
+The hero eyebrow is removed. Setup now shows `uv tool install pocketshell`, starting an agent in the app, and selecting that session from another device. The contribution heading is “Your graph could look like this,” with secondary attribution across the author’s projects. SVG weekday labels now have explicit 9px type and end alignment; month labels use 10px type.
+
+The section list appears in the sidebar or the header, depending on sidebar visibility; the bottom bar no longer repeats it. All 24 original blog PNG/WebP files match the pre-redesign Git versions exactly, and the asset generator no longer overwrites them. Existing charcoal frames preserve the shared site styling.
+
+Implementation verification passed at 1440, 1180, 900, 390 and 320px: no page overflow or JavaScript errors, weekday text bounds end before the first cell, and hiding/restoring the sidebar switches header navigation correctly. Build, SEO and all 51 renderer asset hashes pass. Screenshot evidence: `.tmp/design-review/corrected-{hero,how,opensource}-{1440,320}.png` and `restored-blog-{1440,320}.png`.
