@@ -23,6 +23,7 @@ build: ## Build the site for production
 check: build ## Build and check SEO plus original app assets (Node.js required)
 	node scripts/check-seo.mjs
 	node scripts/check-demo.mjs
+	node scripts/check-accent-borders.mjs
 
 graph: ## Re-render the contribution calendar from _data/gh-history.json
 	python3 scripts/gen-contrib-graph.py

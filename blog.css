@@ -112,9 +112,11 @@ main {
   font-size: 13px;
 }
 .prose blockquote {
-  border-left: 2px solid var(--accent);
+  background: rgba(95, 208, 234, 0.05);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
   margin: 24px 0;
-  padding: 0 24px;
+  padding: 16px 24px;
   color: var(--muted);
 }
 .prose img {

@@ -157,12 +157,12 @@ input {
 }
 .button.primary {
   background: var(--accent);
-  border-color: var(--accent);
+  border-color: transparent;
   color: #04101a;
 }
 .button.primary:hover {
   background: #8fe0f2;
-  border-color: #8fe0f2;
+  border-color: transparent;
 }
 .button.large {
   min-height: 52px;
@@ -1097,7 +1097,7 @@ body{-webkit-font-smoothing:antialiased}
 .site-nav{gap:0;align-self:stretch;align-items:stretch}
 .nav-link{padding:0 15px;font-size:15px;color:#8a909a;min-height:56px}
 .nav-link:hover{color:#f3f4f6;text-decoration:none;background:#15181d}
-.nav-link[aria-current=page]{color:#f3f4f6;font-weight:500;box-shadow:inset 0 -2px 0 #5fd0ea}
+.nav-link[aria-current=page]{color:#5fd0ea;font-weight:600;background:rgba(95,208,234,0.08);border-radius:6px}
 .topbar-actions{display:flex;align-items:center;gap:10px;flex-shrink:0}
 .topbar-signin{color:#c9cdd3;font-size:14px;text-decoration:none;min-height:44px;display:inline-flex;align-items:center;padding-inline:12px}
 .topbar-signin:hover{color:#fff}
