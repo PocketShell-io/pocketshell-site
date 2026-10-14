@@ -15,6 +15,24 @@ The homepage workspace remains the actual copied Vue/xterm desktop renderer. The
 - Radius: 6–7px buttons, 8–10px panels/visuals. Rounded status notation may follow the supplied reference. Do not add ornamental gradients or unrelated decorative colors.
 - The reference's hierarchy governs type scale and spacing. Shared header brand is 17px/600, navigation 15px, action text 14px. Blog/article display uses 600 weight and compact negative tracking; prose remains 17–18px with a generous reading line height.
 
+## Accent borders are forbidden
+
+Accent borders are forbidden across PocketShell websites and shared UI. Status belongs in fills and text, never in borders. An accent border is either of these:
+
+- A border on only one or some sides (`border-left`, `border-right`, `border-top`, `border-bottom`, `border-inline-*`, `border-block-*`, or a `border-width` / `border-color` list that differs per side) used as a colored stripe or side accent.
+- Any border, outline, or `box-shadow` ring whose color is an accent or status color (cyan, green, red, amber, or `--accent*`, `--danger*`, `--warn*`, `--ok*`, `--success*`, `--error*` tokens and their aliases), for example a colored-outline warning or notice box.
+
+Allowed treatments:
+- Full 1px neutral borders using the neutral border tokens (`#23272e` border, `#33383f` elevated border, or equivalent neutral tokens) on cards, inputs, and dividers.
+- A neutral 1px hairline divider between list rows (`border-top` / `border-bottom` with neutral tokens only).
+- Focus-visible outlines for accessibility (`:focus-visible` rules may use the accent color). Pointer focus and drag outlines use neutral colors.
+- Form-control borders that turn neutral-strong on hover.
+
+Replace accent borders with:
+- A tinted background (subtle status-colored fill at low alpha).
+- An icon.
+- A bold heading or label in the status color.
+
 ## Shared page family
 
 The shared header uses the reference’s compact charcoal strip, cyan terminal brand mark, navigation tabs, sign-in action and cyan Open PocketShell button. Desktop chrome is sticky at 56px. Small screens wrap navigation into a readable second row, preserving all destinations and 44px targets. Blog pages do not acquire the homepage’s project navigation rail.
