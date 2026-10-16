@@ -2,7 +2,33 @@
 
 Date: 2026-09-11. Grounded in live search-result scans (sources at the bottom).
 
-## Search Console priorities from October 2 2026
+## Search Console priorities from October 16 2026
+
+The [October 16 review](search-console-2026-10-16.md) records all 99 disclosed
+queries for the requested September 17–October 14 window: 740 property
+impressions, 8 clicks, 1.1% CTR, and average position 22.8. The chart only
+displays September 23–October 14. Disclosed queries account for 214 impressions
+and zero clicks; omitted queries prevent assigning the 8 clicks to a term.
+
+Editorial order is now **mobile SSH, authorized_keys, then configuration
+examples**. Recurring iPad queries remain near positions 10. Four leading
+authorized_keys variants total 40 impressions, including newly observed
+`ssh authorized_keys` at position 25.7; move this guide ahead of the broad
+config rewrite. Strengthen the existing mobile guide's direct answer and
+browser path, put server-side file location/setup near the top of the
+authorized_keys guide, and make config examples/create/edit tasks easy to find.
+New PuTTY-on-iOS variants support a small alternatives section in the mobile
+guide, after checking current product claims. Keep agent content relevant,
+but its newly observed terms still have only 1–2 impressions each.
+
+The October 2 capture below uses a different overlapping window. The additional
+71 disclosed terms are newly observed in our notes, not proof of demand growth;
+do not calculate equal-period gains from these snapshots. Use the October 16
+snapshot as the first dated 28-day baseline and preserve exact dates and chart
+coverage in subsequent fortnightly reviews. These are planning updates only;
+the public articles have not been revised by this collection.
+
+### Historical October 2 baseline
 
 The [query baseline and SEO priorities](search-console-2026-10-02.md) records
 all 28 disclosed queries, including impressions and average positions. Use
