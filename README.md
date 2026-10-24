@@ -1,5 +1,7 @@
 # pocketshell-site
 
+See [SCOPE.md](SCOPE.md) for ownership and product boundaries.
+
 The static pocketshell.io website: landing page, blog, feeds — built with
 [rustkyll](https://github.com/alexeygrigorev/rustkyll) (a Jekyll drop-in in
 Rust, same as datatalksclub.github.io) and deployed via GitHub Pages.
