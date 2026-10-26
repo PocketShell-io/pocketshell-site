@@ -20,6 +20,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Guard so a hung step can never burn the org's Actions quota.
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
 
@@ -40,6 +42,8 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    # Guard so a hung step can never burn the org's Actions quota.
+    timeout-minutes: 10
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

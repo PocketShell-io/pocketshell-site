@@ -6,9 +6,16 @@ on:
 permissions:
   contents: read
 
+# A newer PR event supersedes the stale check instead of stacking duplicates.
+concurrency:
+  group: check-site-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Guard so a hung step can never burn the org's Actions quota.
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
